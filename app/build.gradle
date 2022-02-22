@@ -1,6 +1,10 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+    id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -41,6 +45,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.4.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     testImplementation 'junit:junit:4.13.2'
@@ -50,4 +56,18 @@ dependencies {
 //    intuit ssp/sdp
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
+
+//    Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
+
+//    Datastore
+    implementation 'androidx.datastore:datastore-preferences:1.0.0'
+
+//    Hilt
+    implementation "com.google.dagger:hilt-android:2.38.1"
+    kapt "com.google.dagger:hilt-compiler:2.38.1"
+
+//    SmoothBottomBar
+    implementation 'com.github.ibrahimsn98:SmoothBottomBar:1.7.8'
 }

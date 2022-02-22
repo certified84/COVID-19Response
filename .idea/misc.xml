@@ -3,9 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/drawable/ic_scan.xml" value="0.2135" />
+        <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_login.xml" value="0.22" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_onboarding.xml" value="0.33" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_signup.xml" value="0.33" />
+        <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
       </map>
     </option>
   </component>

@@ -22,4 +22,9 @@
     <string name="password">Password</string>
     <string name="forgot_password"><u>Forgot Password?</u></string>
     <string name="sign_up">Sign Up</string>
+    <string name="home">Home</string>
+    <string name="chat">Chat</string>
+    <string name="status_check">Status Check</string>
+    <string name="me">Me</string>
+    <string name="bottom_navigation_view">Bottom Navigaion View</string>
 </resources>

@@ -2,4 +2,19 @@
     <string name="app_name">COVID-19 Response</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Login</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="terms">Terms</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="create_account">Create Account</string>
+    <string name="choose_display_name">Choose Display Name</string>
+    <string name="create_account_summary">Kindly provide the few details below and we willsetup your account for you</string>
+    <string name="location">Location</string>
+    <string name="enter_nin">Enter NIN</string>
+    <string name="choose_password">Choose Password</string>
+    <string name="hint_location">e.g Lagos</string>
+    <string name="hint_password">********</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="email_hint">e.g name@example.com</string>
+    <string name="name_hint">e.g Samson Achiaga</string>
 </resources>

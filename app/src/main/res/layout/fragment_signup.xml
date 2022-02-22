@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/_10sdp">
+        android:paddingBottom="@dimen/_16sdp">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/materialTextView3"

@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_onboardingFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_onboardingFragment_to_webFragment"
+            app:destination="@id/webFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -56,4 +59,14 @@
         android:name="com.certified.covid19response.ui.HomeFragment"
         android:label="Home Fragment"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/webFragment"
+        android:name="com.certified.covid19response.ui.WebFragment"
+        android:label="fragment_web"
+        tools:layout="@layout/fragment_web" >
+        <argument
+            android:name="url"
+            app:argType="string"
+            android:defaultValue="https://www.google.com/" />
+    </fragment>
 </navigation>

@@ -39,7 +39,7 @@ object Util {
         }
 
         val pattern = Pattern.compile("[^a-z0-9]", Pattern.CASE_INSENSITIVE)
-        if (pattern.matcher(password).find()) {
+        if (!pattern.matcher(password).find()) {
             with(editText) {
                 error = "Special character required* "
                 requestFocus()

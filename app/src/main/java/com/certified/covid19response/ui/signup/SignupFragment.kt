@@ -2,6 +2,7 @@ package com.certified.covid19response.ui.signup
 
 import android.os.Bundle
 import android.os.PatternMatcher
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,6 +49,8 @@ class SignupFragment : Fragment() {
                 if (etEmail.checkFieldEmpty())
                     return@setOnClickListener
 
+                checkEmail(email)
+
                 if (location.isBlank()) {
                     with(etLocation) {
                         error = "Required *"
@@ -64,6 +67,16 @@ class SignupFragment : Fragment() {
 
                 if (!Util.verifyPassword(password, etPassword))
                     return@setOnClickListener
+            }
+        }
+    }
+
+    private  fun checkEmail(email: String) {
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            binding.etEmail.apply {
+                error = "Enter a valid email"
+                requestFocus()
+                return
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.certified.covid19response.ui.signup
 
 import android.os.Bundle
+import android.os.PatternMatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,10 @@ import androidx.navigation.fragment.findNavController
 import com.certified.covid19response.R
 import com.certified.covid19response.databinding.FragmentSignupBinding
 import com.certified.covid19response.util.Extensions.checkFieldEmpty
+import com.certified.covid19response.util.Util
 import com.google.android.material.textfield.TextInputEditText
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 class SignupFragment : Fragment() {
 
@@ -58,7 +62,8 @@ class SignupFragment : Fragment() {
                 if (etPassword.checkFieldEmpty())
                     return@setOnClickListener
 
-                verifyPassword(password)
+                if (!Util.verifyPassword(password, etPassword))
+                    return@setOnClickListener
             }
         }
     }
@@ -70,50 +75,6 @@ class SignupFragment : Fragment() {
                 requestFocus()
             }
             return
-        }
-    }
-
-    private fun verifyPassword(password: String) {
-
-        binding.apply {
-            if (password.length < 8) {
-                with(etPassword) {
-                    error = "Minimum of 8 characters"
-                    requestFocus()
-                }
-                return
-            }
-
-            var numberFlag = false
-            var upperCaseFlag = false
-
-            for (i in password.indices) {
-                val ch = password[i]
-                when {
-                    ch.isDigit() -> {
-                        numberFlag = true
-                    }
-                    ch.isUpperCase() -> {
-                        upperCaseFlag = true
-                    }
-                }
-            }
-
-            if (!numberFlag) {
-                with(etPassword) {
-                    error = "A number is required"
-                    requestFocus()
-                }
-                return
-            }
-
-            if (!upperCaseFlag) {
-                with(etPassword) {
-                    error = "A capital letter is required"
-                    requestFocus()
-                }
-                return
-            }
         }
     }
 

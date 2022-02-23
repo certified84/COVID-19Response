@@ -1,14 +1,15 @@
 package com.certified.covid19response.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.certified.covid19response.R
 import com.certified.covid19response.databinding.FragmentSplashBinding
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -30,7 +31,11 @@ class SplashFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
             delay(3000L)
-            findNavController().navigate(R.id.action_splashFragment_to_onboardingFragment)
+            val currentUser = Firebase.auth.currentUser
+            if (currentUser == null)
+                findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToOnboardingFragment())
+            else
+                findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
         }
     }
 

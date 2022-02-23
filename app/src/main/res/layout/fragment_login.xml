@@ -4,6 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.LoginFragment">
 
+    <data>
+
+        <import type="androidx.databinding.ObservableField" />
+
+        <import type="com.certified.covid19response.util.UIState" />
+
+        <variable
+            name="uiState"
+            type="ObservableField&lt;UIState>" />
+    </data>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -114,12 +125,12 @@
                 app:passwordToggleTint="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_temporary_password"
+                    android:id="@+id/et_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/space_grotesk_regular"
                     android:hint="@string/hint_password"
-                    android:inputType="numberPassword"
+                    android:inputType="textPassword"
                     android:paddingTop="@dimen/_8sdp"
                     android:paddingBottom="@dimen/_8sdp"
                     android:textColor="@color/black" />
@@ -165,7 +176,7 @@
                 android:layout_marginTop="@dimen/_8sdp"
                 android:alpha=".5"
                 android:fontFamily="@font/space_grotesk_regular"
-                android:text="OR"
+                android:text="@string/or"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14ssp"
                 app:layout_constraintEnd_toEndOf="@+id/btn_login"
@@ -191,6 +202,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/materialTextView10"
                 app:strokeColor="@color/black"
                 app:strokeWidth=".5dp" />
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                app:indicatorColor="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:visible="@{uiState == UIState.LOADING}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

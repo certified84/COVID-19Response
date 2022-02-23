@@ -17,7 +17,6 @@ import com.certified.covid19response.util.Extensions.checkFieldEmpty
 import com.certified.covid19response.util.Extensions.showToast
 import com.certified.covid19response.util.UIState
 import com.certified.covid19response.util.Util
-import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -135,16 +134,6 @@ class SignupFragment : Fragment() {
                 requestFocus()
                 return
             }
-        }
-    }
-
-    private fun checkFieldEmpty(editText: TextInputEditText) {
-        if (editText.text.toString().trim().isBlank()) {
-            with(editText) {
-                error = "Required *"
-                requestFocus()
-            }
-            return
         }
     }
 

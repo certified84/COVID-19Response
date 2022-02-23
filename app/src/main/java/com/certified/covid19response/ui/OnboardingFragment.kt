@@ -56,7 +56,7 @@ class OnboardingFragment : Fragment() {
     }
 
     private fun showChromeCustomTabView(url: String) {
-        var customTabsClient: CustomTabsClient? = null
+        var customTabsClient: CustomTabsClient?
         var customTabsSession: CustomTabsSession? = null
         val customTabsServiceConnection: CustomTabsServiceConnection =
             object : CustomTabsServiceConnection() {

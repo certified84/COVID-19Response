@@ -7,4 +7,7 @@ class FirebaseRepository {
 
     fun createUserWithEmailAndPassword(email: String, password: String) =
         Firebase.auth.createUserWithEmailAndPassword(email, password)
+
+    fun signInWithEmailAndPassword(email: String, password: String) =
+        Firebase.auth.signInWithEmailAndPassword(email, password)
 }

@@ -12,7 +12,7 @@ object Util {
                 error = "Minimum of 8 characters"
                 requestFocus()
             }
-            return true
+            return false
         }
 
         var numberFlag = false
@@ -35,7 +35,7 @@ object Util {
                 error = "Uppercase letter required* "
                 requestFocus()
             }
-            return true
+            return false
         }
 
         val pattern = Pattern.compile("[^a-z0-9]", Pattern.CASE_INSENSITIVE)
@@ -44,7 +44,7 @@ object Util {
                 error = "Special character required* "
                 requestFocus()
             }
-            return true
+            return false
         }
 
         if (!numberFlag) {
@@ -52,9 +52,9 @@ object Util {
                 error = "Number required* "
                 requestFocus()
             }
-            return true
+            return false
         }
 
-        return false
+        return true
     }
 }

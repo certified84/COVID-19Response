@@ -1,7 +1,6 @@
 package com.certified.covid19response.di
 
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
+import com.certified.covid19response.data.repository.FirebaseRepository
 import com.google.firebase.ktx.Firebase
 import dagger.Module
 import dagger.Provides
@@ -15,7 +14,10 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideFirebaseAuth(): FirebaseAuth = Firebase.auth
+    fun provideFirebase(): Firebase = Firebase
+
+    @Provides
+    fun provideFirebaseRepository(): FirebaseRepository = FirebaseRepository()
 
 //    @Singleton
 //    @Provides
@@ -34,7 +36,7 @@ class NetworkModule {
 //        retrofit.create(CovidResponseApiService::class.java)
 //
 //    @Provides
-//    fun provideRepository(qomunitiApiService: CovidResponseApiService) = Repository(qomunitiApiService)
+//    fun provideRepository(qomunitiApiService: CovidResponseApiService) = FirebaseRepository(qomunitiApiService)
 //
 //    @Provides
 //    fun provideErrorUtils(retrofit: Retrofit) = ApiErrorUtil(retrofit)

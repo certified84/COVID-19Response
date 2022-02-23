@@ -1,26 +1,35 @@
 package com.certified.covid19response.ui.signup
 
+import android.net.Uri
 import android.os.Bundle
-import android.os.PatternMatcher
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.certified.covid19response.R
+import com.certified.covid19response.data.model.User
 import com.certified.covid19response.databinding.FragmentSignupBinding
 import com.certified.covid19response.util.Extensions.checkFieldEmpty
+import com.certified.covid19response.util.Extensions.showToast
+import com.certified.covid19response.util.UIState
 import com.certified.covid19response.util.Util
 import com.google.android.material.textfield.TextInputEditText
-import java.util.regex.Matcher
-import java.util.regex.Pattern
+import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignupFragment : Fragment() {
 
     private var _binding: FragmentSignupBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: SignupViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +42,8 @@ class SignupFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = this
+        binding.uiState = viewModel.uiState
         binding.apply {
             btnLogin.setOnClickListener { findNavController().navigate(R.id.action_signupFragment_to_loginFragment) }
 
@@ -67,11 +78,57 @@ class SignupFragment : Fragment() {
 
                 if (!Util.verifyPassword(password, etPassword))
                     return@setOnClickListener
+
+                viewModel.uiState.set(UIState.LOADING)
+                viewModel.createUserWithEmailAndPassword(email, password)
+                    ?.addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+
+                            val currentUser = Firebase.auth.currentUser!!
+                            currentUser.sendEmailVerification()
+
+                            val newUser = User(
+                                id = currentUser.uid,
+                                name = name,
+                                email = currentUser.email.toString(),
+                                location = location,
+                                nin = nin.toLong()
+                            )
+
+                            val userRef =
+                                Firebase.firestore.collection("accounts").document("users")
+                                    .collection(currentUser.uid).document("details")
+                            userRef.set(newUser).addOnCompleteListener {
+                                if (it.isSuccessful) {
+                                    val profileChangeRequest =
+                                        UserProfileChangeRequest.Builder()
+                                            .setDisplayName(newUser.name)
+                                            .setPhotoUri(Uri.parse(newUser.profile_image))
+                                            .build()
+                                    currentUser.updateProfile(profileChangeRequest)
+
+//                                    Firebase.auth.signOut()
+                                } else {
+                                    viewModel.uiState.set(UIState.FAILURE)
+                                    showToast("An error occurred: ${it.exception}")
+                                }
+                            }
+
+                            viewModel.uiState.set(UIState.SUCCESS)
+                            showToast("Account created successfully. Check email for verification link")
+                            Firebase.auth.signOut()
+
+                            findNavController().navigate(SignupFragmentDirections.actionSignupFragmentToLoginFragment())
+                        } else {
+                            viewModel.uiState.set(UIState.FAILURE)
+                            showToast("Registration failed ${task.exception}")
+                        }
+                    }
             }
         }
     }
 
-    private  fun checkEmail(email: String) {
+    private fun checkEmail(email: String) {
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             binding.etEmail.apply {
                 error = "Enter a valid email"

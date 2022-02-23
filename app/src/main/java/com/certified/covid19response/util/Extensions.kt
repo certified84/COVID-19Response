@@ -1,5 +1,7 @@
 package com.certified.covid19response.util
 
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputEditText
 
 object Extensions {
@@ -12,5 +14,9 @@ object Extensions {
             true
         } else
             false
+    }
+
+    fun Fragment.showToast(msg: String) {
+        Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
     }
 }

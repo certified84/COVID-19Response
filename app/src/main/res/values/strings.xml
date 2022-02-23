@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">COVID-19 Response</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login">Login</string>
     <string name="create_an_account">Create an account</string>
     <string name="terms">Terms</string>
@@ -26,5 +24,19 @@
     <string name="chat">Chat</string>
     <string name="status_check">Status Check</string>
     <string name="me">Me</string>
-    <string name="bottom_navigation_view">Bottom Navigaion View</string>
+    <string name="bottom_navigation_view">Bottom Navigation View</string>
+    <string name="and">and</string>
+    <string name="read_about_our">Read about our</string>
+    <string name="password_requirement">Password must be at least 8 characters\nand have at least a:\n Special character e.g @\n Number e.g 1</string>
+
+    <string-array name="locations">
+        <item>Lagos</item>
+        <item>Abuja</item>
+        <item>Ondo</item>
+        <item>Benue</item>
+        <item>Ogun</item>
+        <item>Anambra</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

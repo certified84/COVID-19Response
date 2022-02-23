@@ -1,319 +1,345 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.SignupFragment">
+    tools:context=".ui.signup.SignupFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <import type="androidx.databinding.ObservableField" />
+
+        <import type="com.certified.covid19response.util.UIState" />
+
+        <variable
+            name="uiState"
+            type="ObservableField&lt;UIState>" />
+    </data>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/_16sdp">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/materialTextView3"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:fontFamily="@font/space_grotesk_semi_bold"
-            android:text="@string/create_account"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_16ssp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:paddingBottom="@dimen/_16sdp">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/materialTextView4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:fontFamily="@font/space_grotesk_regular"
-            android:text="@string/create_account_summary"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_13ssp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/materialTextView3" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/materialTextView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:fontFamily="@font/space_grotesk_medium"
-            android:text="@string/choose_display_name"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_14ssp"
-            app:layout_constraintStart_toStartOf="@+id/materialTextView4"
-            app:layout_constraintTop_toBottomOf="@+id/materialTextView4" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/et_display_name_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:background="@color/editTextColor"
-            app:boxCornerRadiusBottomEnd="@dimen/_6sdp"
-            app:boxCornerRadiusBottomStart="@dimen/_6sdp"
-            app:boxCornerRadiusTopEnd="@dimen/_6sdp"
-            app:boxCornerRadiusTopStart="@dimen/_6sdp"
-            app:boxStrokeWidth=".2dp"
-            app:hintEnabled="false"
-            app:layout_constraintEnd_toEndOf="@+id/materialTextView4"
-            app:layout_constraintStart_toStartOf="@+id/materialTextView5"
-            app:layout_constraintTop_toBottomOf="@+id/materialTextView5">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_display_name"
-                android:layout_width="match_parent"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView3"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:fontFamily="@font/space_grotesk_semi_bold"
+                android:text="@string/create_account"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:fontFamily="@font/space_grotesk_regular"
-                android:hint="@string/name_hint"
-                android:inputType="textPersonName"
+                android:text="@string/create_account_summary"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView3" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/space_grotesk_medium"
+                android:text="@string/choose_display_name"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintStart_toStartOf="@+id/materialTextView4"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView4" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_display_name_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@color/editTextColor"
+                app:boxCornerRadiusBottomEnd="@dimen/_6sdp"
+                app:boxCornerRadiusBottomStart="@dimen/_6sdp"
+                app:boxCornerRadiusTopEnd="@dimen/_6sdp"
+                app:boxCornerRadiusTopStart="@dimen/_6sdp"
+                app:boxStrokeWidth=".2dp"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="@+id/materialTextView4"
+                app:layout_constraintStart_toStartOf="@+id/materialTextView5"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView5">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_display_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/space_grotesk_regular"
+                    android:hint="@string/name_hint"
+                    android:inputType="textPersonName"
+                    android:paddingTop="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:textColor="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/space_grotesk_medium"
+                android:text="@string/enter_email"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintStart_toStartOf="@+id/materialTextView4"
+                app:layout_constraintTop_toBottomOf="@+id/et_display_name_layout" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_email_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@color/editTextColor"
+                app:boxCornerRadiusBottomEnd="@dimen/_6sdp"
+                app:boxCornerRadiusBottomStart="@dimen/_6sdp"
+                app:boxCornerRadiusTopEnd="@dimen/_6sdp"
+                app:boxCornerRadiusTopStart="@dimen/_6sdp"
+                app:boxStrokeWidth=".2dp"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="@+id/materialTextView4"
+                app:layout_constraintStart_toStartOf="@+id/materialTextView5"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView11">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/space_grotesk_regular"
+                    android:hint="@string/email_hint"
+                    android:inputType="textEmailAddress"
+                    android:paddingTop="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:textColor="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/space_grotesk_medium"
+                android:text="@string/location"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintStart_toStartOf="@+id/materialTextView4"
+                app:layout_constraintTop_toBottomOf="@+id/et_email_layout" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_location_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@color/editTextColor"
+                app:boxCornerRadiusBottomEnd="@dimen/_6sdp"
+                app:boxCornerRadiusBottomStart="@dimen/_6sdp"
+                app:boxCornerRadiusTopEnd="@dimen/_6sdp"
+                app:boxCornerRadiusTopStart="@dimen/_6sdp"
+                app:boxStrokeWidth=".2dp"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="@+id/materialTextView4"
+                app:layout_constraintStart_toStartOf="@+id/materialTextView5"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView6">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/et_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/space_grotesk_regular"
+                    android:hint="@string/hint_location"
+                    android:inputType="none"
+                    android:paddingTop="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:textColor="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/space_grotesk_medium"
+                android:text="@string/enter_nin"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintStart_toStartOf="@+id/materialTextView4"
+                app:layout_constraintTop_toBottomOf="@+id/et_location_layout" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_nin_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@color/editTextColor"
+                app:boxCornerRadiusBottomEnd="@dimen/_6sdp"
+                app:boxCornerRadiusBottomStart="@dimen/_6sdp"
+                app:boxCornerRadiusTopEnd="@dimen/_6sdp"
+                app:boxCornerRadiusTopStart="@dimen/_6sdp"
+                app:boxStrokeWidth=".2dp"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="@+id/materialTextView4"
+                app:layout_constraintStart_toStartOf="@+id/materialTextView5"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView7">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_nin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/space_grotesk_regular"
+                    android:hint="e.g 00012130101010"
+                    android:inputType="number"
+                    android:paddingTop="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:textColor="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/space_grotesk_medium"
+                android:text="@string/choose_password"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintStart_toStartOf="@+id/materialTextView4"
+                app:layout_constraintTop_toBottomOf="@+id/et_nin_layout" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_password_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@color/editTextColor"
+                app:boxCornerRadiusBottomEnd="@dimen/_6sdp"
+                app:boxCornerRadiusBottomStart="@dimen/_6sdp"
+                app:boxCornerRadiusTopEnd="@dimen/_6sdp"
+                app:boxCornerRadiusTopStart="@dimen/_6sdp"
+                app:boxStrokeWidth=".2dp"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="@+id/materialTextView4"
+                app:layout_constraintStart_toStartOf="@+id/materialTextView8"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView8"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/space_grotesk_regular"
+                    android:hint="@string/hint_password"
+                    android:inputType="textPassword"
+                    android:paddingTop="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:textColor="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:text="@string/password_requirement"
+                android:textColor="@color/yellow"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="@+id/et_password_layout"
+                app:layout_constraintTop_toBottomOf="@+id/et_password_layout" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_signup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:backgroundTint="@color/colorPrimary"
+                android:fontFamily="@font/space_grotesk_regular"
                 android:paddingTop="@dimen/_8sdp"
                 android:paddingBottom="@dimen/_8sdp"
-                android:textColor="@color/black" />
+                android:text="@string/create_account"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp"
+                app:cornerRadius="@dimen/_16sdp"
+                app:layout_constraintEnd_toEndOf="@+id/et_password_layout"
+                app:layout_constraintStart_toStartOf="@+id/et_password_layout"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView9" />
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/materialTextView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:fontFamily="@font/space_grotesk_medium"
-            android:text="@string/enter_email"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_14ssp"
-            app:layout_constraintStart_toStartOf="@+id/materialTextView4"
-            app:layout_constraintTop_toBottomOf="@+id/et_display_name_layout" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/et_email_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:background="@color/editTextColor"
-            app:boxCornerRadiusBottomEnd="@dimen/_6sdp"
-            app:boxCornerRadiusBottomStart="@dimen/_6sdp"
-            app:boxCornerRadiusTopEnd="@dimen/_6sdp"
-            app:boxCornerRadiusTopStart="@dimen/_6sdp"
-            app:boxStrokeWidth=".2dp"
-            app:hintEnabled="false"
-            app:layout_constraintEnd_toEndOf="@+id/materialTextView4"
-            app:layout_constraintStart_toStartOf="@+id/materialTextView5"
-            app:layout_constraintTop_toBottomOf="@+id/materialTextView11">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_email"
-                android:layout_width="match_parent"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView10"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:alpha=".5"
                 android:fontFamily="@font/space_grotesk_regular"
-                android:hint="@string/email_hint"
-                android:inputType="textEmailAddress"
+                android:text="OR"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintEnd_toEndOf="@+id/btn_signup"
+                app:layout_constraintStart_toStartOf="@+id/btn_signup"
+                app:layout_constraintTop_toBottomOf="@+id/btn_signup" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_login"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/space_grotesk_regular"
                 android:paddingTop="@dimen/_8sdp"
                 android:paddingBottom="@dimen/_8sdp"
-                android:textColor="@color/black" />
+                android:text="@string/login"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp"
+                app:cornerRadius="@dimen/_16sdp"
+                app:layout_constraintEnd_toEndOf="@+id/et_password_layout"
+                app:layout_constraintStart_toStartOf="@+id/et_password_layout"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView10"
+                app:strokeColor="@color/black"
+                app:strokeWidth=".5dp" />
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/materialTextView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:fontFamily="@font/space_grotesk_medium"
-            android:text="@string/location"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_14ssp"
-            app:layout_constraintStart_toStartOf="@+id/materialTextView4"
-            app:layout_constraintTop_toBottomOf="@+id/et_email_layout" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/et_location_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:background="@color/editTextColor"
-            app:boxCornerRadiusBottomEnd="@dimen/_6sdp"
-            app:boxCornerRadiusBottomStart="@dimen/_6sdp"
-            app:boxCornerRadiusTopEnd="@dimen/_6sdp"
-            app:boxCornerRadiusTopStart="@dimen/_6sdp"
-            app:boxStrokeWidth=".2dp"
-            app:hintEnabled="false"
-            app:layout_constraintEnd_toEndOf="@+id/materialTextView4"
-            app:layout_constraintStart_toStartOf="@+id/materialTextView5"
-            app:layout_constraintTop_toBottomOf="@+id/materialTextView6">
-
-            <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                android:id="@+id/et_location"
-                android:layout_width="match_parent"
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/space_grotesk_regular"
-                android:hint="@string/hint_location"
-                android:inputType="none"
-                android:paddingTop="@dimen/_8sdp"
-                android:paddingBottom="@dimen/_8sdp"
-                android:textColor="@color/black" />
+                android:indeterminate="true"
+                app:indicatorColor="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:visible="@{uiState == UIState.LOADING}" />
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/materialTextView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:fontFamily="@font/space_grotesk_medium"
-            android:text="@string/enter_nin"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_14ssp"
-            app:layout_constraintStart_toStartOf="@+id/materialTextView4"
-            app:layout_constraintTop_toBottomOf="@+id/et_location_layout" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/et_nin_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:background="@color/editTextColor"
-            app:boxCornerRadiusBottomEnd="@dimen/_6sdp"
-            app:boxCornerRadiusBottomStart="@dimen/_6sdp"
-            app:boxCornerRadiusTopEnd="@dimen/_6sdp"
-            app:boxCornerRadiusTopStart="@dimen/_6sdp"
-            app:boxStrokeWidth=".2dp"
-            app:hintEnabled="false"
-            app:layout_constraintEnd_toEndOf="@+id/materialTextView4"
-            app:layout_constraintStart_toStartOf="@+id/materialTextView5"
-            app:layout_constraintTop_toBottomOf="@+id/materialTextView7">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_nin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/space_grotesk_regular"
-                android:hint="e.g 00012130101010"
-                android:inputType="numberPassword"
-                android:paddingTop="@dimen/_8sdp"
-                android:paddingBottom="@dimen/_8sdp"
-                android:textColor="@color/black" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/materialTextView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:fontFamily="@font/space_grotesk_medium"
-            android:text="@string/choose_password"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_14ssp"
-            app:layout_constraintStart_toStartOf="@+id/materialTextView4"
-            app:layout_constraintTop_toBottomOf="@+id/et_nin_layout" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/et_password_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:background="@color/editTextColor"
-            app:boxCornerRadiusBottomEnd="@dimen/_6sdp"
-            app:boxCornerRadiusBottomStart="@dimen/_6sdp"
-            app:boxCornerRadiusTopEnd="@dimen/_6sdp"
-            app:boxCornerRadiusTopStart="@dimen/_6sdp"
-            app:boxStrokeWidth=".2dp"
-            app:hintEnabled="false"
-            app:layout_constraintEnd_toEndOf="@+id/materialTextView4"
-            app:layout_constraintStart_toStartOf="@+id/materialTextView8"
-            app:layout_constraintTop_toBottomOf="@+id/materialTextView8"
-            app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/black">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_temporary_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/space_grotesk_regular"
-                android:hint="@string/hint_password"
-                android:inputType="numberPassword"
-                android:paddingTop="@dimen/_8sdp"
-                android:paddingBottom="@dimen/_8sdp"
-                android:textColor="@color/black" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/materialTextView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_4sdp"
-            android:fontFamily="@font/space_grotesk_regular"
-            android:text="Password must have at least a:\n  Special character e.g @\n  Number e.g 1"
-            android:textColor="@color/yellow"
-            android:textSize="@dimen/_12ssp"
-            app:layout_constraintStart_toStartOf="@+id/et_password_layout"
-            app:layout_constraintTop_toBottomOf="@+id/et_password_layout" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_signup"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:backgroundTint="@color/colorPrimary"
-            android:fontFamily="@font/space_grotesk_regular"
-            android:paddingTop="@dimen/_8sdp"
-            android:paddingBottom="@dimen/_8sdp"
-            android:text="@string/create_account"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_14ssp"
-            app:cornerRadius="@dimen/_16sdp"
-            app:layout_constraintEnd_toEndOf="@+id/et_password_layout"
-            app:layout_constraintStart_toStartOf="@+id/et_password_layout"
-            app:layout_constraintTop_toBottomOf="@+id/materialTextView9" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/materialTextView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:alpha=".5"
-            android:fontFamily="@font/space_grotesk_regular"
-            android:text="OR"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_14ssp"
-            app:layout_constraintEnd_toEndOf="@+id/btn_signup"
-            app:layout_constraintStart_toStartOf="@+id/btn_signup"
-            app:layout_constraintTop_toBottomOf="@+id/btn_signup" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_login"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:fontFamily="@font/space_grotesk_regular"
-            android:paddingTop="@dimen/_8sdp"
-            android:paddingBottom="@dimen/_8sdp"
-            android:text="@string/login"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_14ssp"
-            app:cornerRadius="@dimen/_16sdp"
-            app:layout_constraintEnd_toEndOf="@+id/et_password_layout"
-            app:layout_constraintStart_toStartOf="@+id/et_password_layout"
-            app:layout_constraintTop_toBottomOf="@+id/materialTextView10"
-            app:strokeColor="@color/black"
-            app:strokeWidth=".5dp" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

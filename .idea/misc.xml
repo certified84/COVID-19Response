@@ -4,10 +4,17 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/drawable/ic_scan.xml" value="0.2135" />
-        <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_article.xml" value="0.1" />
+        <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_chat.xml" value="0.1" />
+        <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_chat_details.xml" value="0.1" />
+        <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_login.xml" value="0.22" />
+        <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_news.xml" value="0.1" />
+        <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_notifications.xml" value="0.1" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_onboarding.xml" value="0.33" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_signup.xml" value="0.33" />
+        <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_splash.xml" value="0.1716485507246377" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
       </map>
     </option>

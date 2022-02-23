@@ -10,5 +10,7 @@
     <item
         android:icon="@drawable/ic_scan"
         android:title="@string/status_check" />
-    <item android:title="@string/me" />
+
+    <item android:title="@string/me"
+        android:icon="@drawable/ic_home"/>
 </menu>

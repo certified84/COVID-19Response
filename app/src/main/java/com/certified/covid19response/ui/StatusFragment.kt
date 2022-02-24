@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.certified.covid19response.databinding.FragmentStatusBinding
+import com.certified.covid19response.util.Extensions.openBrowser
 
 class StatusFragment : Fragment() {
 
@@ -19,6 +21,18 @@ class StatusFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentStatusBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+            btnSymptomsLink.setOnClickListener {
+                requireContext().openBrowser(
+                    "https://github.com/certified84/AudioNote", findNavController(),
+                    StatusFragmentDirections.actionStatusFragmentToWebFragment("https://github.com/certified84/AudioNote")
+                )
+            }
+        }
     }
 
     override fun onDestroyView() {

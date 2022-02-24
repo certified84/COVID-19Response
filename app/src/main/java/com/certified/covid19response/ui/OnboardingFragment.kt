@@ -1,7 +1,6 @@
 package com.certified.covid19response.ui
 
 import android.content.ComponentName
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,12 +15,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.certified.covid19response.R
 import com.certified.covid19response.databinding.FragmentOnboardingBinding
+import com.certified.covid19response.util.Config.CUSTOM_PACKAGE_NAME
+import com.certified.covid19response.util.Extensions.openBrowser
 
 class OnboardingFragment : Fragment() {
 
     private var _binding: FragmentOnboardingBinding? = null
     private val binding get() = _binding!!
-    private val CUSTOM_PACKAGE_NAME = "com.android.chrome"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,56 +38,19 @@ class OnboardingFragment : Fragment() {
         binding.apply {
             btnLogin.setOnClickListener { findNavController().navigate(R.id.action_onboardingFragment_to_loginFragment) }
             btnSignup.setOnClickListener { findNavController().navigate(R.id.action_onboardingFragment_to_signupFragment) }
-            btnPrivacyPolicy.setOnClickListener { openBrowser("https://github.com/certified84") }
-            btnTerms.setOnClickListener { openBrowser("https://github.com/certified84/AudioNote") }
-        }
-    }
-
-    private fun openBrowser(url: String) {
-        try {
-            val packageManager = requireContext().packageManager
-            packageManager.getPackageInfo(CUSTOM_PACKAGE_NAME, 0)
-            showChromeCustomTabView(url)
-        } catch (e: PackageManager.NameNotFoundException) {
-            findNavController().navigate(
-                OnboardingFragmentDirections.actionOnboardingFragmentToWebFragment(url)
-            )
-        }
-    }
-
-    private fun showChromeCustomTabView(url: String) {
-        var customTabsClient: CustomTabsClient?
-        var customTabsSession: CustomTabsSession? = null
-        val customTabsServiceConnection: CustomTabsServiceConnection =
-            object : CustomTabsServiceConnection() {
-                override fun onServiceDisconnected(name: ComponentName?) {
-                    customTabsClient = null
-                }
-
-                override fun onCustomTabsServiceConnected(
-                    name: ComponentName,
-                    client: CustomTabsClient
-                ) {
-                    customTabsClient = client
-                    customTabsClient!!.warmup(0L)
-                    customTabsSession = customTabsClient!!.newSession(null)
-                }
-            }
-        CustomTabsClient.bindCustomTabsService(
-            requireContext(),
-            CUSTOM_PACKAGE_NAME,
-            customTabsServiceConnection
-        )
-        val customTabsIntent = CustomTabsIntent.Builder(customTabsSession)
-            .setShowTitle(true).setToolbarColor(
-                ResourcesCompat.getColor(
-                    resources,
-                    R.color.colorPrimary,
-                    null
+            btnPrivacyPolicy.setOnClickListener {
+                requireContext().openBrowser(
+                    "https://github.com/certified84", findNavController(),
+                    OnboardingFragmentDirections.actionOnboardingFragmentToWebFragment("https://github.com/certified84")
                 )
-            ).build()
-
-        customTabsIntent.launchUrl(requireContext(), Uri.parse(url))
+            }
+            btnTerms.setOnClickListener {
+                requireContext().openBrowser(
+                    "https://github.com/certified84/AudioNote", findNavController(),
+                    OnboardingFragmentDirections.actionOnboardingFragmentToWebFragment("https://github.com/certified84/AudioNote")
+                )
+            }
+        }
     }
 
     override fun onDestroyView() {

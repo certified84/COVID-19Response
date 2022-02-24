@@ -98,7 +98,11 @@
         android:id="@+id/statusFragment"
         android:name="com.certified.covid19response.ui.StatusFragment"
         android:label="fragment_status"
-        tools:layout="@layout/fragment_status" />
+        tools:layout="@layout/fragment_status" >
+        <action
+            android:id="@+id/action_statusFragment_to_webFragment"
+            app:destination="@id/webFragment" />
+    </fragment>
     <fragment
         android:id="@+id/articleFragment"
         android:name="com.certified.covid19response.ui.information.ArticleFragment"

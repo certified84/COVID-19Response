@@ -1,14 +1,352 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.StatusFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_16sdp"
+            tools:context=".ui.StatusFragment">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:fontFamily="@font/space_grotesk_semi_bold"
+                android:text="@string/covid_status_check"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:text="@string/choose_symptoms"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView12" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView19"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:text="@string/choose_symptoms_description"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView18" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cb_cough"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:buttonTint="@color/colorPrimary"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:text="@string/confusion"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView19" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cb_diarrhea"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:buttonTint="@color/colorPrimary"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:text="@string/diarrhea"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/cb_cough" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cb_sore_throat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:buttonTint="@color/colorPrimary"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:text="@string/sore_throat"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/cb_diarrhea" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cb_fever"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:buttonTint="@color/colorPrimary"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:text="@string/fever"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/cb_sore_throat" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cb_fatigue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:buttonTint="@color/colorPrimary"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:text="@string/fatigue"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/cb_fever" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cb_dry_cough"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:buttonTint="@color/colorPrimary"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:text="@string/dry_cough"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/cb_fatigue" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cb_shortness_breath"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:buttonTint="@color/colorPrimary"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:text="@string/shortness_breath"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="@+id/guideline3"
+                app:layout_constraintTop_toTopOf="@+id/cb_cough" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cb_chills_dizziness"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorPrimary"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:text="@string/chills_dizziness"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="@+id/cb_shortness_breath"
+                app:layout_constraintTop_toTopOf="@+id/cb_diarrhea" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cb_loss_appetite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorPrimary"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:text="@string/loss_appetite"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="@+id/cb_chills_dizziness"
+                app:layout_constraintTop_toTopOf="@+id/cb_sore_throat" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cb_conjunctivitis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorPrimary"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:text="@string/conjunctivitis"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="@+id/cb_loss_appetite"
+                app:layout_constraintTop_toTopOf="@+id/cb_fever" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cb_nasal_congestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorPrimary"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:text="@string/nasal_congestion"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="@+id/cb_conjunctivitis"
+                app:layout_constraintTop_toTopOf="@+id/cb_fatigue" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cb_headache"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorPrimary"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:text="@string/headache"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="@+id/cb_nasal_congestion"
+                app:layout_constraintTop_toTopOf="@+id/cb_dry_cough" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/_16sdp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintStart_toEndOf="@+id/cb_sore_throat" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/_16sdp" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cb_persistent_pain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:buttonTint="@color/colorPrimary"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:text="@string/persistent_pain_or_pressure_in_the_chest"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="@+id/cb_dry_cough"
+                app:layout_constraintTop_toBottomOf="@+id/cb_dry_cough" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cb_high_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:buttonTint="@color/colorPrimary"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:text="@string/high_temp"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="@+id/cb_dry_cough"
+                app:layout_constraintTop_toBottomOf="@+id/cb_persistent_pain" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:background="#E6E6FF"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/cb_high_temp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:text="@string/source"
+                android:textColor="#6A6A6A"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/view"
+                app:layout_constraintEnd_toStartOf="@+id/btn_symptoms_link"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/view" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_symptoms_link"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:text="@string/symptoms_link"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/materialTextView20"
+                app:layout_constraintTop_toTopOf="@+id/view" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/space_grotesk_semi_bold"
+                android:text="@string/describe_how_you_are_feeling"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/btn_symptoms_link" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView22"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:alpha=".7"
+                android:text="@string/describe_how_you_are_feeling_in_your_own_words_below"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView21" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_user_feeling_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@color/editTextColor"
+                app:boxCornerRadiusBottomEnd="@dimen/_6sdp"
+                app:boxCornerRadiusBottomStart="@dimen/_6sdp"
+                app:boxCornerRadiusTopEnd="@dimen/_6sdp"
+                app:boxCornerRadiusTopStart="@dimen/_6sdp"
+                app:boxStrokeWidth="@dimen/_1sdp"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView22">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_user_feeling"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_100sdp"
+                    android:fontFamily="@font/space_grotesk_regular"
+                    android:gravity="top|start"
+                    android:hint="@string/type_here"
+                    android:inputType="textMultiLine"
+                    android:paddingTop="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:textColor="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_check_status"
+                android:layout_width="0dp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:text="@string/check_status"
+                android:textAllCaps="false"
+                android:textSize="@dimen/_14ssp"
+                app:cornerRadius="@dimen/_10sdp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/et_user_feeling_layout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

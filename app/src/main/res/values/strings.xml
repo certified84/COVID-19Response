@@ -51,4 +51,27 @@
     <string name="article_by">Article by</string>
     <string name="read_more">Read more</string>
     <string name="coming_soon">Coming soon</string>
+    <string name="covid_status_check">Covid Status check</string>
+    <string name="choose_symptoms">Choose symptoms</string>
+    <string name="choose_symptoms_description">Choose the symptoms that best describes how you are feeling.</string>
+    <string name="confusion">Confusion</string>
+    <string name="diarrhea">Diarrhea</string>
+    <string name="sore_throat">Sore throat</string>
+    <string name="fever">Fever</string>
+    <string name="fatigue">Fatigue</string>
+    <string name="dry_cough">Dry cough</string>
+    <string name="shortness_breath">Shortness of breath</string>
+    <string name="chills_dizziness">Chills or Dizziness</string>
+    <string name="loss_appetite">Loss of appetite</string>
+    <string name="conjunctivitis">Conjunctivitis</string>
+    <string name="nasal_congestion">Nasal congestion</string>
+    <string name="headache">Headache</string>
+    <string name="persistent_pain_or_pressure_in_the_chest">Persistent pain or pressure in the chest</string>
+    <string name="high_temp">High temperature (above 38 °C).</string>
+    <string name="source">Source:</string>
+    <string name="symptoms_link"><u>www.who.int/FghJr</u></string>
+    <string name="describe_how_you_are_feeling">Describe how you are feeling</string>
+    <string name="describe_how_you_are_feeling_in_your_own_words_below">Describe how you are feeling in your own words below</string>
+    <string name="type_here">Type here...</string>
+    <string name="check_status">Check Status</string>
 </resources>

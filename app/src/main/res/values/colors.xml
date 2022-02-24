@@ -11,4 +11,5 @@
     <color name="colorPrimary">#0404B2</color>
     <color name="yellow">#EDA61B</color>
     <color name="editTextColor">#E6E6FF</color>
+    <color name="red">#ED1B35</color>
 </resources>

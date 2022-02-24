@@ -2,6 +2,7 @@ package com.certified.covid19response.ui.signup
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
@@ -79,52 +80,57 @@ class SignupFragment : Fragment() {
                     return@setOnClickListener
 
                 viewModel.uiState.set(UIState.LOADING)
-                viewModel.createUserWithEmailAndPassword(email, password)
-                    ?.addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
+                createUser(email, password, name, location, nin)
+            }
+        }
+    }
 
-                            val currentUser = Firebase.auth.currentUser!!
+    private fun createUser(
+        email: String,
+        password: String,
+        name: String,
+        location: String,
+        nin: String
+    ) {
+        viewModel.createUserWithEmailAndPassword(email, password)
+            ?.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+
+                    val currentUser = Firebase.auth.currentUser!!
+                    val newUser = User(
+                        id = currentUser.uid,
+                        name = name,
+                        email = currentUser.email.toString(),
+                        location = location,
+                        nin = nin
+                    )
+
+                    Firebase.firestore.collection("accounts").document("users")
+                        .collection(currentUser.uid).document("details").set(newUser)
+                        .addOnSuccessListener {
+                            val profileChangeRequest =
+                                UserProfileChangeRequest.Builder()
+                                    .setDisplayName(newUser.name)
+                                    .build()
+                            currentUser.updateProfile(profileChangeRequest)
                             currentUser.sendEmailVerification()
-
-                            val newUser = User(
-                                id = currentUser.uid,
-                                name = name,
-                                email = currentUser.email.toString(),
-                                location = location,
-                                nin = nin.toLong()
-                            )
-
-                            val userRef =
-                                Firebase.firestore.collection("accounts").document("users")
-                                    .collection(currentUser.uid).document("details")
-                            userRef.set(newUser).addOnCompleteListener {
-                                if (it.isSuccessful) {
-                                    val profileChangeRequest =
-                                        UserProfileChangeRequest.Builder()
-                                            .setDisplayName(newUser.name)
-                                            .setPhotoUri(Uri.parse(newUser.profile_image))
-                                            .build()
-                                    currentUser.updateProfile(profileChangeRequest)
-
-//                                    Firebase.auth.signOut()
-                                } else {
-                                    viewModel.uiState.set(UIState.FAILURE)
-                                    showToast("An error occurred: ${it.exception}")
-                                }
-                            }
 
                             viewModel.uiState.set(UIState.SUCCESS)
                             showToast("Account created successfully. Check email for verification link")
                             Firebase.auth.signOut()
 
                             findNavController().navigate(SignupFragmentDirections.actionSignupFragmentToLoginFragment())
-                        } else {
-                            viewModel.uiState.set(UIState.FAILURE)
-                            showToast("Registration failed ${task.exception}")
                         }
-                    }
+                        .addOnFailureListener {
+                            viewModel.uiState.set(UIState.FAILURE)
+                            showToast("An error occurred: $it")
+                            Log.d("TAG", "onViewCreated: An error occurred $it")
+                        }
+                } else {
+                    viewModel.uiState.set(UIState.FAILURE)
+                    showToast("Registration failed ${task.exception}")
+                }
             }
-        }
     }
 
     private fun checkEmail(email: String) {

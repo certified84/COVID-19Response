@@ -12,4 +12,6 @@
     <color name="yellow">#EDA61B</color>
     <color name="editTextColor">#E6E6FF</color>
     <color name="red">#ED1B35</color>
+    <color name="iconTintInactive">#B2B2EF</color>
+    <color name="overlay">#E6E6FC</color>
 </resources>

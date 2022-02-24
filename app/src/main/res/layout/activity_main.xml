@@ -20,22 +20,16 @@
         app:layout_constraintVertical_bias="0.0"
         app:navGraph="@navigation/navigation" />
 
-<!--    <me.ibrahimsn.lib.SmoothBottomBar-->
-<!--        android:id="@+id/bottomBar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="70dp"-->
-<!--        app:backgroundColor="@color/colorPrimary"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/nav_host_fragment"-->
-<!--        app:menu="@menu/bottom_nav_menu" />-->
-
         <me.ibrahimsn.lib.SmoothBottomBar
             android:id="@+id/bottomBar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"
             android:contentDescription="@string/bottom_navigation_view"
             app:backgroundColor="@color/white"
-            app:iconSize="@dimen/_24sdp"
-            app:iconTint="@color/colorPrimary"
+            app:iconSize="@dimen/_20sdp"
+            app:iconTint="@color/iconTintInactive"
+            app:textSize="@dimen/_12ssp"
+            app:indicatorColor="@color/overlay"
             app:iconTintActive="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

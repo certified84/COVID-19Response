@@ -1,8 +1,10 @@
 package com.certified.covid19response.ui
 
 import android.os.Bundle
+import android.widget.PopupMenu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.certified.covid19response.R
 import com.certified.covid19response.databinding.ActivityMainBinding
@@ -13,12 +15,14 @@ class MainActivity : AppCompatActivity() {
 
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+        setupSmoothBottomBar()
         isDarkModeEnabled()
     }
 
@@ -34,10 +38,15 @@ class MainActivity : AppCompatActivity() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 
+    private fun setupSmoothBottomBar() {
+        val popupMenu = PopupMenu(this, null)
+        popupMenu.inflate(R.menu.bottom_nav_menu)
+        val menu = popupMenu.menu
+        binding.bottomBar.setupWithNavController(menu, navController)
+    }
+
     override fun onBackPressed() {
-        val navigationController =
-            Navigation.findNavController(this, R.id.nav_host_fragment_container)
-        if (navigationController.currentDestination?.id == R.id.homeFragment) {
+        if (navController.currentDestination?.id == R.id.homeFragment) {
             finish()
         } else {
             super.onBackPressed()

@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.certified.covid19response.R
 import com.certified.covid19response.databinding.FragmentSplashBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import me.ibrahimsn.lib.SmoothBottomBar
 
 class SplashFragment : Fragment() {
 
@@ -37,6 +39,11 @@ class SplashFragment : Fragment() {
             else
                 findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        requireActivity().findViewById<SmoothBottomBar>(R.id.bottomBar).visibility = View.GONE
     }
 
     override fun onDestroyView() {

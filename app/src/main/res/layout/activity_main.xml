@@ -6,20 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/nav_host_fragment_container"
+    <fragment
+        android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:navGraph="@navigation/navigation" />
 
+<!--    <me.ibrahimsn.lib.SmoothBottomBar-->
+<!--        android:id="@+id/bottomBar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="70dp"-->
+<!--        app:backgroundColor="@color/colorPrimary"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/nav_host_fragment"-->
+<!--        app:menu="@menu/bottom_nav_menu" />-->
 
         <me.ibrahimsn.lib.SmoothBottomBar
             android:id="@+id/bottomBar"
@@ -29,7 +36,7 @@
             app:backgroundColor="@color/white"
             app:iconSize="@dimen/_24sdp"
             app:iconTint="@color/colorPrimary"
-            app:iconTintActive="@color/black"
+            app:iconTintActive="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

@@ -50,7 +50,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/materialTextView12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/materialTextView12"
-                app:srcCompat="@drawable/ic_notification_button" />
+                app:srcCompat="@drawable/ic_notification" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/materialTextView13"

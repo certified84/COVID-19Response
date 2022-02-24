@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.certified.covid19response.R
 import com.certified.covid19response.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,6 +26,13 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+            btnNotifications.setOnClickListener { findNavController().navigate(R.id.notificationsFragment) }
+        }
     }
 
     override fun onResume() {

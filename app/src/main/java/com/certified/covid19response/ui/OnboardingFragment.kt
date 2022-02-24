@@ -1,21 +1,13 @@
 package com.certified.covid19response.ui
 
-import android.content.ComponentName
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.browser.customtabs.CustomTabsClient
-import androidx.browser.customtabs.CustomTabsIntent
-import androidx.browser.customtabs.CustomTabsServiceConnection
-import androidx.browser.customtabs.CustomTabsSession
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.certified.covid19response.R
 import com.certified.covid19response.databinding.FragmentOnboardingBinding
-import com.certified.covid19response.util.Config.CUSTOM_PACKAGE_NAME
 import com.certified.covid19response.util.Extensions.openBrowser
 
 class OnboardingFragment : Fragment() {

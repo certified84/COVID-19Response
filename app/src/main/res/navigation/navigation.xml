@@ -68,10 +68,43 @@
         android:id="@+id/webFragment"
         android:name="com.certified.covid19response.ui.WebFragment"
         android:label="fragment_web"
-        tools:layout="@layout/fragment_web" >
+        tools:layout="@layout/fragment_web">
         <argument
             android:name="url"
-            app:argType="string"
-            android:defaultValue="https://www.google.com/" />
+            android:defaultValue="https://www.google.com/"
+            app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.certified.covid19response.ui.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" />
+    <fragment
+        android:id="@+id/chatDetailsFragment"
+        android:name="com.certified.covid19response.ui.ChatDetailsFragment"
+        android:label="fragment_chat_details"
+        tools:layout="@layout/fragment_chat_details" />
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.certified.covid19response.ui.NotificationsFragment"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.certified.covid19response.ui.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/statusFragment"
+        android:name="com.certified.covid19response.ui.StatusFragment"
+        android:label="fragment_status"
+        tools:layout="@layout/fragment_status" />
+    <fragment
+        android:id="@+id/articleFragment"
+        android:name="com.certified.covid19response.ui.information.ArticleFragment"
+        android:label="ArticleFragment" />
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.certified.covid19response.ui.information.NewsFragment"
+        android:label="NewsFragment" />
 </navigation>

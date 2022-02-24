@@ -3,14 +3,18 @@
 
     <item
         android:icon="@drawable/ic_home"
+        android:id="@+id/homeFragment"
         android:title="@string/home" />
     <item
         android:icon="@drawable/ic_message"
+        android:id="@+id/chatFragment"
         android:title="@string/chat" />
     <item
         android:icon="@drawable/ic_scan"
+        android:id="@+id/statusFragment"
         android:title="@string/status_check" />
 
     <item android:title="@string/me"
+        android:id="@+id/profileFragment"
         android:icon="@drawable/ic_home"/>
 </menu>

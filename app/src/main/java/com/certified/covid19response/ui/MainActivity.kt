@@ -3,6 +3,8 @@ package com.certified.covid19response.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.navigation.Navigation
+import com.certified.covid19response.R
 import com.certified.covid19response.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,6 +32,16 @@ class MainActivity : AppCompatActivity() {
 //            darkModeValues[2] -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 //        }
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+    }
+
+    override fun onBackPressed() {
+        val navigationController =
+            Navigation.findNavController(this, R.id.nav_host_fragment_container)
+        if (navigationController.currentDestination?.id == R.id.homeFragment) {
+            finish()
+        } else {
+            super.onBackPressed()
+        }
     }
 
     override fun onDestroy() {

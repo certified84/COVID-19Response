@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.certified.covid19response.databinding.FragmentChatDetailsBinding
+import com.certified.covid19response.databinding.FragmentProfileBinding
 
-class ChatDetailsFragment : Fragment() {
+class ProfileFragment : Fragment() {
 
-    private var _binding: FragmentChatDetailsBinding? = null
+    private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -17,7 +17,7 @@ class ChatDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentChatDetailsBinding.inflate(inflater, container, false)
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
 

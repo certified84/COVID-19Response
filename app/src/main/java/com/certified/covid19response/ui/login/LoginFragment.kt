@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.certified.covid19response.R
 import com.certified.covid19response.databinding.FragmentLoginBinding
 import com.certified.covid19response.util.Extensions.checkFieldEmpty
 import com.certified.covid19response.util.Extensions.showToast
@@ -14,6 +15,7 @@ import com.certified.covid19response.util.UIState
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
+import me.ibrahimsn.lib.SmoothBottomBar
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -70,6 +72,11 @@ class LoginFragment : Fragment() {
 
             btnSignup.setOnClickListener { findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignupFragment()) }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        requireActivity().findViewById<SmoothBottomBar>(R.id.bottomBar).visibility = View.GONE
     }
 
     override fun onDestroyView() {

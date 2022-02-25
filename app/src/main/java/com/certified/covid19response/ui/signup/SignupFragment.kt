@@ -1,6 +1,5 @@
 package com.certified.covid19response.ui.signup
 
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
@@ -18,8 +17,8 @@ import com.certified.covid19response.util.Extensions.checkFieldEmpty
 import com.certified.covid19response.util.Extensions.showToast
 import com.certified.covid19response.util.UIState
 import com.certified.covid19response.util.Util
-import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
@@ -108,10 +107,9 @@ class SignupFragment : Fragment() {
                     Firebase.firestore.collection("accounts").document("users")
                         .collection(currentUser.uid).document("details").set(newUser)
                         .addOnSuccessListener {
-                            val profileChangeRequest =
-                                UserProfileChangeRequest.Builder()
-                                    .setDisplayName(newUser.name)
-                                    .build()
+                            val profileChangeRequest = userProfileChangeRequest {
+                                displayName = newUser.name
+                            }
                             currentUser.updateProfile(profileChangeRequest)
                             currentUser.sendEmailVerification()
 

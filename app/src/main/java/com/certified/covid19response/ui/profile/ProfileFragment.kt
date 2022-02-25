@@ -117,10 +117,9 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     private fun launchCamera() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         try {
-
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
         } catch (e: ActivityNotFoundException) {
-            showToast("An error occurred: ${e.message}")
+            showToast("An error occurred: ${e.localizedMessage}")
         }
     }
 
@@ -199,9 +198,11 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                         startActivity(intent)
                     }
                 }
+                viewChangePassword -> {
+                    launchPasswordChangeDialog()
+                }
                 btnLogout -> {
-                    auth.signOut()
-                    findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
+                    signOut()
                 }
                 btnChangeImage -> {
                     launchChangeProfileImageDialog()
@@ -211,6 +212,32 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 }
             }
         }
+    }
+
+    private fun signOut() {
+        preferences.edit { putBoolean(PreferenceKeys.PUSH_NOTIFICATIONS_KEY, false) }
+        auth.signOut()
+        findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
+    }
+
+    private fun launchPasswordChangeDialog() {
+        val materialDialog = MaterialAlertDialogBuilder(requireContext()).apply {
+            setTitle("Password change")
+            setMessage("You are about to change your password. A password reset link will be sent to your email and you'll be signed out")
+            setPositiveButton("Continue") { dialog, _ ->
+                dialog.dismiss()
+                viewModel.uiState.set(UIState.LOADING)
+                auth.sendPasswordResetEmail(auth.currentUser!!.email!!).addOnSuccessListener {
+                    viewModel.uiState.set(UIState.SUCCESS)
+                    signOut()
+                }.addOnFailureListener {
+                    viewModel.uiState.set(UIState.FAILURE)
+                    showToast("An error occurred: ${it.localizedMessage}")
+                }
+            }
+            setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
+        }
+        materialDialog.show()
     }
 
     private fun launchBottomSheetDialog() {

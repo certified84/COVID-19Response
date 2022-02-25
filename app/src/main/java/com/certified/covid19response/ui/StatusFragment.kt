@@ -28,8 +28,8 @@ class StatusFragment : Fragment() {
         binding.apply {
             btnSymptomsLink.setOnClickListener {
                 requireContext().openBrowser(
-                    "https://github.com/certified84/AudioNote", findNavController(),
-                    StatusFragmentDirections.actionStatusFragmentToWebFragment("https://github.com/certified84/AudioNote")
+                    "https://www.who.int/health-topics/coronavirus#tab=tab_3", findNavController(),
+                    StatusFragmentDirections.actionStatusFragmentToWebFragment("https://www.who.int/health-topics/coronavirus#tab=tab_3")
                 )
             }
         }

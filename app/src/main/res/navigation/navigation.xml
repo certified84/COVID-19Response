@@ -102,6 +102,9 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/profileFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/statusFragment"
@@ -120,4 +123,18 @@
         android:id="@+id/newsFragment"
         android:name="com.certified.covid19response.ui.information.NewsFragment"
         android:label="NewsFragment" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.certified.covid19response.ui.profile.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" >
+        <argument
+            android:name="which"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:popUpTo="@id/profileFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

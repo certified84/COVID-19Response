@@ -295,7 +295,7 @@
                 android:tint="@color/black"
                 app:layout_constraintStart_toStartOf="@+id/guideline5"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatImageView7"
-                app:srcCompat="@drawable/ic_shield" />
+                app:srcCompat="@drawable/ic_headphone" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/materialTextView27"

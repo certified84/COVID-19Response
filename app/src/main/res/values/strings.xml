@@ -82,4 +82,8 @@
     <string name="privacy">Privacy</string>
     <string name="help_amp_support"><![CDATA[Help & Support]]></string>
     <string name="logout">Logout</string>
+    <string name="edit_name">Edit Name</string>
+    <string name="edit_nin">Edit NIN</string>
+    <string name="add_bio">Add Bio</string>
+    <string name="save_changes">Save Changes</string>
 </resources>

@@ -15,17 +15,19 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.certified.covid19response.R
+import com.certified.covid19response.databinding.DialogEditProfileBinding
 import com.certified.covid19response.databinding.FragmentProfileBinding
 import com.certified.covid19response.util.Extensions.openBrowser
 import com.certified.covid19response.util.Extensions.showToast
 import com.certified.covid19response.util.PreferenceKeys
 import com.certified.covid19response.util.UIState
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -42,7 +44,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     private val binding get() = _binding!!
     private lateinit var preferences: SharedPreferences
     private lateinit var auth: FirebaseAuth
-    private val viewModel: ProfileViewModel by viewModels()
+    private val viewModel: ProfileViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,13 +70,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             viewHelpSupport.setOnClickListener(this@ProfileFragment)
             btnLogout.setOnClickListener(this@ProfileFragment)
             btnChangeImage.setOnClickListener(this@ProfileFragment)
-
-//            ivProfileImage.setOnClickListener {
-//                launchChangeProfileImageDialog()
-//            }
-//            btnChangeImage.setOnClickListener {
-//                launchChangeProfileImageDialog()
-//            }
+            btnEditProfile.setOnClickListener(this@ProfileFragment)
 
             tvUserName.text = auth.currentUser?.displayName
             if (auth.currentUser?.photoUrl == null)
@@ -193,6 +189,16 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                         ProfileFragmentDirections.actionProfileFragmentToWebFragment("https://github.com/certified84")
                     )
                 }
+                viewHelpSupport -> {
+                    val intent = Intent(Intent.ACTION_SENDTO).apply {
+                        data = Uri.parse("mailto:")
+                        putExtra(Intent.EXTRA_EMAIL, arrayOf("Sammie_kt@pm.me"))
+                        putExtra(Intent.EXTRA_SUBJECT, "Feedback")
+                    }
+                    if (intent.resolveActivity(requireActivity().packageManager) != null) {
+                        startActivity(intent)
+                    }
+                }
                 btnLogout -> {
                     auth.signOut()
                     findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
@@ -200,8 +206,44 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 btnChangeImage -> {
                     launchChangeProfileImageDialog()
                 }
+                btnEditProfile -> {
+                    launchBottomSheetDialog()
+                }
             }
         }
+    }
+
+    private fun launchBottomSheetDialog() {
+        val view = DialogEditProfileBinding.inflate(layoutInflater)
+        val bottomSheetDialog = BottomSheetDialog(requireContext())
+        bottomSheetDialog.setContentView(view.root)
+        view.apply {
+            btnEditName.setOnClickListener {
+                bottomSheetDialog.dismiss()
+                findNavController().navigate(
+                    ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment(
+                        "Edit Name"
+                    )
+                )
+            }
+            btnEditNin.setOnClickListener {
+                bottomSheetDialog.dismiss()
+                findNavController().navigate(
+                    ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment(
+                        "Edit NIN"
+                    )
+                )
+            }
+            btnAddBio.setOnClickListener {
+                bottomSheetDialog.dismiss()
+                findNavController().navigate(
+                    ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment(
+                        "Add Bio"
+                    )
+                )
+            }
+        }
+        bottomSheetDialog.show()
     }
 
     companion object {

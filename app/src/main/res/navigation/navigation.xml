@@ -91,7 +91,7 @@
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.certified.covid19response.ui.ProfileFragment"
+        android:name="com.certified.covid19response.ui.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action

@@ -336,13 +336,13 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_check_status"
                 android:layout_width="0dp"
+                android:layout_height="@dimen/_40sdp"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:layout_height="wrap_content"
                 android:fontFamily="@font/space_grotesk_regular"
                 android:text="@string/check_status"
                 android:textAllCaps="false"
                 android:textSize="@dimen/_14ssp"
-                app:cornerRadius="@dimen/_10sdp"
+                app:cornerRadius="@dimen/_16sdp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline4"
                 app:layout_constraintStart_toStartOf="@+id/guideline2"
                 app:layout_constraintTop_toBottomOf="@+id/et_user_feeling_layout" />

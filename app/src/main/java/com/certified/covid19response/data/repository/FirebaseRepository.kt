@@ -1,5 +1,8 @@
 package com.certified.covid19response.data.repository
 
+import android.net.Uri
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -10,4 +13,12 @@ class FirebaseRepository {
 
     fun signInWithEmailAndPassword(email: String, password: String) =
         Firebase.auth.signInWithEmailAndPassword(email, password)
+
+    fun uploadImage(uri: Uri?): Task<Void>? {
+        val profileChangeRequest =
+            UserProfileChangeRequest.Builder()
+                .setPhotoUri(uri)
+                .build()
+        return Firebase.auth.currentUser?.updateProfile(profileChangeRequest)
+    }
 }

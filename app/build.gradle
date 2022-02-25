@@ -84,4 +84,7 @@ dependencies {
 //    implementation 'com.google.firebase:firebase-storage-ktx'
 //    implementation 'com.firebaseui:firebase-ui-firestore-ktx'
 //    implementation 'com.firebaseui:firebase-ui-storage-ktx'
+
+//    Coil
+    implementation "io.coil-kt:coil:1.4.0"
 }

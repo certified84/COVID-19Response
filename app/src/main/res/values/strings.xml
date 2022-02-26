@@ -86,4 +86,11 @@
     <string name="edit_nin">Edit NIN</string>
     <string name="add_bio">Add Bio</string>
     <string name="save_changes">Save Changes</string>
+    <string name="last_name_hint">e.g Achiaga</string>
+    <string name="last_name">Last name</string>
+    <string name="first_name_hint">e.g Samson</string>
+    <string name="first_name">First name</string>
+    <string name="back_button">Back button</string>
+    <string name="enter_bio">Enter Bio</string>
+    <string name="hint_bio">e.g A little something about you</string>
 </resources>

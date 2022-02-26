@@ -5,6 +5,14 @@
 
     <data>
 
+        <import type="androidx.databinding.ObservableField" />
+
+        <import type="com.certified.covid19response.util.UIState" />
+
+        <variable
+            name="uiState"
+            type="ObservableField&lt;UIState>" />
+
         <variable
             name="which"
             type="String" />
@@ -38,6 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:contentDescription="@string/back_button"
             android:padding="@dimen/_4sdp"
             android:src="@drawable/ic_back"
             app:layout_constraintBottom_toBottomOf="@+id/materialTextView12"
@@ -57,8 +66,177 @@
             app:layout_constraintTop_toBottomOf="@+id/btn_back"
             tools:text="Kindly provide your first and last name" />
 
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/materialTextView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_24sdp"
+            android:fontFamily="@font/space_grotesk_medium"
+            android:text="@string/first_name"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
+            app:layout_constraintTop_toBottomOf="@+id/materialTextView13" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/et_first_name_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@color/editTextColor"
+            app:boxCornerRadiusBottomEnd="@dimen/_6sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_6sdp"
+            app:boxCornerRadiusTopEnd="@dimen/_6sdp"
+            app:boxCornerRadiusTopStart="@dimen/_6sdp"
+            app:boxStrokeWidth=".2dp"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintStart_toStartOf="@+id/materialTextView5"
+            app:layout_constraintTop_toBottomOf="@+id/materialTextView5">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_first_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:hint="@string/first_name_hint"
+                android:inputType="textPersonName"
+                android:paddingTop="@dimen/_8sdp"
+                android:paddingBottom="@dimen/_8sdp"
+                android:textColor="@color/black" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/materialTextView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="@font/space_grotesk_medium"
+            android:text="@string/last_name"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
+            app:layout_constraintTop_toBottomOf="@+id/et_first_name_layout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/et_last_name_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@color/editTextColor"
+            app:boxCornerRadiusBottomEnd="@dimen/_6sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_6sdp"
+            app:boxCornerRadiusTopEnd="@dimen/_6sdp"
+            app:boxCornerRadiusTopStart="@dimen/_6sdp"
+            app:boxStrokeWidth=".2dp"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintStart_toStartOf="@+id/materialTextView5"
+            app:layout_constraintTop_toBottomOf="@+id/materialTextView11">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:hint="@string/last_name_hint"
+                android:inputType="textPersonName"
+                android:paddingTop="@dimen/_8sdp"
+                android:paddingBottom="@dimen/_8sdp"
+                android:textColor="@color/black" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/materialTextView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_24sdp"
+            android:fontFamily="@font/space_grotesk_medium"
+            android:text="@string/enter_nin"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
+            app:layout_constraintTop_toBottomOf="@+id/materialTextView13" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/et_nin_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@color/editTextColor"
+            app:boxCornerRadiusBottomEnd="@dimen/_6sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_6sdp"
+            app:boxCornerRadiusTopEnd="@dimen/_6sdp"
+            app:boxCornerRadiusTopStart="@dimen/_6sdp"
+            app:boxStrokeWidth=".2dp"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintStart_toStartOf="@+id/materialTextView6"
+            app:layout_constraintTop_toBottomOf="@+id/materialTextView6">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_nin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:hint="@string/hint_nin"
+                android:inputType="number"
+                android:paddingTop="@dimen/_8sdp"
+                android:paddingBottom="@dimen/_8sdp"
+                android:textColor="@color/black" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/materialTextView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_24sdp"
+            android:fontFamily="@font/space_grotesk_medium"
+            android:text="@string/enter_bio"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
+            app:layout_constraintTop_toBottomOf="@+id/materialTextView13" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/et_bio_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@color/editTextColor"
+            app:boxCornerRadiusBottomEnd="@dimen/_6sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_6sdp"
+            app:boxCornerRadiusTopEnd="@dimen/_6sdp"
+            app:boxCornerRadiusTopStart="@dimen/_6sdp"
+            app:boxStrokeWidth=".2dp"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintStart_toStartOf="@+id/materialTextView7"
+            app:layout_constraintTop_toBottomOf="@+id/materialTextView7">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_bio"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:gravity="top|start"
+                android:hint="@string/type_here"
+                android:inputType="textMultiLine"
+                android:paddingTop="@dimen/_8sdp"
+                android:paddingBottom="@dimen/_8sdp"
+                android:textColor="@color/black" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_edit_profile"
+            android:id="@+id/btn_save_changes"
             android:layout_width="0dp"
             android:layout_height="@dimen/_40sdp"
             android:layout_marginBottom="@dimen/_16sdp"
@@ -84,6 +262,39 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_end="@dimen/_16sdp" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_edit_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="materialTextView11,et_last_name_layout,et_first_name_layout,materialTextView5" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_edit_nin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="et_nin_layout,materialTextView6" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_edit_bio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="materialTextView7,et_bio_layout" />
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:indicatorColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visible="@{uiState == UIState.LOADING}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

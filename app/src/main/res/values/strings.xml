@@ -93,4 +93,10 @@
     <string name="back_button">Back button</string>
     <string name="enter_bio">Enter Bio</string>
     <string name="hint_bio">e.g A little something about you</string>
+    <string name="omicron">Omicron</string>
+    <string name="variant">Variant</string>
+    <string name="notifications_button">Notifications Button</string>
+    <string name="show_all_news_button">Show all news button</string>
+    <string name="show_all_articles_button">Show all articles button</string>
+    <string name="who">WHO</string>
 </resources>

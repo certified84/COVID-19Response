@@ -46,11 +46,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_16sdp"
                 android:background="@null"
-                android:padding="@dimen/_4sdp"
+                android:contentDescription="@string/notifications_button"
+                android:padding="@dimen/_5sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/materialTextView12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/materialTextView12"
-                app:srcCompat="@drawable/ic_notification" />
+                app:srcCompat="@drawable/ic_notification"
+                tools:ignore="RedundantDescriptionCheck,TouchTargetSizeCheck" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/materialTextView13"
@@ -70,6 +72,7 @@
                 style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/show_all_news_button"
                 android:fontFamily="@font/space_grotesk_semi_bold"
                 android:gravity="center_vertical|end"
                 android:text="@string/all"
@@ -77,7 +80,8 @@
                 android:textSize="@dimen/_14ssp"
                 app:layout_constraintBottom_toBottomOf="@+id/materialTextView13"
                 app:layout_constraintEnd_toEndOf="@+id/btn_notifications"
-                app:layout_constraintTop_toTopOf="@+id/materialTextView13" />
+                app:layout_constraintTop_toTopOf="@+id/materialTextView13"
+                tools:ignore="RedundantDescriptionCheck" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_news"
@@ -95,14 +99,53 @@
                 android:id="@+id/materialTextView16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_14sdp"
                 android:alpha=".7"
                 android:fontFamily="@font/space_grotesk_regular"
                 android:text="@string/related_topics"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/chipGroup"
                 app:layout_constraintStart_toStartOf="@+id/recycler_view_news"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_view_news" />
+                app:layout_constraintTop_toTopOf="@+id/chipGroup" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginStart="@dimen/_4sdp"
+                app:layout_constraintEnd_toEndOf="@+id/btn_notifications"
+                app:layout_constraintStart_toEndOf="@+id/materialTextView16"
+                app:layout_constraintTop_toBottomOf="@+id/recycler_view_news">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_omicron"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/space_grotesk_regular"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp"
+                    android:text="@string/omicron" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_variant"
+                    android:layout_width="wrap_content"
+                    android:fontFamily="@font/space_grotesk_regular"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/variant" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_who"
+                    android:layout_width="wrap_content"
+                    android:fontFamily="@font/space_grotesk_regular"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/who" />
+
+            </com.google.android.material.chip.ChipGroup>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/materialTextView14"
@@ -122,6 +165,7 @@
                 style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/show_all_articles_button"
                 android:fontFamily="@font/space_grotesk_semi_bold"
                 android:gravity="center_vertical|end"
                 android:text="@string/all"
@@ -129,7 +173,8 @@
                 android:textSize="@dimen/_14ssp"
                 app:layout_constraintBottom_toBottomOf="@+id/materialTextView14"
                 app:layout_constraintEnd_toEndOf="@+id/btn_notifications"
-                app:layout_constraintTop_toTopOf="@+id/materialTextView14" />
+                app:layout_constraintTop_toTopOf="@+id/materialTextView14"
+                tools:ignore="RedundantDescriptionCheck" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_articles"

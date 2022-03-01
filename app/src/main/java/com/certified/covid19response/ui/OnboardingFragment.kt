@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.certified.covid19response.R
 import com.certified.covid19response.databinding.FragmentOnboardingBinding
 import com.certified.covid19response.util.Extensions.openBrowser
+import me.ibrahimsn.lib.SmoothBottomBar
 
 class OnboardingFragment : Fragment() {
 
@@ -43,6 +44,11 @@ class OnboardingFragment : Fragment() {
                 )
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        requireActivity().findViewById<SmoothBottomBar>(R.id.bottomBar).visibility = View.GONE
     }
 
     override fun onDestroyView() {

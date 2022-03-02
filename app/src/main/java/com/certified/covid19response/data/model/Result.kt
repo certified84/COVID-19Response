@@ -23,7 +23,7 @@ data class Result(
         mostPercent = (noOfMostSymptoms / totalNoOfSymptoms) * 100
 
         message = when {
-            severePercent >= 1 -> {
+            noOfSevereSymptoms >= 1 -> {
                 "Seek immediate medical attention if you have serious symptoms. Always call before visiting your doctor or health facility."
             }
             lessPercent >= 1 -> {

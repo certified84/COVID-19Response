@@ -5,6 +5,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.certified.covid19response.data.model.Article
 import com.certified.covid19response.data.model.News
+import com.certified.covid19response.util.Util.roundOffDecimal
 import com.google.android.material.textview.MaterialTextView
 
 @BindingAdapter("visible")
@@ -32,15 +33,15 @@ fun bindArticlesRecyclerView(
 
 @BindingAdapter("severePercentText")
 fun MaterialTextView.severePercentText(value: Float) {
-    text = "$value% Sever symptoms"
+    text = "${roundOffDecimal(value)}% Sever symptoms"
 }
 
 @BindingAdapter("lessPercentText")
 fun MaterialTextView.lessPercentText(value: Float) {
-    text = "$value% Less common symptoms"
+    text = "${roundOffDecimal(value)}% Less common symptoms"
 }
 
 @BindingAdapter("mostPercentText")
 fun MaterialTextView.mostPercentText(value: Float) {
-    text = "$value% Most common symptoms"
+    text = "${roundOffDecimal(value)}% Most common symptoms"
 }

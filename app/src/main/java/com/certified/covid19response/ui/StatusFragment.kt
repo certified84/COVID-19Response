@@ -57,6 +57,7 @@ class StatusFragment : Fragment() {
                 if (isChecked) {
                     noOfSevereSymptoms++
                     totalNoOfSymptoms++
+                    severeSymptoms += cbConfusion.text.toString()
                 } else {
                     noOfSevereSymptoms--
                     totalNoOfSymptoms--

@@ -1,6 +1,8 @@
 package com.certified.covid19response.util
 
 import com.google.android.material.textfield.TextInputEditText
+import java.math.RoundingMode
+import java.text.DecimalFormat
 import java.util.regex.Pattern
 
 object Util {
@@ -56,5 +58,11 @@ object Util {
         }
 
         return true
+    }
+
+    fun roundOffDecimal(number: Float): Float {
+        val df = DecimalFormat("#.##")
+        df.roundingMode = RoundingMode.CEILING
+        return df.format(number).toFloat()
     }
 }

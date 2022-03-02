@@ -5,6 +5,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.certified.covid19response.data.model.Article
 import com.certified.covid19response.data.model.News
+import com.google.android.material.textview.MaterialTextView
 
 @BindingAdapter("visible")
 fun View.setVisible(visible: Boolean) {
@@ -27,4 +28,19 @@ fun bindArticlesRecyclerView(
 ) {
 //    val adapter = recyclerView.adapter as ArticlesRecyclerAdapter
 //    adapter.submitList(data)
+}
+
+@BindingAdapter("severePercentText")
+fun MaterialTextView.severePercentText(value: Int) {
+    text = "$value% Sever symptoms"
+}
+
+@BindingAdapter("lessPercentText")
+fun MaterialTextView.lessPercentText(value: Int) {
+    text = "$value% Less common symptoms"
+}
+
+@BindingAdapter("mostPercentText")
+fun MaterialTextView.mostPercentText(value: Int) {
+    text = "$value% Most common symptoms"
 }

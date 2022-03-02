@@ -99,4 +99,13 @@
     <string name="show_all_news_button">Show all news button</string>
     <string name="show_all_articles_button">Show all articles button</string>
     <string name="who">WHO</string>
+    <string name="covid_status_result">Covid Status Result</string>
+    <string name="results">Results</string>
+    <string name="result_summary">Based on your symptoms, here’s your covid status</string>
+    <string name="covid19_isolation">Covid19 Isolation:</string>
+    <string name="checking_status">Checking status</string>
+    <string name="analyzing_symptoms">Analyzing symptoms</string>
+    <string name="check_status_summary">Please bear with us, this analysis might take a few seconds,</string>
+    <string name="cancel">Cancel</string>
+    <string name="continue_text">Continue</string>
 </resources>

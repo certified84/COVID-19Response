@@ -14,6 +14,7 @@
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/drawable/ic_person.xml" value="0.25" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/drawable/ic_scan.xml" value="0.2135" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/activity_main.xml" value="0.3080568720379147" />
+        <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/dialog_covid_status.xml" value="0.22" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/dialog_edit_profile.xml" value="0.48691860465116277" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_article.xml" value="0.1" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_chat.xml" value="0.25" />
@@ -25,6 +26,7 @@
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_notifications.xml" value="0.25" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_onboarding.xml" value="0.29819277108433734" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
+        <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_result.xml" value="0.25" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_signup.xml" value="0.33" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_splash.xml" value="0.1716485507246377" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_status.xml" value="0.33" />

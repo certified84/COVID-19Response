@@ -236,46 +236,54 @@
                 app:layout_constraintStart_toStartOf="@+id/cb_dry_cough"
                 app:layout_constraintTop_toBottomOf="@+id/cb_persistent_pain" />
 
-            <View
-                android:id="@+id/view"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_16sdp"
-                android:background="#E6E6FF"
+                app:cardBackgroundColor="#E6E6FF"
+                app:cardCornerRadius="@dimen/_8sdp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline4"
                 app:layout_constraintStart_toStartOf="@+id/guideline2"
-                app:layout_constraintTop_toBottomOf="@+id/cb_high_temp" />
+                app:layout_constraintTop_toBottomOf="@+id/cb_high_temp">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/materialTextView20"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/space_grotesk_regular"
-                android:text="@string/source"
-                android:textColor="#6A6A6A"
-                android:textSize="@dimen/_12ssp"
-                app:layout_constraintBottom_toBottomOf="@+id/view"
-                app:layout_constraintEnd_toStartOf="@+id/btn_symptoms_link"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/view" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_symptoms_link"
-                style="@style/Widget.Material3.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/space_grotesk_regular"
-                android:text="@string/symptoms_link"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/_12ssp"
-                app:layout_constraintBottom_toBottomOf="@+id/view"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/guideline4"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/materialTextView20"
-                app:layout_constraintTop_toTopOf="@+id/view" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/materialTextView34"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/space_grotesk_regular"
+                        android:text="@string/source"
+                        android:textColor="#6A6A6A"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/btn_symptoms_link"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/btn_symptoms_link" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_symptoms_link"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/space_grotesk_regular"
+                        android:text="@string/symptoms_link"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/materialTextView34"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/materialTextView21"
@@ -287,7 +295,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14ssp"
                 app:layout_constraintStart_toStartOf="@+id/guideline2"
-                app:layout_constraintTop_toBottomOf="@+id/btn_symptoms_link" />
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/materialTextView22"

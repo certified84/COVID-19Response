@@ -16,4 +16,10 @@ class ProfileViewModel @Inject constructor(private val repository: FirebaseRepos
     val editProfileUiState = ObservableField(UIState.EMPTY)
 
     fun uploadImage(uri: Uri?) = repository.uploadImage(uri)
+
+    fun updateNIN(nin: String, userID: String) = repository.updateNIN(nin, userID)
+
+    fun updateBio(bio: String, userID: String) = repository.updateBio(bio, userID)
+
+    fun updateName(name: String, userID: String) = repository.updateName(name, userID)
 }

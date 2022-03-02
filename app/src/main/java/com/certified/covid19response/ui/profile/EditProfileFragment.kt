@@ -9,7 +9,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.certified.covid19response.databinding.FragmentEditProfileBinding
+import com.certified.covid19response.util.Extensions.showToast
 import com.certified.covid19response.util.UIState
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.ktx.userProfileChangeRequest
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,6 +25,7 @@ class EditProfileFragment : Fragment(), View.OnClickListener {
     private val viewModel: ProfileViewModel by activityViewModels()
     private val args: EditProfileFragmentArgs by navArgs()
     private val required = "Required *"
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +33,7 @@ class EditProfileFragment : Fragment(), View.OnClickListener {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentEditProfileBinding.inflate(inflater, container, false)
+        auth = Firebase.auth
         return binding.root
     }
 
@@ -95,7 +102,23 @@ class EditProfileFragment : Fragment(), View.OnClickListener {
                         return
                     }
 
+                    val name = "$firstName $lastName"
                     viewModel.editProfileUiState.set(UIState.LOADING)
+                    viewModel.updateName(name, auth.currentUser!!.uid).addOnSuccessListener {
+                        val profileChangeRequest = userProfileChangeRequest { displayName = name }
+                        auth.currentUser!!.updateProfile(profileChangeRequest)
+                            .addOnSuccessListener {
+                                viewModel.editProfileUiState.set(UIState.SUCCESS)
+                                showToast("Name updated successfully")
+                                findNavController().navigate(EditProfileFragmentDirections.actionEditProfileFragmentToProfileFragment())
+                            }.addOnFailureListener {
+                                viewModel.editProfileUiState.set(UIState.FAILURE)
+                                showToast("An error occurred: ${it.localizedMessage}")
+                            }
+                    }.addOnFailureListener {
+                        viewModel.editProfileUiState.set(UIState.FAILURE)
+                        showToast("An error occurred: ${it.localizedMessage}")
+                    }
                 }
 
                 "Edit NIN" -> {
@@ -110,6 +133,14 @@ class EditProfileFragment : Fragment(), View.OnClickListener {
                     }
 
                     viewModel.editProfileUiState.set(UIState.LOADING)
+                    viewModel.updateNIN(nin, auth.currentUser!!.uid).addOnSuccessListener {
+                        viewModel.editProfileUiState.set(UIState.SUCCESS)
+                        showToast("NIN updated successfully")
+                        findNavController().navigate(EditProfileFragmentDirections.actionEditProfileFragmentToProfileFragment())
+                    }.addOnFailureListener {
+                        viewModel.editProfileUiState.set(UIState.FAILURE)
+                        showToast("An error occurred: ${it.localizedMessage}")
+                    }
                 }
 
                 "Add Bio" -> {
@@ -124,6 +155,14 @@ class EditProfileFragment : Fragment(), View.OnClickListener {
                     }
 
                     viewModel.editProfileUiState.set(UIState.LOADING)
+                    viewModel.updateBio(bio, auth.currentUser!!.uid).addOnSuccessListener {
+                        viewModel.editProfileUiState.set(UIState.SUCCESS)
+                        showToast("Bio updated successfully")
+                        findNavController().navigate(EditProfileFragmentDirections.actionEditProfileFragmentToProfileFragment())
+                    }.addOnFailureListener {
+                        viewModel.editProfileUiState.set(UIState.FAILURE)
+                        showToast("An error occurred: ${it.localizedMessage}")
+                    }
                 }
             }
         }

@@ -31,16 +31,16 @@ fun bindArticlesRecyclerView(
 }
 
 @BindingAdapter("severePercentText")
-fun MaterialTextView.severePercentText(value: Int) {
+fun MaterialTextView.severePercentText(value: Float) {
     text = "$value% Sever symptoms"
 }
 
 @BindingAdapter("lessPercentText")
-fun MaterialTextView.lessPercentText(value: Int) {
+fun MaterialTextView.lessPercentText(value: Float) {
     text = "$value% Less common symptoms"
 }
 
 @BindingAdapter("mostPercentText")
-fun MaterialTextView.mostPercentText(value: Int) {
+fun MaterialTextView.mostPercentText(value: Float) {
     text = "$value% Most common symptoms"
 }

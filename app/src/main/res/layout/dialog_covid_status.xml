@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:paddingBottom="@dimen/_16sdp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/_16sdp">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
@@ -57,13 +57,14 @@
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/linearProgressIndicator"
         android:layout_width="0dp"
+        android:max="100"
         android:layout_height="wrap_content"
-        app:trackCornerRadius="@dimen/_2sdp"
         android:layout_marginTop="@dimen/_20sdp"
         app:indicatorColor="@color/colorPrimary"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toBottomOf="@+id/materialTextView35" />
+        app:layout_constraintTop_toBottomOf="@+id/materialTextView35"
+        app:trackCornerRadius="@dimen/_2sdp" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/materialTextView36"
@@ -78,7 +79,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_cancel"
-        style="@style/Widget.Material3.Button.TextButton"
+        style="@style/Widget.Material3.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_4sdp"
@@ -93,12 +94,13 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
         app:layout_constraintTop_toBottomOf="@+id/materialTextView36"
-        app:strokeWidth=".5dp" />
+        app:strokeColor="@color/black" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_continue"
-        android:layout_width="0dp"
+        android:enabled="false"
         style="@style/Widget.Material3.Button"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
         android:layout_marginEnd="@dimen/_4sdp"

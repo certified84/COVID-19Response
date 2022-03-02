@@ -144,5 +144,14 @@
         android:id="@+id/resultFragment"
         tools:layout="@layout/fragment_result"
         android:name="com.certified.covid19response.ui.ResultFragment"
-        android:label="ResultFragment" />
+        android:label="ResultFragment" >
+        <action
+            android:id="@+id/action_resultFragment_to_statusFragment"
+            app:destination="@id/statusFragment"
+            app:popUpTo="@id/statusFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="result"
+            app:argType="com.certified.covid19response.data.model.Result" />
+    </fragment>
 </navigation>

@@ -42,11 +42,11 @@
                 android:layout_width="@dimen/_80sdp"
                 android:layout_height="@dimen/_80sdp"
                 android:layout_marginTop="@dimen/_24sdp"
-                tools:src="@drawable/no_profile_image"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/materialTextView12"
-                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Covid19Response" />
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Covid19Response"
+                tools:src="@drawable/no_profile_image" />
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/btn_change_image"
@@ -343,7 +343,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_logout"
-                style="@style/Widget.Material3.Button.TextButton"
+                style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_marginTop="@dimen/_20sdp"
@@ -356,7 +356,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/guideline6"
                 app:layout_constraintStart_toStartOf="@+id/guideline5"
                 app:layout_constraintTop_toBottomOf="@+id/view_help_support"
-                app:strokeWidth=".5dp" />
+                app:strokeColor="@color/black" />
 
             <com.google.android.material.progressindicator.CircularProgressIndicator
                 android:id="@+id/progressBar"

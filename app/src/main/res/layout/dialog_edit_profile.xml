@@ -31,7 +31,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_edit_name"
-        style="@style/Widget.Material3.Button.TextButton"
+        style="@style/Widget.Material3.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_10sdp"
@@ -44,11 +44,11 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
         app:layout_constraintTop_toBottomOf="@+id/appCompatImageView5"
-        app:strokeWidth=".5dp" />
+        app:strokeColor="@color/black" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_edit_nin"
-        style="@style/Widget.Material3.Button.TextButton"
+        style="@style/Widget.Material3.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_10sdp"
@@ -60,12 +60,13 @@
         app:cornerRadius="@dimen/_16sdp"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
+
         app:layout_constraintTop_toBottomOf="@+id/btn_edit_name"
-        app:strokeWidth=".5dp" />
+        app:strokeColor="@color/black" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_add_bio"
-        style="@style/Widget.Material3.Button.TextButton"
+        style="@style/Widget.Material3.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_10sdp"
@@ -77,7 +78,8 @@
         app:cornerRadius="@dimen/_16sdp"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
+
         app:layout_constraintTop_toBottomOf="@+id/btn_edit_nin"
-        app:strokeWidth=".5dp" />
+        app:strokeColor="@color/black" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

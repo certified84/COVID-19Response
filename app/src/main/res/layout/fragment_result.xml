@@ -6,16 +6,8 @@
     <data>
 
         <variable
-            name="severePercent"
-            type="Integer" />
-
-        <variable
-            name="lessPercent"
-            type="Integer" />
-
-        <variable
-            name="mostPercent"
-            type="Integer" />
+            name="result"
+            type="com.certified.covid19response.data.model.Result" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -104,7 +96,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline6"
             app:layout_constraintStart_toStartOf="@+id/guideline7"
             app:layout_constraintTop_toBottomOf="@+id/materialTextView33"
-            app:severePercentText="@{severePercent}"
+            app:severePercentText="@{result.severePercent}"
             tools:text="75% Severe symptoms" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -131,7 +123,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline6"
             app:layout_constraintStart_toStartOf="@+id/guideline7"
             app:layout_constraintTop_toBottomOf="@+id/tv_severe_symptoms"
-            app:severePercentText="@{severePercent}"
+            app:lessPercentText="@{result.lessPercent}"
             tools:text="15% Less common symptoms" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -158,7 +150,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline6"
             app:layout_constraintStart_toStartOf="@+id/guideline7"
             app:layout_constraintTop_toBottomOf="@+id/tv_less_symptoms"
-            app:severePercentText="@{severePercent}"
+            app:mostPercentText="@{result.mostPercent}"
             tools:text="10% Most common symptoms" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -181,6 +173,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             app:cardBackgroundColor="#E6E6FF"
             app:cardCornerRadius="@dimen/_8sdp"
+            app:cardElevation="0dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline6"
             app:layout_constraintStart_toStartOf="@+id/guideline5"
             app:layout_constraintTop_toBottomOf="@+id/tv_most_symptoms">
@@ -206,8 +199,9 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_marginBottom="@dimen/_16sdp"
+                    android:text="@{result.message}"
                     android:fontFamily="@font/space_grotesk_light"
-                    android:text="You need to self isolate, as your symptoms are very close to those of covid’19. Do not panic. Refer to the article below on the next steps to take. After doing this, you should contact any of the doctors below."
+                    tools:text="You need to self isolate, as your symptoms are very close to those of covid’19. Do not panic. Refer to the article below on the next steps to take. After doing this, you should contact any of the doctors below."
                     android:textColor="@color/black"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -220,10 +214,11 @@
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_16sdp"
             app:cardBackgroundColor="#E6E6FF"
             app:cardCornerRadius="@dimen/_8sdp"
-            android:layout_height="wrap_content"
+            app:cardElevation="0dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline6"
             app:layout_constraintStart_toStartOf="@+id/guideline5"
             app:layout_constraintTop_toBottomOf="@+id/materialCardView2">

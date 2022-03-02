@@ -9,6 +9,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,6 +33,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.io.FileNotFoundException
@@ -45,6 +48,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     private lateinit var preferences: SharedPreferences
     private lateinit var auth: FirebaseAuth
     private val viewModel: ProfileViewModel by activityViewModels()
+    private lateinit var storage: FirebaseStorage
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,6 +62,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         auth = Firebase.auth
+        storage = Firebase.storage
         preferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
         binding.apply {
 
@@ -72,7 +77,8 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             btnChangeImage.setOnClickListener(this@ProfileFragment)
             btnEditProfile.setOnClickListener(this@ProfileFragment)
 
-            tvUserName.text = auth.currentUser?.displayName
+            tvUserName.text = auth.currentUser!!.displayName
+            Log.d("TAG", "onViewCreated: profileImage: ${auth.currentUser!!.photoUrl}")
             if (auth.currentUser?.photoUrl == null)
                 ivProfileImage.load(R.drawable.no_profile_image) {
                     transformations(CircleCropTransformation())
@@ -159,18 +165,21 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     }
 
     private fun uploadImage(uri: Uri?) {
+        val path = "profileImages/${auth.currentUser!!.uid}/profileImage.jpg"
         viewModel.apply {
             uiState.set(UIState.LOADING)
-            uploadImage(uri)?.addOnSuccessListener {
-                uiState.set(UIState.SUCCESS)
-                binding.ivProfileImage.load(uri) {
-                    transformations(CircleCropTransformation())
-                }
+            uploadImage(uri, path, storage)
+//            val profileImageRef = storage.reference.child(path)
+//            profileImageRef.putFile(uri!!).addOnSuccessListener {
+//                uiState.set(UIState.SUCCESS)
+            binding.ivProfileImage.load(uri) {
+                transformations(CircleCropTransformation())
             }
-                ?.addOnFailureListener {
-                    uiState.set(UIState.FAILURE)
-                    showToast("An error occurred. ${it.localizedMessage}")
-                }
+//                showToast("Profile image updated successfully")
+//            }. addOnFailureListener {
+//                uiState.set(UIState.FAILURE)
+//                showToast("An error occurred: ${it.localizedMessage}")
+//            }
         }
     }
 

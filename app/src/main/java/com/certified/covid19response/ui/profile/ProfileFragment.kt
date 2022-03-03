@@ -69,6 +69,11 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             uiState = viewModel.uiState
             lifecycleOwner = this@ProfileFragment
 
+            viewModel.message.observe(viewLifecycleOwner) {
+                if (it != null)
+                    showToast(it)
+            }
+
             viewAccount.setOnClickListener(this@ProfileFragment)
             viewChangePassword.setOnClickListener(this@ProfileFragment)
             viewPrivacy.setOnClickListener(this@ProfileFragment)
@@ -169,17 +174,9 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         viewModel.apply {
             uiState.set(UIState.LOADING)
             uploadImage(uri, path, storage)
-//            val profileImageRef = storage.reference.child(path)
-//            profileImageRef.putFile(uri!!).addOnSuccessListener {
-//                uiState.set(UIState.SUCCESS)
             binding.ivProfileImage.load(uri) {
                 transformations(CircleCropTransformation())
             }
-//                showToast("Profile image updated successfully")
-//            }. addOnFailureListener {
-//                uiState.set(UIState.FAILURE)
-//                showToast("An error occurred: ${it.localizedMessage}")
-//            }
         }
     }
 

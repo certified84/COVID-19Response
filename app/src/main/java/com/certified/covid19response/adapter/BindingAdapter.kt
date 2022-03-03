@@ -3,9 +3,14 @@ package com.certified.covid19response.adapter
 import android.view.View
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import coil.transform.CircleCropTransformation
+import com.certified.covid19response.R
 import com.certified.covid19response.data.model.Article
+import com.certified.covid19response.data.model.Doctor
 import com.certified.covid19response.data.model.News
 import com.certified.covid19response.util.Util.roundOffDecimal
+import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
 
 @BindingAdapter("visible")
@@ -44,4 +49,17 @@ fun MaterialTextView.lessPercentText(value: Float) {
 @BindingAdapter("mostPercentText")
 fun MaterialTextView.mostPercentText(value: Float) {
     text = "${roundOffDecimal(value)}% Most common symptoms"
+}
+
+@BindingAdapter("loadImage")
+fun ShapeableImageView.loadImage(image: String?) {
+    if (image == null)
+        this.load(R.drawable.no_profile_image) {
+            transformations(CircleCropTransformation())
+        }
+    else
+        this.load(image) {
+            transformations(CircleCropTransformation())
+            placeholder(R.drawable.no_profile_image)
+        }
 }

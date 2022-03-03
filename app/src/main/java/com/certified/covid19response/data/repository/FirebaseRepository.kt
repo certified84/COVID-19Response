@@ -21,17 +21,14 @@ class FirebaseRepository {
     }
 
     fun updateNIN(nin: String, userID: String): Task<Void> {
-        return Firebase.firestore.collection("accounts").document("users")
-            .collection(userID).document("details").update("nin", nin)
+        return Firebase.firestore.collection("accounts").document(userID).update("nin", nin)
     }
 
     fun updateBio(bio: String, userID: String): Task<Void> {
-        return Firebase.firestore.collection("accounts").document("users")
-            .collection(userID).document("details").update("bio", bio)
+        return Firebase.firestore.collection("users").document(userID).update("bio", bio)
     }
 
     fun updateName(name: String, userID: String): Task<Void> {
-        return Firebase.firestore.collection("accounts").document("users")
-            .collection(userID).document("details").update("name", name)
+        return Firebase.firestore.collection("users").document(userID).update("name", name)
     }
 }

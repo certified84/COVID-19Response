@@ -104,8 +104,7 @@ class SignupFragment : Fragment() {
                         nin = nin
                     )
 
-                    Firebase.firestore.collection("accounts").document("users")
-                        .collection(currentUser.uid).document("details").set(newUser)
+                    Firebase.firestore.collection("users").document(currentUser.uid).set(newUser)
                         .addOnSuccessListener {
                             val profileChangeRequest = userProfileChangeRequest {
                                 displayName = newUser.name

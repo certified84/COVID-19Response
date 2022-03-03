@@ -108,4 +108,6 @@
     <string name="check_status_summary">Please bear with us, this analysis might take a few seconds,</string>
     <string name="cancel">Cancel</string>
     <string name="continue_text">Continue</string>
+    <string name="message">Message</string>
+    <string name="contact_any_of_these_doctors">Contact any of these doctors</string>
 </resources>

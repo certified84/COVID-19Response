@@ -1,15 +1,20 @@
 package com.certified.covid19response.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.certified.covid19response.data.model.Doctor
 import com.certified.covid19response.databinding.ItemDoctorBinding
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter
-import com.firebase.ui.firestore.FirestoreRecyclerOptions
 
-class DoctorAdapter(options: FirestoreRecyclerOptions<Doctor>) :
-    FirestoreRecyclerAdapter<Doctor, DoctorAdapter.ViewHolder>(options) {
+class DoctorAdapter(private val doctors: MutableList<Doctor>) :
+    ListAdapter<Doctor, DoctorAdapter.ViewHolder>(diffCallback) {
+
+    init {
+        Log.d("TAG", "DoctorAdapter: Initialized")
+    }
 
     private lateinit var listener: OnItemClickedListener
 
@@ -19,8 +24,10 @@ class DoctorAdapter(options: FirestoreRecyclerOptions<Doctor>) :
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int, model: Doctor) {
-        holder.bind(model)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val currentItem = doctors[position]
+        Log.d("TAG", "onBindViewHolder: Doctor: $currentItem")
+        holder.bind(currentItem)
     }
 
     inner class ViewHolder(val binding: ItemDoctorBinding) :
@@ -31,7 +38,7 @@ class DoctorAdapter(options: FirestoreRecyclerOptions<Doctor>) :
 
         init {
             binding.btnMessage.setOnClickListener {
-                val position = adapterPosition
+                val position = absoluteAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     listener.onItemClick(getItem(position))
                 }
@@ -45,5 +52,14 @@ class DoctorAdapter(options: FirestoreRecyclerOptions<Doctor>) :
 
     fun setOnItemClickedListener(listener: OnItemClickedListener) {
         this.listener = listener
+    }
+
+    companion object {
+        private val diffCallback = object : DiffUtil.ItemCallback<Doctor>() {
+            override fun areItemsTheSame(oldItem: Doctor, newItem: Doctor) =
+                oldItem.id == newItem.id
+
+            override fun areContentsTheSame(oldItem: Doctor, newItem: Doctor) = oldItem == newItem
+        }
     }
 }

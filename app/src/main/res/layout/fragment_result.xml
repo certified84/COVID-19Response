@@ -8,6 +8,14 @@
         <variable
             name="result"
             type="com.certified.covid19response.data.model.Result" />
+
+        <import type="androidx.databinding.ObservableField" />
+
+        <import type="com.certified.covid19response.util.UIState" />
+
+        <variable
+            name="uiState"
+            type="ObservableField&lt;UIState>" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,11 +39,11 @@
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
             android:background="@null"
             android:contentDescription="@string/back_button"
             android:padding="@dimen/_4sdp"
             android:src="@drawable/ic_back"
-            android:layout_marginStart="@dimen/_16sdp"
             app:layout_constraintBottom_toBottomOf="@+id/materialTextView12"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/materialTextView12" />
@@ -52,7 +60,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:context=".ui.ResultFragment">
+                tools:context=".ui.result.ResultFragment">
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline5"
@@ -290,11 +298,39 @@
                     android:id="@+id/recycler_view_doctors"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:minHeight="@dimen/_100sdp"
                     app:layout_constraintEnd_toStartOf="@+id/guideline6"
                     app:layout_constraintStart_toStartOf="@+id/guideline5"
                     app:layout_constraintTop_toBottomOf="@+id/materialTextView39"
-                    tools:itemCount="4"
+                    tools:itemCount="1"
                     tools:listitem="@layout/item_doctor" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="0dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14ssp"
+                    android:fontFamily="@font/space_grotesk_regular"
+                    android:textAlignment="center"
+                    app:visible="@{uiState == UIState.EMPTY}"
+                    android:text="There are no available doctors at the moment"
+                    app:layout_constraintTop_toTopOf="@+id/recycler_view_doctors"
+                    app:layout_constraintBottom_toBottomOf="@+id/recycler_view_doctors"
+                    app:layout_constraintStart_toStartOf="@+id/recycler_view_doctors"
+                    app:layout_constraintEnd_toEndOf="@+id/recycler_view_doctors"
+                    android:layout_height="wrap_content"
+                    android:alpha=".5"/>
+
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    app:indicatorColor="@color/colorPrimary"
+                    app:layout_constraintBottom_toBottomOf="@+id/recycler_view_doctors"
+                    app:layout_constraintEnd_toEndOf="@+id/recycler_view_doctors"
+                    app:layout_constraintStart_toStartOf="@+id/recycler_view_doctors"
+                    app:layout_constraintTop_toTopOf="@+id/recycler_view_doctors"
+                    app:visible="@{uiState == UIState.LOADING}" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

@@ -143,7 +143,7 @@
     <fragment
         android:id="@+id/resultFragment"
         tools:layout="@layout/fragment_result"
-        android:name="com.certified.covid19response.ui.ResultFragment"
+        android:name="com.certified.covid19response.ui.result.ResultFragment"
         android:label="ResultFragment" >
         <action
             android:id="@+id/action_resultFragment_to_statusFragment"

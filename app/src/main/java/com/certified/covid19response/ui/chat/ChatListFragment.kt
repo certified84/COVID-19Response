@@ -1,15 +1,15 @@
-package com.certified.covid19response.ui
+package com.certified.covid19response.ui.chat
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.certified.covid19response.databinding.FragmentChatBinding
+import com.certified.covid19response.databinding.FragmentChatListBinding
 
-class ChatFragment : Fragment() {
+class ChatListFragment : Fragment() {
 
-    private var _binding: FragmentChatBinding? = null
+    private var _binding: FragmentChatListBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -17,7 +17,7 @@ class ChatFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentChatBinding.inflate(inflater, container, false)
+        _binding = FragmentChatListBinding.inflate(inflater, container, false)
         return binding.root
     }
 

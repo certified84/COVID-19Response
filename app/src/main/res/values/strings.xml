@@ -110,4 +110,7 @@
     <string name="continue_text">Continue</string>
     <string name="message">Message</string>
     <string name="contact_any_of_these_doctors">Contact any of these doctors</string>
+    <string name="notifications">Notifications</string>
+    <string name="attachment_button">Attachment Button</string>
+    <string name="floating_action_button">Floating Action Button</string>
 </resources>

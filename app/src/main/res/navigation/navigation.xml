@@ -76,14 +76,9 @@
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
-        android:name="com.certified.covid19response.ui.ChatFragment"
+        android:name="com.certified.covid19response.ui.chat.ChatListFragment"
         android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" />
-    <fragment
-        android:id="@+id/chatDetailsFragment"
-        android:name="com.certified.covid19response.ui.ChatDetailsFragment"
-        android:label="fragment_chat_details"
-        tools:layout="@layout/fragment_chat_details" />
+        tools:layout="@layout/fragment_chat_list" />
     <fragment
         android:id="@+id/notificationsFragment"
         android:name="com.certified.covid19response.ui.NotificationsFragment"

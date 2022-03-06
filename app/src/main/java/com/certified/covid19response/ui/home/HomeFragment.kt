@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.certified.covid19response.R
+import com.certified.covid19response.adapter.DataProductsRecyclerAdapter
 import com.certified.covid19response.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import me.ibrahimsn.lib.SmoothBottomBar
@@ -30,8 +32,18 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+        binding.uiState = viewModel.uiState
+        viewModel.getCatalog()
+
         binding.apply {
             btnNotifications.setOnClickListener { findNavController().navigate(R.id.notificationsFragment) }
+
+            val adapter = DataProductsRecyclerAdapter()
+            recyclerViewArticles.adapter = adapter
+            recyclerViewArticles.layoutManager = LinearLayoutManager(requireContext())
         }
     }
 

@@ -7,28 +7,30 @@
 
         <variable
             name="article"
-            type="com.certified.covid19response.data.model.Article" />
+            type="com.certified.covid19response.data.model.News" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/_8sdp"
+        app:cardElevation="0dp"
         app:cardUseCompatPadding="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:paddingBottom="@dimen/_10sdp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_10sdp">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:alpha=".7"
                 android:fontFamily="@font/space_grotesk_regular"
+                android:text="@{article.publishedDateTime}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -69,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_4sdp"
                 android:fontFamily="@font/space_grotesk_regular"
-                android:text="@string/article_by"
+                android:text="@{article.provider.name}"
                 android:textColor="@color/red"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_date"
@@ -85,6 +87,7 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/space_grotesk_regular"
                 android:maxLines="1"
+                android:text="@{article.title}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -101,6 +104,7 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/space_grotesk_regular"
                 android:maxLines="4"
+                android:text="@{article.excerpt}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintEnd_toEndOf="@+id/tv_title"

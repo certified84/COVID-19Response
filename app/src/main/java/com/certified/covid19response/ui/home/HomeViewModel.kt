@@ -6,8 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.certified.covid19response.data.model.DataProduct
 import com.certified.covid19response.data.model.Article
+import com.certified.covid19response.data.model.DataProduct
 import com.certified.covid19response.data.model.News
 import com.certified.covid19response.data.repository.FirebaseRepository
 import com.certified.covid19response.data.repository.Repository
@@ -25,7 +25,7 @@ class HomeViewModel @Inject constructor(
 ) :
     ViewModel() {
 
-    val uiState = ObservableField(UIState.EMPTY)
+    val uiState = ObservableField(UIState.LOADING)
 
     private val _latestNews = MutableLiveData<List<News>>()
     val latestNews: LiveData<List<News>> get() = _latestNews
@@ -50,6 +50,29 @@ class HomeViewModel @Inject constructor(
                     Log.d("TAG", "getData: error: ${error?.error}")
                 }
             } catch (e: Exception) {
+                e.printStackTrace()
+                Log.d("TAG", "getCatalog: error2: ${e.localizedMessage}")
+            }
+        }
+    }
+
+    fun getNews(apiKey: String) {
+        viewModelScope.launch {
+            try {
+                Log.d("TAG", "getNews: Init")
+                val response = covidRepo.getNews(apiKey)
+                if (response.isSuccessful) {
+                    uiState.set(UIState.SUCCESS)
+                    Log.d("TAG", "getNews: ${response.body()}")
+                    _latestNews.value = response.body()?.news
+                    Log.d("TAG", "getNews: Image: ${response.body()?.news?.get(0)?.images?.get(0)}")
+                } else {
+                    uiState.set(UIState.FAILURE)
+                    val error = apiErrorUtil.parseError(response)
+                    Log.d("TAG", "getNews: error: ${error?.error}")
+                }
+            } catch (e: Exception) {
+                uiState.set(UIState.FAILURE)
                 e.printStackTrace()
                 Log.d("TAG", "getCatalog: error2: ${e.localizedMessage}")
             }

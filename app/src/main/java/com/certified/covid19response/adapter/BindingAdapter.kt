@@ -3,8 +3,10 @@ package com.certified.covid19response.adapter
 import android.os.Build
 import android.text.Html
 import android.view.View
+import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.certified.covid19response.data.model.Article
 import com.certified.covid19response.data.model.DataProduct
 import com.certified.covid19response.data.model.News
@@ -24,8 +26,8 @@ fun bindNewsRecyclerView(
     recyclerView: RecyclerView,
     data: List<News>?
 ) {
-//    val adapter = recyclerView.adapter as NewsRecyclerAdapter
-//    adapter.submitList(data)
+    val adapter = recyclerView.adapter as NewsRecyclerAdapter
+    adapter.submitList(data)
 }
 
 @BindingAdapter("listDataProducts")
@@ -77,4 +79,9 @@ fun MaterialTextView.parseServerTime(time: String) {
             .format(DateTimeFormatter.ofPattern("dd/MM/YYYY hh:mm a")).toString()
     else
         time
+}
+
+@BindingAdapter("load_image")
+fun ImageView.loadImage(image: String) {
+    this.load(image)
 }

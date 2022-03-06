@@ -10,7 +10,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.certified.covid19response.R
 import com.certified.covid19response.adapter.DataProductsRecyclerAdapter
+import com.certified.covid19response.adapter.NewsRecyclerAdapter
 import com.certified.covid19response.databinding.FragmentHomeBinding
+import com.certified.covid19response.util.Config.RAPID_API_KEY
 import dagger.hilt.android.AndroidEntryPoint
 import me.ibrahimsn.lib.SmoothBottomBar
 
@@ -36,12 +38,12 @@ class HomeFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         binding.uiState = viewModel.uiState
-        viewModel.getCatalog()
+        viewModel.getNews(RAPID_API_KEY)
 
         binding.apply {
             btnNotifications.setOnClickListener { findNavController().navigate(R.id.notificationsFragment) }
 
-            val adapter = DataProductsRecyclerAdapter()
+            val adapter = NewsRecyclerAdapter()
             recyclerViewArticles.adapter = adapter
             recyclerViewArticles.layoutManager = LinearLayoutManager(requireContext())
         }

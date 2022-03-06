@@ -39,7 +39,13 @@ class LoginFragment : Fragment() {
         binding.uiState = viewModel.uiState
         binding.apply {
 
-            binding.btnLogin.setOnClickListener {
+            btnForgotButton.setOnClickListener {
+                findNavController().navigate(
+                    LoginFragmentDirections.actionLoginFragmentToPasswordRecoveryFragment()
+                )
+            }
+
+            btnLogin.setOnClickListener {
                 val email = etEmail.text.toString().trim()
                 val password = etPassword.text.toString().trim()
 

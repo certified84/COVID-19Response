@@ -15,6 +15,9 @@ class FirebaseRepository {
     fun signInWithEmailAndPassword(email: String, password: String) =
         Firebase.auth.signInWithEmailAndPassword(email, password)
 
+    fun sendPasswordResetEmail(email: String) =
+        Firebase.auth.sendPasswordResetEmail(email)
+
     fun uploadImage(uri: Uri?): Task<Void>? {
         val profileChangeRequest = userProfileChangeRequest { photoUri = uri }
         return Firebase.auth.currentUser?.updateProfile(profileChangeRequest)

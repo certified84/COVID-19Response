@@ -10,11 +10,30 @@ import com.certified.covid19response.databinding.ItemArticlesBinding
 
 class NewsRecyclerAdapter : ListAdapter<News, NewsRecyclerAdapter.ViewHolder>(diffCallback) {
 
+    private lateinit var listener: OnItemClickedListener
+
     inner class ViewHolder(val binding: ItemArticlesBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(news: News) {
             binding.article = news
         }
+
+        init {
+            binding.btnReadMore.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    listener.onItemClick(getItem(position))
+                }
+            }
+        }
+    }
+
+    interface OnItemClickedListener {
+        fun onItemClick(news: News)
+    }
+
+    fun setOnItemClickedListener(listener: OnItemClickedListener) {
+        this.listener = listener
     }
 
     companion object {

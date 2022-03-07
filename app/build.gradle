@@ -99,4 +99,7 @@ dependencies {
 
 //    MPAndroidChart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+//    Shimmer Layout
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
 }

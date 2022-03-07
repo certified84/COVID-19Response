@@ -66,7 +66,11 @@
         android:id="@+id/homeFragment"
         android:name="com.certified.covid19response.ui.home.HomeFragment"
         android:label="Home Fragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_webFragment"
+            app:destination="@id/webFragment" />
+    </fragment>
     <fragment
         android:id="@+id/webFragment"
         android:name="com.certified.covid19response.ui.WebFragment"
@@ -74,7 +78,6 @@
         tools:layout="@layout/fragment_web">
         <argument
             android:name="url"
-            android:defaultValue="https://www.google.com/"
             app:argType="string" />
     </fragment>
     <fragment
@@ -156,6 +159,9 @@
         <argument
             android:name="result"
             app:argType="com.certified.covid19response.data.model.Result" />
+        <action
+            android:id="@+id/action_resultFragment_to_webFragment"
+            app:destination="@id/webFragment" />
     </fragment>
     <fragment
         android:id="@+id/passwordRecoveryFragment"

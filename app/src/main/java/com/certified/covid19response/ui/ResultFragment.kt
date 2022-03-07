@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.certified.covid19response.databinding.FragmentResultBinding
+import com.certified.covid19response.util.Extensions.openBrowser
 
 class ResultFragment : Fragment() {
 
@@ -29,6 +30,15 @@ class ResultFragment : Fragment() {
         binding.apply {
             result = args.result
             btnBack.setOnClickListener { findNavController().navigate(ResultFragmentDirections.actionResultFragmentToStatusFragment()) }
+            btnCovidIsolationLink.setOnClickListener {
+                val url =
+                    "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public"
+                requireContext().openBrowser(
+                    url,
+                    findNavController(),
+                    ResultFragmentDirections.actionResultFragmentToWebFragment(url)
+                )
+            }
         }
     }
 

@@ -6,8 +6,9 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import javax.inject.Inject
 
-class FirebaseRepository {
+class FirebaseRepository @Inject constructor() {
 
     fun createUserWithEmailAndPassword(email: String, password: String) =
         Firebase.auth.createUserWithEmailAndPassword(email, password)

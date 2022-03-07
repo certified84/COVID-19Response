@@ -6,15 +6,14 @@
     <data>
 
         <variable
-            name="article"
-            type="com.certified.covid19response.data.model.News" />
+            name="dataProduct"
+            type="com.certified.covid19response.data.model.DataProduct" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/_8sdp"
-        app:cardElevation="0dp"
         app:cardUseCompatPadding="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,11 +25,11 @@
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
                 android:alpha=".7"
                 android:fontFamily="@font/space_grotesk_regular"
-                android:text="@{article.publishedDateTime}"
+                app:server_time="@{dataProduct.lastUpdate}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -67,17 +66,14 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_article_owner_name"
-                android:layout_width="0dp"
-                android:maxLines="1"
-                android:ellipsize="end"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_4sdp"
                 android:fontFamily="@font/space_grotesk_regular"
-                android:text="@{article.provider.name}"
+                android:text="@{dataProduct.id}"
                 android:textColor="@color/red"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_date"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/materialTextView17"
                 app:layout_constraintTop_toTopOf="@+id/tv_date" />
 
@@ -90,7 +86,7 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/space_grotesk_regular"
                 android:maxLines="1"
-                android:text="@{article.title}"
+                android:text="@{dataProduct.name}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -106,8 +102,6 @@
                 android:alpha=".7"
                 android:ellipsize="end"
                 android:fontFamily="@font/space_grotesk_regular"
-                android:maxLines="4"
-                android:text="@{article.excerpt}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintEnd_toEndOf="@+id/tv_title"

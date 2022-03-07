@@ -16,7 +16,6 @@
     <string name="email_hint">e.g name@example.com</string>
     <string name="name_hint">e.g Samson Achiaga</string>
     <string name="login_summary">Welcome back, provide your details to login to your account</string>
-    <string name="password_recovery_summary">Hi there, kindly enter your email address to reset your password</string>
     <string name="email_address">Email Address</string>
     <string name="password">Password</string>
     <string name="forgot_password"><u>Forgot Password?</u></string>
@@ -109,6 +108,5 @@
     <string name="check_status_summary">Please bear with us, this analysis might take a few seconds,</string>
     <string name="cancel">Cancel</string>
     <string name="continue_text">Continue</string>
-    <string name="password_recovery">Password Recovery</string>
-    <string name="reset_password">Reset Password</string>
+    <string name="protect_yourself">Protect yourself:</string>
 </resources>

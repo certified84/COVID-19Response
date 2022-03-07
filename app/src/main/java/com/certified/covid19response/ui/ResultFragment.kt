@@ -1,5 +1,6 @@
 package com.certified.covid19response.ui
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.certified.covid19response.databinding.FragmentResultBinding
 import com.certified.covid19response.util.Extensions.openBrowser
+import com.github.mikephil.charting.components.Description
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
 
 class ResultFragment : Fragment() {
 
@@ -38,6 +43,29 @@ class ResultFragment : Fragment() {
                     findNavController(),
                     ResultFragmentDirections.actionResultFragmentToWebFragment(url)
                 )
+            }
+
+            val pieDataSet = PieDataSet(
+                listOf(
+                    PieEntry(args.result.severePercent / 100),
+                    PieEntry(args.result.lessPercent / 100),
+                    PieEntry(args.result.mostPercent / 100)
+                ), ""
+            )
+            pieDataSet.apply {
+                sliceSpace = 2f
+                valueTextSize = 0f
+                colors = listOf(Color.RED, Color.BLUE, Color.YELLOW)
+            }
+            val descrip = Description()
+            descrip.text = ""
+            pieChart.apply {
+                isRotationEnabled = false
+                holeRadius = 2f
+                description = descrip
+                setTransparentCircleAlpha(0)
+                data = PieData(pieDataSet)
+                invalidate()
             }
         }
     }

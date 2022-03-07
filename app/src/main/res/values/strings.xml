@@ -109,4 +109,7 @@
     <string name="cancel">Cancel</string>
     <string name="continue_text">Continue</string>
     <string name="protect_yourself">Protect yourself:</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="password_recovery">Password Recovery</string>
+    <string name="password_recovery_summary">Hi there, Kindly enter to email to reset your password</string>
 </resources>

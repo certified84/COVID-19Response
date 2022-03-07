@@ -85,13 +85,24 @@
             app:layout_constraintStart_toStartOf="@+id/guideline5"
             app:layout_constraintTop_toBottomOf="@+id/materialTextView29" />
 
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pieChart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_most_symptoms"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@+id/guideline7"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
+            app:layout_constraintTop_toTopOf="@+id/materialTextView30" />
+
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/materialTextView30"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
             android:fontFamily="@font/space_grotesk_regular"
-            android:textColor="#E51616"
+            android:textColor="@color/severeSymptomsColor"
             android:textSize="@dimen/_12ssp"
             app:layout_constraintEnd_toStartOf="@+id/guideline6"
             app:layout_constraintStart_toStartOf="@+id/guideline7"
@@ -118,7 +129,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_16sdp"
             android:fontFamily="@font/space_grotesk_regular"
-            android:textColor="#190453"
+            android:textColor="@color/lessSymptomsColor"
             android:textSize="@dimen/_12ssp"
             app:layout_constraintEnd_toStartOf="@+id/guideline6"
             app:layout_constraintStart_toStartOf="@+id/guideline7"
@@ -145,7 +156,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_16sdp"
             android:fontFamily="@font/space_grotesk_regular"
-            android:textColor="#BDA31E"
+            android:textColor="@color/mostSymptomsColor"
             android:textSize="@dimen/_12ssp"
             app:layout_constraintEnd_toStartOf="@+id/guideline6"
             app:layout_constraintStart_toStartOf="@+id/guideline7"

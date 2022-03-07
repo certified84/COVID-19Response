@@ -14,4 +14,8 @@
     <color name="red">#ED1B35</color>
     <color name="iconTintInactive">#B2B2EF</color>
     <color name="overlay">#E6E6FC</color>
+
+    <color name="severeSymptomsColor">#E51616</color>
+    <color name="lessSymptomsColor">#190453</color>
+    <color name="mostSymptomsColor">#BDA31E</color>
 </resources>

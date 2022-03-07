@@ -35,6 +35,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    lintOptions {
+        baseline file("lint-baseline.xml")
+    }
     buildFeatures {
         viewBinding true
         dataBinding true

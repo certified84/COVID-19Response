@@ -40,7 +40,6 @@ class HomeFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         binding.uiState = viewModel.uiState
-        viewModel.getNews(RAPID_API_KEY)
 
         binding.apply {
             btnNotifications.setOnClickListener { findNavController().navigate(R.id.notificationsFragment) }

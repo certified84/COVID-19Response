@@ -12,6 +12,7 @@ import com.certified.covid19response.data.model.News
 import com.certified.covid19response.data.repository.FirebaseRepository
 import com.certified.covid19response.data.repository.Repository
 import com.certified.covid19response.util.ApiErrorUtil
+import com.certified.covid19response.util.Config
 import com.certified.covid19response.util.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -36,6 +37,10 @@ class HomeViewModel @Inject constructor(
     private val _data = MutableLiveData<List<DataProduct>>()
     val data: LiveData<List<DataProduct>> get() = _data
 
+    init {
+        getNews()
+    }
+
     fun getCatalog() {
         viewModelScope.launch {
             try {
@@ -56,11 +61,11 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getNews(apiKey: String) {
+    private fun getNews() {
         viewModelScope.launch {
             try {
                 Log.d("TAG", "getNews: Init")
-                val response = covidRepo.getNews(apiKey)
+                val response = covidRepo.getNews(Config.RAPID_API_KEY)
                 if (response.isSuccessful) {
                     uiState.set(UIState.SUCCESS)
                     Log.d("TAG", "getNews: ${response.body()}")

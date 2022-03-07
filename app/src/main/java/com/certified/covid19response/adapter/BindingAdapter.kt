@@ -11,6 +11,7 @@ import com.certified.covid19response.data.model.Article
 import com.certified.covid19response.data.model.DataProduct
 import com.certified.covid19response.data.model.News
 import com.certified.covid19response.util.Util.roundOffDecimal
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.textview.MaterialTextView
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -84,4 +85,9 @@ fun MaterialTextView.parseServerTime(time: String) {
 @BindingAdapter("load_image")
 fun ImageView.loadImage(image: String) {
     this.load(image)
+}
+
+@BindingAdapter("set_animation")
+fun ShimmerFrameLayout.setShimmerAnimation(visible: Boolean) {
+    if (visible) startShimmerAnimation() else stopShimmerAnimation()
 }

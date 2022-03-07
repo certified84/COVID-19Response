@@ -53,6 +53,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            visible="@{uiState != UIState.LOADING}"
             android:layout_marginTop="@dimen/_20sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -199,16 +200,175 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            app:indicatorColor="@color/colorPrimary"
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerFrameLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:visible="@{uiState == UIState.LOADING}" />
+            app:layout_constraintTop_toBottomOf="@+id/materialTextView12"
+            app:set_animation="@{uiState == UIState.LOADING}"
+            app:visible="@{uiState == UIState.LOADING}">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:background="@color/grey"
+                        android:fontFamily="@font/space_grotesk_semi_bold"
+                        android:text="@string/latest_news"
+                        android:textColor="@android:color/transparent"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:backgroundTint="@color/grey"
+                        android:fontFamily="@font/space_grotesk_semi_bold"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:padding="@dimen/_2sdp"
+                        android:text="@string/all"
+                        android:textColor="@android:color/transparent" />
+                </RelativeLayout>
+
+                <include
+                    layout="@layout/item_news_shimmer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_24sdp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:background="@color/grey"
+                        android:fontFamily="@font/space_grotesk_regular"
+                        android:text="@string/related_topics"
+                        android:textColor="@android:color/transparent"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_4sdp">
+
+                        <com.google.android.material.chip.Chip
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/grey"
+                            android:fontFamily="@font/space_grotesk_regular"
+                            android:text="@string/omicron"
+                            android:textColor="@android:color/transparent"
+                            android:textSize="@dimen/_10ssp" />
+
+                        <com.google.android.material.chip.Chip
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/grey"
+                            android:fontFamily="@font/space_grotesk_regular"
+                            android:text="@string/variant"
+                            android:textColor="@android:color/transparent"
+                            android:textSize="@dimen/_10ssp" />
+
+                        <com.google.android.material.chip.Chip
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/grey"
+                            android:fontFamily="@font/space_grotesk_regular"
+                            android:text="@string/who"
+                            android:textColor="@android:color/transparent"
+                            android:textSize="@dimen/_10ssp" />
+
+                    </com.google.android.material.chip.ChipGroup>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_16sdp"
+                        android:background="@color/grey"
+                        android:fontFamily="@font/space_grotesk_semi_bold"
+                        android:text="@string/latest_articles"
+                        android:textColor="@android:color/transparent"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:backgroundTint="@color/grey"
+                        android:fontFamily="@font/space_grotesk_semi_bold"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:padding="@dimen/_2sdp"
+                        android:text="@string/all"
+                        android:textColor="@android:color/transparent" />
+                </RelativeLayout>
+
+                <include
+                    layout="@layout/item_articles_shimmer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_16sdp" />
+
+                <include
+                    layout="@layout/item_articles_shimmer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_16sdp" />
+
+                <include
+                    layout="@layout/item_articles_shimmer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_16sdp" />
+
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <!--        <com.google.android.material.progressindicator.CircularProgressIndicator-->
+        <!--            android:id="@+id/progressBar"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:indeterminate="true"-->
+        <!--            app:indicatorColor="@color/colorPrimary"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:visible="@{uiState == UIState.LOADING}" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

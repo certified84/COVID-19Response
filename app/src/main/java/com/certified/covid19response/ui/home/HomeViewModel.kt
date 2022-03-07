@@ -15,6 +15,7 @@ import com.certified.covid19response.util.ApiErrorUtil
 import com.certified.covid19response.util.Config
 import com.certified.covid19response.util.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -63,6 +64,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getNews() {
         viewModelScope.launch {
+            delay(10000L)
             try {
                 Log.d("TAG", "getNews: Init")
                 val response = covidRepo.getNews(Config.RAPID_API_KEY)

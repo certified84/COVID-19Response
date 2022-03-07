@@ -25,7 +25,7 @@
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_chat_list.xml" value="0.16930312099187686" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_doctor_chat.xml" value="0.16930312099187686" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_edit_profile.xml" value="0.2527121888959796" />
-        <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_home.xml" value="0.18" />
+        <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_login.xml" value="0.22" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_news.xml" value="0.1" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_notifications.xml" value="0.25" />
@@ -39,9 +39,11 @@
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_user_chat.xml" value="0.5" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_web.xml" value="0.1716485507246377" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/item_articles.xml" value="0.25" />
+        <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/item_articles_shimmer.xml" value="0.15185856754306437" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/item_chat.xml" value="0.33" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/item_data_product.xml" value="0.33" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/item_news.xml" value="0.33" />
+        <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/item_news_shimmer.xml" value="0.25" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
       </map>
     </option>

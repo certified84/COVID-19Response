@@ -66,7 +66,7 @@
         android:id="@+id/homeFragment"
         android:name="com.certified.covid19response.ui.home.HomeFragment"
         android:label="Home Fragment"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_webFragment"
             app:destination="@id/webFragment" />
@@ -99,24 +99,29 @@
         android:id="@+id/profileFragment"
         android:name="com.certified.covid19response.ui.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profileFragment_to_webFragment"
             app:destination="@id/webFragment" />
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"
             app:destination="@id/loginFragment"
-            app:popUpTo="@id/profileFragment"
-            app:popUpToInclusive="true" />
+            app:popUpTo="@id/onboardingFragment"
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_profileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_onboardingFragment"
+            app:destination="@id/onboardingFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/statusFragment"
         android:name="com.certified.covid19response.ui.StatusFragment"
         android:label="fragment_status"
-        tools:layout="@layout/fragment_status" >
+        tools:layout="@layout/fragment_status">
         <action
             android:id="@+id/action_statusFragment_to_webFragment"
             app:destination="@id/webFragment" />
@@ -136,7 +141,7 @@
         android:id="@+id/editProfileFragment"
         android:name="com.certified.covid19response.ui.profile.EditProfileFragment"
         android:label="fragment_edit_profile"
-        tools:layout="@layout/fragment_edit_profile" >
+        tools:layout="@layout/fragment_edit_profile">
         <argument
             android:name="which"
             app:argType="string" />
@@ -148,9 +153,9 @@
     </fragment>
     <fragment
         android:id="@+id/resultFragment"
-        tools:layout="@layout/fragment_result"
         android:name="com.certified.covid19response.ui.ResultFragment"
-        android:label="ResultFragment" >
+        android:label="ResultFragment"
+        tools:layout="@layout/fragment_result">
         <action
             android:id="@+id/action_resultFragment_to_statusFragment"
             app:destination="@id/statusFragment"
@@ -167,7 +172,7 @@
         android:id="@+id/passwordRecoveryFragment"
         android:name="com.certified.covid19response.ui.passwordRecovery.PasswordRecoveryFragment"
         android:label="fragment_password_recovery"
-        tools:layout="@layout/fragment_password_recovery" >
+        tools:layout="@layout/fragment_password_recovery">
         <action
             android:id="@+id/action_passwordRecoveryFragment_to_loginFragment"
             app:destination="@id/loginFragment"

@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.ui.navigateUp
 import com.certified.covid19response.R
 import com.certified.covid19response.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,10 +46,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (navController.currentDestination?.id == R.id.homeFragment) {
-            finish()
-        } else {
-            super.onBackPressed()
+        when (navController.currentDestination?.id) {
+            R.id.homeFragment -> {
+                finish()
+            }
+            R.id.onboardingFragment -> {
+                finish()
+            }
+            else -> {
+                super.onBackPressed()
+            }
         }
     }
 

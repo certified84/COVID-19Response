@@ -68,8 +68,7 @@ class HomeViewModel @Inject constructor(
                     Log.d("TAG", "getNews: Image: ${response.body()?.news?.get(0)?.images?.get(0)}")
                 } else {
                     uiState.set(UIState.FAILURE)
-                    val error = apiErrorUtil.parseError(response)
-                    Log.d("TAG", "getNews: error: ${error?.error}")
+                    Log.d("TAG", "getNews: error: ${response.message()}")
                 }
             } catch (e: Exception) {
                 uiState.set(UIState.FAILURE)

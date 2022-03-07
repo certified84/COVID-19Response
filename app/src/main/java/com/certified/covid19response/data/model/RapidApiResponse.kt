@@ -3,7 +3,8 @@ package com.certified.covid19response.data.model
 data class RapidApiResponse(
     val location: Location = Location(),
     val updatedDateTime: String = "",
-    val news: List<News>
+    val news: List<News>,
+    val message: String = ""
 )
 
 data class Location(

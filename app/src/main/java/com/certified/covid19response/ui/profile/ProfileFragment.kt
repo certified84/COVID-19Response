@@ -70,8 +70,10 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             lifecycleOwner = this@ProfileFragment
 
             viewModel.message.observe(viewLifecycleOwner) {
-                if (it != null)
+                if (it != null) {
                     showToast(it)
+                    viewModel._message.postValue(null)
+                }
             }
 
             viewAccount.setOnClickListener(this@ProfileFragment)
@@ -139,7 +141,10 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         intent.type = "image/*"
         intent.putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/jpeg", "image/png"))
         try {
-            startActivityForResult(Intent.createChooser(intent, "Select image"), PICK_IMAGE_CODE)
+            startActivityForResult(
+                Intent.createChooser(intent, "Select image"),
+                PICK_IMAGE_CODE
+            )
         } catch (e: ActivityNotFoundException) {
             Toast.makeText(context, "An error occurred: ${e.message}", Toast.LENGTH_LONG).show()
         }

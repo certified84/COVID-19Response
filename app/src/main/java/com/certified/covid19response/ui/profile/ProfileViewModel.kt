@@ -23,8 +23,8 @@ class ProfileViewModel @Inject constructor(private val repository: FirebaseRepos
     val uiState = ObservableField(UIState.EMPTY)
     val editProfileUiState = ObservableField(UIState.EMPTY)
 
-    val _message = MutableLiveData<String>()
-    val message: LiveData<String> get() = _message
+    val _message = MutableLiveData<String?>()
+    val message: LiveData<String?> get() = _message
 
     val _success = MutableLiveData<Boolean>()
     val success: LiveData<Boolean> get() = _success

@@ -108,4 +108,5 @@
     <string name="check_status_summary">Please bear with us, this analysis might take a few seconds,</string>
     <string name="cancel">Cancel</string>
     <string name="continue_text">Continue</string>
+    <string name="protect_yourself">Protect yourself:</string>
 </resources>

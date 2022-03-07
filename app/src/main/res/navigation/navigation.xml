@@ -156,5 +156,8 @@
         <argument
             android:name="result"
             app:argType="com.certified.covid19response.data.model.Result" />
+        <action
+            android:id="@+id/action_resultFragment_to_webFragment"
+            app:destination="@id/webFragment" />
     </fragment>
 </navigation>

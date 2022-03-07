@@ -42,10 +42,10 @@ fun bindDataProductRecyclerView(
 @BindingAdapter("listArticles")
 fun bindArticlesRecyclerView(
     recyclerView: RecyclerView,
-    data: List<Article>?
+    data: List<News>?
 ) {
-//    val adapter = recyclerView.adapter as ArticlesRecyclerAdapter
-//    adapter.submitList(data)
+    val adapter = recyclerView.adapter as ArticlesRecyclerAdapter
+    adapter.submitList(data)
 }
 
 @BindingAdapter("severePercentText")

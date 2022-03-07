@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.certified.covid19response.R
+import com.certified.covid19response.adapter.ArticlesRecyclerAdapter
 import com.certified.covid19response.adapter.NewsRecyclerAdapter
 import com.certified.covid19response.data.model.News
 import com.certified.covid19response.databinding.FragmentHomeBinding
@@ -44,11 +45,34 @@ class HomeFragment : Fragment() {
         binding.apply {
             btnNotifications.setOnClickListener { findNavController().navigate(R.id.notificationsFragment) }
 
-            val adapter = NewsRecyclerAdapter()
-            recyclerViewArticles.adapter = adapter
-            recyclerViewArticles.layoutManager = LinearLayoutManager(requireContext())
+            val articlesAdapter = ArticlesRecyclerAdapter()
+            recyclerViewArticles.apply {
+                adapter = articlesAdapter
+                layoutManager = LinearLayoutManager(requireContext())
+            }
 
-            adapter.setOnItemClickedListener(object : NewsRecyclerAdapter.OnItemClickedListener {
+            articlesAdapter.setOnItemClickedListener(object :
+                ArticlesRecyclerAdapter.OnItemClickedListener {
+                override fun onItemClick(news: News) {
+                    requireContext().openBrowser(
+                        news.originalUrl,
+                        findNavController(),
+                        HomeFragmentDirections.actionHomeFragmentToWebFragment(news.originalUrl)
+                    )
+                }
+            })
+
+            val newsAdapter = NewsRecyclerAdapter()
+            recyclerViewNews.apply {
+                adapter = newsAdapter
+                layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                clipChildren = false
+                clipToPadding = false
+            }
+
+            newsAdapter.setOnItemClickedListener(object :
+                NewsRecyclerAdapter.OnItemClickedListener {
                 override fun onItemClick(news: News) {
                     requireContext().openBrowser(
                         news.originalUrl,

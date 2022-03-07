@@ -7,20 +7,19 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.certified.covid19response.data.model.News
 import com.certified.covid19response.databinding.ItemArticlesBinding
-import com.certified.covid19response.databinding.ItemNewsBinding
 
-class NewsRecyclerAdapter : ListAdapter<News, NewsRecyclerAdapter.ViewHolder>(diffCallback) {
+class ArticlesRecyclerAdapter : ListAdapter<News, ArticlesRecyclerAdapter.ViewHolder>(diffCallback) {
 
     private lateinit var listener: OnItemClickedListener
 
-    inner class ViewHolder(val binding: ItemNewsBinding) :
+    inner class ViewHolder(val binding: ItemArticlesBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(news: News) {
-            binding.news = news
+            binding.article = news
         }
 
         init {
-            itemView.setOnClickListener {
+            binding.btnReadMore.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     listener.onItemClick(getItem(position))
@@ -49,7 +48,7 @@ class NewsRecyclerAdapter : ListAdapter<News, NewsRecyclerAdapter.ViewHolder>(di
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
-            ItemNewsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemArticlesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 

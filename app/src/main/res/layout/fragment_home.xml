@@ -100,6 +100,7 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/materialTextView13"
                     app:layout_constraintTop_toBottomOf="@+id/btn_show_all_news"
+                    app:listNews="@{viewModel.latestNews}"
                     tools:itemCount="1"
                     tools:listitem="@layout/item_news" />
 
@@ -192,7 +193,7 @@
                     app:layout_constraintEnd_toEndOf="@+id/btn_show_all_news"
                     app:layout_constraintStart_toStartOf="@+id/materialTextView13"
                     app:layout_constraintTop_toBottomOf="@+id/btn_show_all_articles"
-                    app:listNews="@{viewModel.latestNews}"
+                    app:listArticles="@{viewModel.latestNews}"
                     tools:listitem="@layout/item_articles" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

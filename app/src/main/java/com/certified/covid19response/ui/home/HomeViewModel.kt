@@ -64,7 +64,6 @@ class HomeViewModel @Inject constructor(
 
     private fun getNews() {
         viewModelScope.launch {
-            delay(10000L)
             try {
                 Log.d("TAG", "getNews: Init")
                 val response = covidRepo.getNews(Config.RAPID_API_KEY)

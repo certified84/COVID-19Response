@@ -1,14 +1,16 @@
 package com.certified.covid19response.adapter
 
+import android.os.Build
+import android.text.Html
 import android.view.View
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.certified.covid19response.data.model.Article
 import com.certified.covid19response.data.model.DataProduct
 import com.certified.covid19response.data.model.News
 import com.certified.covid19response.util.Util.roundOffDecimal
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
 import java.time.ZoneId
 import java.time.ZonedDateTime
@@ -80,7 +82,7 @@ fun MaterialTextView.parseServerTime(time: String) {
 }
 
 @BindingAdapter("load_image")
-fun ImageView.loadImage(image: String) {
+fun ShapeableImageView.loadImage(image: String) {
     this.load(image)
 }
 

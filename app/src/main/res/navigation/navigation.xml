@@ -82,14 +82,19 @@
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
-        android:name="com.certified.covid19response.ui.ChatFragment"
+        android:name="com.certified.covid19response.ui.chat.ChatListFragment"
         android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" />
+        tools:layout="@layout/fragment_chat_list" />
     <fragment
-        android:id="@+id/chatDetailsFragment"
-        android:name="com.certified.covid19response.ui.ChatDetailsFragment"
+        android:id="@+id/userChatFragment"
+        android:name="com.certified.covid19response.ui.chat.UserChatFragment"
         android:label="fragment_chat_details"
-        tools:layout="@layout/fragment_chat_details" />
+        tools:layout="@layout/fragment_user_chat" />
+    <fragment
+        android:id="@+id/doctorChatFragment"
+        android:name="com.certified.covid19response.ui.chat.DoctorChatFragment"
+        android:label="fragment_chat_details"
+        tools:layout="@layout/fragment_doctor_chat" />
     <fragment
         android:id="@+id/notificationsFragment"
         android:name="com.certified.covid19response.ui.NotificationsFragment"
@@ -179,4 +184,8 @@
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/chatListFragment"
+        android:name="com.certified.covid19response.ui.chat.ChatListFragment"
+        android:label="ChatListFragment" />
 </navigation>

@@ -17,7 +17,7 @@
             android:id="@+id/iv_profile_image"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_50sdp"
-            app:loadImage="@{doctor.profile_image}"
+            app:load_image="@{doctor.profile_image}"
             android:layout_marginTop="@dimen/_8sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

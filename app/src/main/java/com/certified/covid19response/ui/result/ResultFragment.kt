@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.certified.covid19response.adapter.DoctorAdapter
 import com.certified.covid19response.data.model.Doctor
 import com.certified.covid19response.databinding.FragmentResultBinding
+import com.certified.covid19response.ui.ResultFragmentArgs
+import com.certified.covid19response.ui.ResultFragmentDirections
 import com.certified.covid19response.util.UIState
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase

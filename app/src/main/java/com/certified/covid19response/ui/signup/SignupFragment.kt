@@ -1,7 +1,6 @@
 package com.certified.covid19response.ui.signup
 
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +18,6 @@ import com.certified.covid19response.util.UIState
 import com.certified.covid19response.util.Util
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,6 +27,10 @@ class SignupFragment : Fragment() {
     private var _binding: FragmentSignupBinding? = null
     private val binding get() = _binding!!
     private val viewModel: SignupViewModel by viewModels()
+
+    private lateinit var name: String
+    private lateinit var location: String
+    private lateinit var nin: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,16 +43,55 @@ class SignupFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.lifecycleOwner = this
         binding.uiState = viewModel.uiState
+
+        viewModel.apply {
+            message.observe(viewLifecycleOwner) {
+                if (it != null) {
+                    showToast(it)
+                    _message.postValue(null)
+                }
+            }
+            success.observe(viewLifecycleOwner) {
+                if (it) {
+                    _success.postValue(false)
+                    val currentUser = Firebase.auth.currentUser!!
+                    val newUser = User(
+                        id = currentUser.uid,
+                        name = name,
+                        email = currentUser.email.toString(),
+                        location = location,
+                        nin = nin
+                    )
+                    uploadDetails(currentUser.uid, newUser)
+                }
+            }
+            uploadSuccess.observe(viewLifecycleOwner) {
+                if (it) {
+                    _uploadSuccess.postValue(false)
+                    Firebase.auth.apply {
+                        val profileChangeRequest = userProfileChangeRequest {
+                            displayName = name
+                        }
+                        currentUser!!.updateProfile(profileChangeRequest)
+                        currentUser!!.sendEmailVerification()
+                        signOut()
+                    }
+                    findNavController().navigate(SignupFragmentDirections.actionSignupFragmentToLoginFragment())
+                }
+            }
+        }
+
         binding.apply {
             btnLogin.setOnClickListener { findNavController().navigate(R.id.action_signupFragment_to_loginFragment) }
 
             btnSignup.setOnClickListener {
-                val name = etDisplayName.text.toString().trim()
+                name = etDisplayName.text.toString().trim()
                 val email = etEmail.text.toString().trim()
-                val location = etLocation.text.toString().trim()
-                val nin = etNin.text.toString().trim()
+                location = etLocation.text.toString().trim()
+                nin = etNin.text.toString().trim()
                 val password = etPassword.text.toString().trim()
 
                 if (etDisplayName.checkFieldEmpty())
@@ -79,56 +120,57 @@ class SignupFragment : Fragment() {
                     return@setOnClickListener
 
                 viewModel.uiState.set(UIState.LOADING)
-                createUser(email, password, name, location, nin)
+                viewModel.createUserWithEmailAndPassword(email, password)
             }
         }
     }
 
-    private fun createUser(
-        email: String,
-        password: String,
-        name: String,
-        location: String,
-        nin: String
-    ) {
-        viewModel.createUserWithEmailAndPassword(email, password)
-            ?.addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-
-                    val currentUser = Firebase.auth.currentUser!!
-                    val newUser = User(
-                        id = currentUser.uid,
-                        name = name,
-                        email = currentUser.email.toString(),
-                        location = location,
-                        nin = nin
-                    )
-
-                    Firebase.firestore.collection("users").document(currentUser.uid).set(newUser)
-                        .addOnSuccessListener {
-                            val profileChangeRequest = userProfileChangeRequest {
-                                displayName = newUser.name
-                            }
-                            currentUser.updateProfile(profileChangeRequest)
-                            currentUser.sendEmailVerification()
-
-                            viewModel.uiState.set(UIState.SUCCESS)
-                            showToast("Account created successfully. Check email for verification link")
-                            Firebase.auth.signOut()
-
-                            findNavController().navigate(SignupFragmentDirections.actionSignupFragmentToLoginFragment())
-                        }
-                        .addOnFailureListener {
-                            viewModel.uiState.set(UIState.FAILURE)
-                            showToast("An error occurred: $it")
-                            Log.d("TAG", "onViewCreated: An error occurred $it")
-                        }
-                } else {
-                    viewModel.uiState.set(UIState.FAILURE)
-                    showToast("Registration failed ${task.exception}")
-                }
-            }
-    }
+//    private fun createUser(
+//        email: String,
+//        password: String,
+//        name: String,
+//        location: String,
+//        nin: String
+//    ) {
+//        viewModel.createUserWithEmailAndPassword(email, password)
+//            ?.addOnCompleteListener { task ->
+//                if (task.isSuccessful) {
+//
+//                    val currentUser = Firebase.auth.currentUser!!
+//                    val newUser = User(
+//                        id = currentUser.uid,
+//                        name = name,
+//                        email = currentUser.email.toString(),
+//                        location = location,
+//                        nin = nin
+//                    )
+//
+//                    Firebase.firestore.collection("accounts").document("users")
+//                        .collection(currentUser.uid).document("details").set(newUser)
+//                        .addOnSuccessListener {
+//                            val profileChangeRequest = userProfileChangeRequest {
+//                                displayName = newUser.name
+//                            }
+//                            currentUser.updateProfile(profileChangeRequest)
+//                            currentUser.sendEmailVerification()
+//
+//                            viewModel.uiState.set(UIState.SUCCESS)
+//                            showToast("Account created successfully. Check email for verification link")
+//                            Firebase.auth.signOut()
+//
+//                            findNavController().navigate(SignupFragmentDirections.actionSignupFragmentToLoginFragment())
+//                        }
+//                        .addOnFailureListener {
+//                            viewModel.uiState.set(UIState.FAILURE)
+//                            showToast("An error occurred: $it")
+//                            Log.d("TAG", "onViewCreated: An error occurred $it")
+//                        }
+//                } else {
+//                    viewModel.uiState.set(UIState.FAILURE)
+//                    showToast("Registration failed ${task.exception}")
+//                }
+//            }
+//    }
 
     private fun checkEmail(email: String) {
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {

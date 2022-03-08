@@ -20,7 +20,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.ResultFragment">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/materialTextView12"
@@ -39,7 +40,6 @@
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_16sdp"
             android:background="@null"
             android:contentDescription="@string/back_button"
             android:padding="@dimen/_4sdp"
@@ -59,8 +59,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:context=".ui.result.ResultFragment">
+                android:layout_height="wrap_content">
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline5"
@@ -87,12 +86,13 @@
                     android:id="@+id/materialTextView29"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_24sdp"
                     android:fontFamily="@font/space_grotesk_semi_bold"
                     android:text="@string/results"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14ssp"
                     app:layout_constraintStart_toStartOf="@+id/guideline5"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/btn_back" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/materialTextView33"
@@ -106,13 +106,24 @@
                     app:layout_constraintStart_toStartOf="@+id/guideline5"
                     app:layout_constraintTop_toBottomOf="@+id/materialTextView29" />
 
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/pieChart"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_most_symptoms"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline7"
+                    app:layout_constraintStart_toStartOf="@+id/guideline5"
+                    app:layout_constraintTop_toTopOf="@+id/materialTextView30" />
+
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/materialTextView30"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:fontFamily="@font/space_grotesk_regular"
-                    android:textColor="#E51616"
+                    android:textColor="@color/severeSymptomsColor"
                     android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toStartOf="@+id/guideline6"
                     app:layout_constraintStart_toStartOf="@+id/guideline7"
@@ -139,7 +150,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_16sdp"
                     android:fontFamily="@font/space_grotesk_regular"
-                    android:textColor="#190453"
+                    android:textColor="@color/lessSymptomsColor"
                     android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toStartOf="@+id/guideline6"
                     app:layout_constraintStart_toStartOf="@+id/guideline7"
@@ -166,7 +177,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_16sdp"
                     android:fontFamily="@font/space_grotesk_regular"
-                    android:textColor="#BDA31E"
+                    android:textColor="@color/mostSymptomsColor"
                     android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toStartOf="@+id/guideline6"
                     app:layout_constraintStart_toStartOf="@+id/guideline7"
@@ -234,7 +245,6 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/materialCardView3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_16sdp"
@@ -254,7 +264,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/space_grotesk_regular"
-                            android:text="@string/covid19_isolation"
+                            android:text="@string/protect_yourself"
                             android:textSize="@dimen/_12ssp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/btn_covid_isolation_link"
@@ -307,18 +317,18 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:alpha=".5"
+                    android:fontFamily="@font/space_grotesk_regular"
+                    android:text="There are no available doctors at the moment"
+                    android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14ssp"
-                    android:fontFamily="@font/space_grotesk_regular"
-                    android:textAlignment="center"
-                    app:visible="@{uiState == UIState.EMPTY}"
-                    android:text="There are no available doctors at the moment"
-                    app:layout_constraintTop_toTopOf="@+id/recycler_view_doctors"
                     app:layout_constraintBottom_toBottomOf="@+id/recycler_view_doctors"
-                    app:layout_constraintStart_toStartOf="@+id/recycler_view_doctors"
                     app:layout_constraintEnd_toEndOf="@+id/recycler_view_doctors"
-                    android:layout_height="wrap_content"
-                    android:alpha=".5"/>
+                    app:layout_constraintStart_toStartOf="@+id/recycler_view_doctors"
+                    app:layout_constraintTop_toTopOf="@+id/recycler_view_doctors"
+                    app:visible="@{uiState == UIState.EMPTY}" />
 
                 <com.google.android.material.progressindicator.CircularProgressIndicator
                     android:id="@+id/progressBar"

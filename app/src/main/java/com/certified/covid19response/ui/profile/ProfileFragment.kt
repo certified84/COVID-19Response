@@ -70,8 +70,10 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             lifecycleOwner = this@ProfileFragment
 
             viewModel.message.observe(viewLifecycleOwner) {
-                if (it != null)
+                if (it != null) {
                     showToast(it)
+                    viewModel._message.postValue(null)
+                }
             }
 
             viewAccount.setOnClickListener(this@ProfileFragment)
@@ -82,8 +84,8 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             btnChangeImage.setOnClickListener(this@ProfileFragment)
             btnEditProfile.setOnClickListener(this@ProfileFragment)
 
-            tvUserName.text = auth.currentUser!!.displayName
-            Log.d("TAG", "onViewCreated: profileImage: ${auth.currentUser!!.photoUrl}")
+            tvUserName.text = auth.currentUser?.displayName
+            Log.d("TAG", "onViewCreated: profileImage: ${auth.currentUser?.photoUrl}")
             if (auth.currentUser?.photoUrl == null)
                 ivProfileImage.load(R.drawable.no_profile_image) {
                     transformations(CircleCropTransformation())
@@ -139,7 +141,10 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         intent.type = "image/*"
         intent.putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/jpeg", "image/png"))
         try {
-            startActivityForResult(Intent.createChooser(intent, "Select image"), PICK_IMAGE_CODE)
+            startActivityForResult(
+                Intent.createChooser(intent, "Select image"),
+                PICK_IMAGE_CODE
+            )
         } catch (e: ActivityNotFoundException) {
             Toast.makeText(context, "An error occurred: ${e.message}", Toast.LENGTH_LONG).show()
         }
@@ -178,6 +183,12 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 transformations(CircleCropTransformation())
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (auth.currentUser == null)
+            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToOnboardingFragment())
     }
 
     override fun onDestroyView() {

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/grey"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardElevation="0dp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_10sdp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:alpha=".7"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="11 January, 2022" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:alpha=".7"
+                android:fontFamily="@font/space_grotesk_semi_bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_date"
+                app:layout_constraintStart_toEndOf="@+id/tv_date"
+                app:layout_constraintTop_toTopOf="@+id/tv_date" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:alpha=".7"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_date"
+                app:layout_constraintStart_toEndOf="@+id/materialTextView15"
+                app:layout_constraintTop_toTopOf="@+id/tv_date" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_article_owner_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:maxLines="1"
+                android:textColor="@color/red"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/materialTextView17"
+                app:layout_constraintTop_toTopOf="@+id/tv_date" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:ellipsize="end"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_date"
+                app:layout_constraintTop_toBottomOf="@+id/tv_date"
+                tools:text="Interim Statement on COVID-19 vaccines..." />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:alpha=".7"
+                android:ellipsize="end"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:maxLines="4"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_title"
+                app:layout_constraintStart_toStartOf="@+id/tv_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title"
+                tools:text="In September 2021, WHO established the Technical Advisory Group on COVID-19 Vaccine Composition (TAG-CO-VAC). This multidisciplin-ary group of 18 experts reviews and assesses... " />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_read_more"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_content"
+                app:layout_constraintTop_toBottomOf="@+id/tv_content" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

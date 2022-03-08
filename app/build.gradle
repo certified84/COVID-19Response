@@ -35,6 +35,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    lintOptions {
+        baseline file("lint-baseline.xml")
+    }
     buildFeatures {
         viewBinding true
         dataBinding true
@@ -88,4 +91,15 @@ dependencies {
 
 //    Coil
     implementation "io.coil-kt:coil:1.4.0"
+
+//    Retrofit, Moshi & Gson
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.google.code.gson:gson:2.8.7"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+
+//    MPAndroidChart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+//    Shimmer Layout
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
 }

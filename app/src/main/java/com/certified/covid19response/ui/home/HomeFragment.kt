@@ -7,8 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.certified.covid19response.R
+import com.certified.covid19response.adapter.ArticlesRecyclerAdapter
+import com.certified.covid19response.adapter.NewsRecyclerAdapter
+import com.certified.covid19response.data.model.News
 import com.certified.covid19response.databinding.FragmentHomeBinding
+import com.certified.covid19response.util.Config.RAPID_API_KEY
+import com.certified.covid19response.util.Extensions.openBrowser
 import dagger.hilt.android.AndroidEntryPoint
 import me.ibrahimsn.lib.SmoothBottomBar
 
@@ -30,8 +36,50 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+        binding.uiState = viewModel.uiState
+
         binding.apply {
             btnNotifications.setOnClickListener { findNavController().navigate(R.id.notificationsFragment) }
+
+            val articlesAdapter = ArticlesRecyclerAdapter()
+            recyclerViewArticles.apply {
+                adapter = articlesAdapter
+                layoutManager = LinearLayoutManager(requireContext())
+            }
+
+            articlesAdapter.setOnItemClickedListener(object :
+                ArticlesRecyclerAdapter.OnItemClickedListener {
+                override fun onItemClick(news: News) {
+                    requireContext().openBrowser(
+                        news.originalUrl,
+                        findNavController(),
+                        HomeFragmentDirections.actionHomeFragmentToWebFragment(news.originalUrl)
+                    )
+                }
+            })
+
+            val newsAdapter = NewsRecyclerAdapter()
+            recyclerViewNews.apply {
+                adapter = newsAdapter
+                layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                clipChildren = false
+                clipToPadding = false
+            }
+
+            newsAdapter.setOnItemClickedListener(object :
+                NewsRecyclerAdapter.OnItemClickedListener {
+                override fun onItemClick(news: News) {
+                    requireContext().openBrowser(
+                        news.originalUrl,
+                        findNavController(),
+                        HomeFragmentDirections.actionHomeFragmentToWebFragment(news.originalUrl)
+                    )
+                }
+            })
         }
     }
 

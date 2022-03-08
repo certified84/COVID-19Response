@@ -355,6 +355,13 @@
                     android:layout_marginStart="@dimen/_16sdp"
                     android:layout_marginEnd="@dimen/_16sdp" />
 
+                <include
+                    layout="@layout/item_articles_shimmer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_16sdp" />
+
             </LinearLayout>
 
         </com.facebook.shimmer.ShimmerFrameLayout>

@@ -99,7 +99,11 @@
         android:id="@+id/notificationsFragment"
         android:name="com.certified.covid19response.ui.notification.NotificationsFragment"
         android:label="fragment_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_notifications" >
+        <action
+            android:id="@+id/action_notificationsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.certified.covid19response.ui.profile.ProfileFragment"

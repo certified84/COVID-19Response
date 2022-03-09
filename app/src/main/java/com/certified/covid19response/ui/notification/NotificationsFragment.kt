@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.certified.covid19response.databinding.FragmentNotificationsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,6 +32,14 @@ class NotificationsFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         binding.uiState = viewModel.uiState
+
+        binding.apply {
+            btnBack.setOnClickListener {
+                findNavController().navigate(
+                    NotificationsFragmentDirections.actionNotificationsFragmentToHomeFragment()
+                )
+            }
+        }
     }
 
     override fun onDestroyView() {

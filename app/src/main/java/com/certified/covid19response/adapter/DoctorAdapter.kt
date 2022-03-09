@@ -38,7 +38,7 @@ class DoctorAdapter(private val doctors: MutableList<Doctor>) :
 
         init {
             binding.btnMessage.setOnClickListener {
-                val position = absoluteAdapterPosition
+                val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     listener.onItemClick(getItem(position))
                 }

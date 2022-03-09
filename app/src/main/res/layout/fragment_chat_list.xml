@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -21,6 +22,63 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.chat.ChatListFragment">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/materialTextView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:fontFamily="@font/space_grotesk_semi_bold"
+            android:text="@string/chat"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:contentDescription="@string/back_button"
+            android:padding="@dimen/_4sdp"
+            android:src="@drawable/ic_settings"
+            app:layout_constraintBottom_toBottomOf="@+id/materialTextView12"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintTop_toTopOf="@+id/materialTextView12" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/materialTextView40"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:alpha=".7"
+            android:fontFamily="@font/space_grotesk_regular"
+            android:text="You have no chat yet. Your chat will appear here"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.499"
+            app:visible="@{uiState == uiState.EMPTY}" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/_16sdp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/_16sdp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

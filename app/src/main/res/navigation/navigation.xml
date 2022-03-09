@@ -97,7 +97,7 @@
         tools:layout="@layout/fragment_doctor_chat" />
     <fragment
         android:id="@+id/notificationsFragment"
-        android:name="com.certified.covid19response.ui.NotificationsFragment"
+        android:name="com.certified.covid19response.ui.notification.NotificationsFragment"
         android:label="fragment_notifications"
         tools:layout="@layout/fragment_notifications" />
     <fragment

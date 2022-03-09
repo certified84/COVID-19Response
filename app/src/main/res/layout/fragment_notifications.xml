@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="androidx.databinding.ObservableField" />
+
+        <import type="com.certified.covid19response.util.UIState" />
+
+        <variable
+            name="uiState"
+            type="ObservableField&lt;UIState>" />
+
+        <variable
+            name="viewModel"
+            type="com.certified.covid19response.ui.notification.NotificationViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.NotificationsFragment">
+        tools:context=".ui.notification.NotificationsFragment">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/materialTextView12"
@@ -34,17 +49,37 @@
             app:layout_constraintTop_toTopOf="@+id/materialTextView12" />
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/materialTextView38"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/space_grotesk_semi_bold"
+            android:text="There's nothing new here."
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16ssp"
+            app:layout_constraintBottom_toTopOf="@+id/materialTextView40"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
+            app:layout_constraintTop_toBottomOf="@+id/materialTextView12"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:visible="@{uiState == uiState.EMPTY}" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/materialTextView40"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:alpha=".7"
             android:fontFamily="@font/space_grotesk_regular"
-            android:text="@string/coming_soon"
+            android:text="When there are new updates; news and new articles, we'll post it here "
+            android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="@dimen/_16sdp"
+            android:textSize="@dimen/_12ssp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
+            app:layout_constraintTop_toBottomOf="@+id/materialTextView38"
+            app:visible="@{uiState == uiState.EMPTY}" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline5"

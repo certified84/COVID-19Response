@@ -1,16 +1,20 @@
-package com.certified.covid19response.ui
+package com.certified.covid19response.ui.notification
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.certified.covid19response.databinding.FragmentNotificationsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NotificationsFragment : Fragment() {
 
     private var _binding: FragmentNotificationsBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: NotificationViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -19,6 +23,14 @@ class NotificationsFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+        binding.uiState = viewModel.uiState
     }
 
     override fun onDestroyView() {

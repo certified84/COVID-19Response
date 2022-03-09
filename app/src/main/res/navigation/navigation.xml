@@ -88,6 +88,10 @@
         <argument
             android:name="doctor"
             app:argType="com.certified.covid19response.data.model.Doctor" />
+        <action
+            android:id="@+id/action_userChatFragment_to_chatListFragment"
+            app:destination="@id/chatListFragment"
+            app:popUpTo="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/doctorChatFragment"

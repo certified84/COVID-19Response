@@ -1,12 +1,12 @@
 package com.certified.covid19response.ui.chat
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.certified.covid19response.R
 import com.certified.covid19response.databinding.FragmentUserChatBinding
 
 class UserChatFragment : Fragment() {
@@ -28,6 +28,7 @@ class UserChatFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             tvHeading.text = "You & ${args.doctor.name}"
+            btnBack.setOnClickListener { findNavController().navigate(UserChatFragmentDirections.actionUserChatFragmentToChatListFragment()) }
         }
     }
 

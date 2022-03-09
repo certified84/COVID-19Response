@@ -35,7 +35,6 @@ class SplashFragment : Fragment() {
         lifecycleScope.launch {
             delay(3000L)
             val currentUser = Firebase.auth.currentUser
-            Log.d("TAG", "onViewCreated: user: ${currentUser?.displayName}")
             if (currentUser == null)
                 findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToOnboardingFragment())
             else

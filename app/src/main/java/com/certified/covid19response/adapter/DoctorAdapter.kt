@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.certified.covid19response.data.model.Doctor
 import com.certified.covid19response.databinding.ItemDoctorBinding
 
-class DoctorAdapter(private val doctors: MutableList<Doctor>) :
+class DoctorAdapter(private val doctors: List<Doctor>) :
     ListAdapter<Doctor, DoctorAdapter.ViewHolder>(diffCallback) {
 
     init {
@@ -38,7 +38,7 @@ class DoctorAdapter(private val doctors: MutableList<Doctor>) :
 
         init {
             binding.btnMessage.setOnClickListener {
-                val position = adapterPosition
+                val position = absoluteAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     listener.onItemClick(getItem(position))
                 }

@@ -1,5 +1,6 @@
 package com.certified.covid19response.ui.result
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,9 +15,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.certified.covid19response.adapter.DoctorAdapter
 import com.certified.covid19response.data.model.Doctor
 import com.certified.covid19response.databinding.FragmentResultBinding
-import com.certified.covid19response.ui.ResultFragmentArgs
-import com.certified.covid19response.ui.ResultFragmentDirections
+import com.certified.covid19response.util.Extensions.openBrowser
 import com.certified.covid19response.util.UIState
+import com.github.mikephil.charting.components.Description
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,7 +34,6 @@ class ResultFragment : Fragment() {
     private val binding get() = _binding!!
     private val args: ResultFragmentArgs by navArgs()
     private val viewModel: ResultViewModel by viewModels()
-//    private lateinit var adapter: DoctorAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,60 +41,77 @@ class ResultFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentResultBinding.inflate(inflater, container, false)
-//        val doctors = ArrayList<Doctor>()
-//        val query =
-//            Firebase.firestore.collection("doctors")
-//        query.addSnapshotListener { value, error ->
-//            Log.d("TAG", "onCreateView: Doctors: ${value?.toObjects(Doctor::class.java)}")
-////            value?.toObjects(Doctor::class.java)?.let { doctors.addAll(it) }
-////            val adapter = DoctorAdapter(value?.toObjects(Doctor::class.java))
-//            if (value?.toObjects(Doctor::class.java)?.isEmpty() == true)
-//                viewModel.uiState.set(UIState.EMPTY)
-////            if (value != null)
-////                for (doctor in value.toObjects(Doctor::class.java))
-////                    doctors.add(doctor)
-//            error?.printStackTrace()
-//        }
-//        val options =
-//            FirestoreRecyclerOptions.Builder<Doctor>().setQuery(query, Doctor::class.java).build()
+        Log.d("TAG", "onCreateView: Create")
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d("TAG", "onViewCreated: Created")
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+        binding.uiState = viewModel.uiState
+
         binding.apply {
             result = args.result
-            uiState = viewModel.uiState
             btnBack.setOnClickListener { findNavController().navigate(ResultFragmentDirections.actionResultFragmentToStatusFragment()) }
-            val query =
-                Firebase.firestore.collection("doctors")
-            query.addSnapshotListener { value, error ->
-                val doctors = value?.toObjects(Doctor::class.java)
-                Log.d("TAG", "onCreateView: Doctors: $doctors")
-                lifecycleScope.launch {
-                    delay(5000L)
-                    if (doctors?.isEmpty() == true)
-                        viewModel.uiState.set(UIState.EMPTY)
-                    else {
-                        viewModel.uiState.set(UIState.HAS_DATA)
-                        val adapter = DoctorAdapter(doctors!!)
-                        recyclerViewDoctors.adapter = adapter
-                        recyclerViewDoctors.layoutManager = LinearLayoutManager(requireContext())
-                    }
-                }
-                error?.printStackTrace()
+
+            btnCovidIsolationLink.setOnClickListener {
+                val url =
+                    "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public"
+                requireContext().openBrowser(
+                    url,
+                    findNavController(),
+                    ResultFragmentDirections.actionResultFragmentToWebFragment(url)
+                )
+            }
+
+            val pieDataSet = PieDataSet(
+                listOf(
+                    PieEntry(args.result.severePercent / 100),
+                    PieEntry(args.result.lessPercent / 100),
+                    PieEntry(args.result.mostPercent / 100)
+                ), ""
+            )
+            pieDataSet.apply {
+                sliceSpace = 2f
+                valueTextSize = 0f
+                colors = listOf(Color.RED, Color.BLUE, Color.YELLOW)
+            }
+            val descrip = Description()
+            descrip.text = ""
+            pieChart.apply {
+                isRotationEnabled = false
+                holeRadius = 2f
+                description = descrip
+                setTransparentCircleAlpha(0)
+                data = PieData(pieDataSet)
+                invalidate()
             }
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-//        adapter.startListening()
-    }
-
-    override fun onStop() {
-        super.onStop()
-//        adapter.stopListening()
+    override fun onResume() {
+        super.onResume()
+        val query = Firebase.firestore.collection("doctors")
+        query.addSnapshotListener { value, error ->
+            val doctors = value?.toObjects(Doctor::class.java)
+            Log.d("TAG", "onCreateView: Doctors: $doctors")
+            lifecycleScope.launch {
+                delay(5000L)
+                if (doctors?.isEmpty() == true)
+                    viewModel.uiState.set(UIState.EMPTY)
+                else {
+                    viewModel.uiState.set(UIState.HAS_DATA)
+                    val adapter = DoctorAdapter(doctors!!)
+                    binding.recyclerViewDoctors.adapter = adapter
+                    binding.recyclerViewDoctors.layoutManager =
+                        LinearLayoutManager(requireContext())
+                }
+            }
+            error?.printStackTrace()
+        }
     }
 
     override fun onDestroyView() {

@@ -16,12 +16,16 @@
         <variable
             name="uiState"
             type="ObservableField&lt;UIState>" />
+
+        <variable
+            name="viewModel"
+            type="com.certified.covid19response.ui.result.ResultViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.ResultFragment">
+        tools:context=".ui.result.ResultFragment">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/materialTextView12"
@@ -60,7 +64,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/_16sdp">
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline5"

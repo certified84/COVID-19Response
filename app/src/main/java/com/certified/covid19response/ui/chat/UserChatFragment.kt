@@ -54,7 +54,7 @@ class UserChatFragment : Fragment() {
         viewModel.getChat("${auth.currentUser!!.uid}_${args.doctor.id}")
 
         binding.apply {
-            tvHeading.text = "You & ${args.doctor.name}"
+            tvHeading.text = "You & Doctor ${args.doctor.first_name}"
             messageKeyListener = etMessage.keyListener
             btnBack.setOnClickListener { findNavController().navigate(UserChatFragmentDirections.actionUserChatFragmentToChatListFragment()) }
             fabAction.setOnClickListener {

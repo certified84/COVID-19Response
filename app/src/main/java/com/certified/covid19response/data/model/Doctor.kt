@@ -6,8 +6,14 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Doctor(
     val id: String = "",
-    val name: String = "",
+    val first_name: String = "",
+    val last_name: String = "",
+    var full_name: String = "",
     val sex: String = "",
     val position: String = "",
     val profile_image: String? = null
-) : Parcelable
+) : Parcelable {
+    init {
+        full_name = "Doctor $first_name $last_name"
+    }
+}

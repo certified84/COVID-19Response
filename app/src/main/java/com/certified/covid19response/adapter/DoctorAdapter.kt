@@ -6,15 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.certified.covid19response.data.model.Doctor
 import com.certified.covid19response.databinding.ItemDoctorBinding
 
 class DoctorAdapter() :
     ListAdapter<Doctor, DoctorAdapter.ViewHolder>(diffCallback) {
-
-    init {
-        Log.d("TAG", "DoctorAdapter: Initialized")
-    }
 
     private lateinit var listener: OnItemClickedListener
 
@@ -26,7 +23,6 @@ class DoctorAdapter() :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = getItem(position)
-        Log.d("TAG", "onBindViewHolder: Doctor: $currentItem")
         holder.bind(currentItem)
     }
 
@@ -34,6 +30,7 @@ class DoctorAdapter() :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(doctor: Doctor) {
             binding.doctor = doctor
+            binding.ivProfileImage.load(doctor.profile_image)
         }
 
         init {

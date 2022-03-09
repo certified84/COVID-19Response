@@ -6,6 +6,7 @@ import android.view.View
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.certified.covid19response.R
 import com.certified.covid19response.data.model.DataProduct
 import com.certified.covid19response.data.model.Doctor
 import com.certified.covid19response.data.model.News
@@ -92,8 +93,9 @@ fun MaterialTextView.parseServerTime(time: String) {
 }
 
 @BindingAdapter("load_image")
-fun ShapeableImageView.loadImage(image: String) {
-    this.load(image)
+fun ShapeableImageView.loadImage(image: String?) {
+    if (image != null) this.load(image)
+    else this.load(R.drawable.no_profile_image)
 }
 
 @BindingAdapter("set_animation")

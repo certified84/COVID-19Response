@@ -81,15 +81,14 @@
             app:argType="string" />
     </fragment>
     <fragment
-        android:id="@+id/chatFragment"
-        android:name="com.certified.covid19response.ui.chat.ChatListFragment"
-        android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat_list" />
-    <fragment
         android:id="@+id/userChatFragment"
         android:name="com.certified.covid19response.ui.chat.UserChatFragment"
         android:label="fragment_chat_details"
-        tools:layout="@layout/fragment_user_chat" />
+        tools:layout="@layout/fragment_user_chat" >
+        <argument
+            android:name="doctor"
+            app:argType="com.certified.covid19response.data.model.Doctor" />
+    </fragment>
     <fragment
         android:id="@+id/doctorChatFragment"
         android:name="com.certified.covid19response.ui.chat.DoctorChatFragment"
@@ -176,6 +175,11 @@
         <action
             android:id="@+id/action_resultFragment_to_webFragment"
             app:destination="@id/webFragment" />
+        <action
+            android:id="@+id/action_resultFragment_to_userChatFragment"
+            app:destination="@id/userChatFragment"
+            app:popUpTo="@id/chatListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/passwordRecoveryFragment"
@@ -191,5 +195,6 @@
     <fragment
         android:id="@+id/chatListFragment"
         android:name="com.certified.covid19response.ui.chat.ChatListFragment"
-        android:label="ChatListFragment" />
+        android:label="ChatListFragment"
+        tools:layout="@layout/fragment_chat_list"/>
 </navigation>

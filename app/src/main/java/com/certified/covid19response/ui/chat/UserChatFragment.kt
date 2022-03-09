@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.certified.covid19response.R
 import com.certified.covid19response.databinding.FragmentUserChatBinding
 
@@ -12,6 +13,7 @@ class UserChatFragment : Fragment() {
 
     private var _binding: FragmentUserChatBinding? = null
     private val binding get() = _binding!!
+    private val args: UserChatFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,6 +22,13 @@ class UserChatFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentUserChatBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+            tvHeading.text = "You & ${args.doctor.name}"
+        }
     }
 
     override fun onDestroyView() {

@@ -24,7 +24,6 @@ import com.github.mikephil.charting.data.PieEntry
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -41,13 +40,11 @@ class ResultFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentResultBinding.inflate(inflater, container, false)
-        Log.d("TAG", "onCreateView: Create")
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("TAG", "onViewCreated: Created")
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -97,14 +94,20 @@ class ResultFragment : Fragment() {
         val query = Firebase.firestore.collection("doctors")
         query.addSnapshotListener { value, error ->
             val doctors = value?.toObjects(Doctor::class.java)
-            Log.d("TAG", "onCreateView: Doctors: $doctors")
             lifecycleScope.launch {
                 if (doctors?.isEmpty() == true)
                     viewModel.uiState.set(UIState.EMPTY)
                 else {
                     viewModel.uiState.set(UIState.HAS_DATA)
                     val adapter = DoctorAdapter()
-                    adapter.submitList(doctors)
+                    adapter.apply {
+                        submitList(doctors)
+                        setOnItemClickedListener(object: DoctorAdapter.OnItemClickedListener {
+                            override fun onItemClick(doctor: Doctor) {
+                                findNavController().navigate(ResultFragmentDirections.actionResultFragmentToUserChatFragment(doctor))
+                            }
+                        })
+                    }
                     binding.recyclerViewDoctors.adapter = adapter
                     binding.recyclerViewDoctors.layoutManager =
                         LinearLayoutManager(requireContext())

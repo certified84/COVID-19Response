@@ -174,6 +174,9 @@
             app:popUpTo="@id/statusFragment"
             app:popUpToInclusive="true" />
         <argument
+            android:name="user"
+            app:argType="com.certified.covid19response.data.model.User" />
+        <argument
             android:name="result"
             app:argType="com.certified.covid19response.data.model.Result" />
         <action

@@ -7,11 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.preference.PreferenceManager
 import com.certified.covid19response.data.model.Result
+import com.certified.covid19response.data.model.User
 import com.certified.covid19response.databinding.DialogCovidStatusBinding
 import com.certified.covid19response.databinding.FragmentStatusBinding
 import com.certified.covid19response.util.Extensions.openBrowser
 import com.certified.covid19response.util.Extensions.showToast
+import com.certified.covid19response.util.PreferenceKeys
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -204,20 +207,33 @@ class StatusFragment : Fragment() {
                 return
             }
 
-            val result = Result(
-                noOfSevereSymptoms = noOfSevereSymptoms,
-                noOfLessSymptoms = noOfLessSymptoms,
-                noOfMostSymptoms = noOfMostSymptoms,
-                totalNoOfSymptoms = totalNoOfSymptoms,
-                severeSymptoms = severeSymptoms,
-                lessSymptoms = lessSymptoms,
-                mostSymptoms = mostSymptoms
-            )
-            launchBottomSheetDialog(result)
+            val preferenceManager = PreferenceManager.getDefaultSharedPreferences(requireContext())
+            preferenceManager.apply {
+                val user = User(
+                    getString(PreferenceKeys.USER_ID_KEY, "")!!,
+                    getString(PreferenceKeys.USER_NAME_KEY, "")!!,
+                    getString(PreferenceKeys.USER_EMAIL_KEY, "")!!,
+                    getString(PreferenceKeys.USER_PROFILE_IMAGE_KEY, "")!!,
+                    getString(PreferenceKeys.USER_LOCATION_KEY, "")!!,
+                    getString(PreferenceKeys.USER_NIN_KEY, "")!!,
+                    getString(PreferenceKeys.USER_BIO_KEY, "")!!
+                )
+
+                val result = Result(
+                    noOfSevereSymptoms = noOfSevereSymptoms,
+                    noOfLessSymptoms = noOfLessSymptoms,
+                    noOfMostSymptoms = noOfMostSymptoms,
+                    totalNoOfSymptoms = totalNoOfSymptoms,
+                    severeSymptoms = severeSymptoms,
+                    lessSymptoms = lessSymptoms,
+                    mostSymptoms = mostSymptoms
+                )
+                launchBottomSheetDialog(result, user)
+            }
         }
     }
 
-    private fun launchBottomSheetDialog(result: Result) {
+    private fun launchBottomSheetDialog(result: Result, user: User) {
         val view = DialogCovidStatusBinding.inflate(layoutInflater)
         val bottomSheetDialog = BottomSheetDialog(requireContext())
         bottomSheetDialog.setContentView(view.root)
@@ -229,9 +245,7 @@ class StatusFragment : Fragment() {
             btnContinue.setOnClickListener {
                 bottomSheetDialog.dismiss()
                 findNavController().navigate(
-                    StatusFragmentDirections.actionStatusFragmentToResultFragment(
-                        result
-                    )
+                    StatusFragmentDirections.actionStatusFragmentToResultFragment(user, result)
                 )
             }
 

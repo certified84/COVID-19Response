@@ -62,7 +62,20 @@
             android:orientation="vertical"
             app:layout_constraintGuide_end="@dimen/_16sdp" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintBottom_toTopOf="@+id/materialCardView5"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
+            app:layout_constraintTop_toBottomOf="@+id/btn_back"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_chat_receiver" />
+
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_8sdp"
@@ -80,9 +93,9 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@null"
                 android:paddingTop="@dimen/_2sdp"
-                android:paddingBottom="@dimen/_2sdp"
-                android:background="@null">
+                android:paddingBottom="@dimen/_2sdp">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/et_display_name_layout"
@@ -106,7 +119,7 @@
                         android:fontFamily="@font/space_grotesk_regular"
                         android:hint="@string/message"
                         android:inputType="textMultiLine"
-                        android:maxLines="5"
+                        android:maxLines="6"
                         android:paddingTop="@dimen/_8sdp"
                         android:paddingBottom="@dimen/_8sdp"
                         android:textColor="@color/black" />
@@ -135,12 +148,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            app:tint="@android:color/white"
             android:backgroundTint="@color/colorPrimary"
             android:contentDescription="@string/floating_action_button"
             android:src="@drawable/ic_wave"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline6" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:tint="@android:color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

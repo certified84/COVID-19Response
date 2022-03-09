@@ -1,6 +1,7 @@
 package com.certified.covid19response.ui.profile
 
 import android.net.Uri
+import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -29,18 +30,20 @@ class ProfileViewModel @Inject constructor(private val repository: FirebaseRepos
     val _success = MutableLiveData<Boolean>()
     val success: LiveData<Boolean> get() = _success
 
-    fun uploadImage(uri: Uri?, path: String, storage: FirebaseStorage) {
+    fun uploadImage(uri: Uri?, path: String, storage: FirebaseStorage, userID: String) {
         viewModelScope.launch {
             try {
                 val profileImageRef = storage.reference.child(path)
                 profileImageRef.putFile(uri!!).await()
                 val downloadUrl = profileImageRef.downloadUrl.await()
                 repository.uploadImage(downloadUrl)?.await()
+//                repository.updateProfile(userID).await()
                 uiState.set(UIState.SUCCESS)
                 _message.value = "Image uploaded successfully"
             } catch (e: Exception) {
                 uiState.set(UIState.FAILURE)
                 _message.value = "An error occurred: ${e.localizedMessage}"
+                Log.d("TAG", "uploadImage: Error: ${e.localizedMessage}")
             }
         }
     }

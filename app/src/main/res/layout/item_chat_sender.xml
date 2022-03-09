@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:paddingBottom="@dimen/_10sdp"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:foregroundGravity="right"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/space_grotesk_regular"
+                android:maxWidth="@dimen/_220sdp"
+                android:padding="@dimen/_8sdp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12ssp"
+                tools:text="jaojfiajdoiafodoajoidfasdnafafafajiojoiajfoiajfiojijaofijiofajoiejfoaijfoiajfoiajoifjaoiejfioaaijfoajfioajoijfaoijfaoijaijiofjaoijfiaojfoiajoifjoaiejfioajoiefjajfawojfiaoaoijfoiajoifofadfioaneoifenaiodfenja" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/appCompatImageView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tint="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="@+id/materialTextView41"
+            app:layout_constraintEnd_toEndOf="@+id/materialCardView3"
+            app:layout_constraintTop_toTopOf="@+id/materialTextView41"
+            app:srcCompat="@drawable/ic_round_done_all" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/materialTextView41"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:fontFamily="@font/space_grotesk_regular"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintEnd_toStartOf="@+id/appCompatImageView11"
+            app:layout_constraintTop_toBottomOf="@+id/materialCardView3"
+            tools:text="9:23 PM" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

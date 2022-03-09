@@ -9,8 +9,9 @@ import coil.load
 import com.certified.covid19response.R
 import com.certified.covid19response.data.model.DataProduct
 import com.certified.covid19response.data.model.Doctor
+import com.certified.covid19response.data.model.Message
 import com.certified.covid19response.data.model.News
-import com.certified.covid19response.util.Util.roundOffDecimal
+import com.certified.covid19response.util.roundOffDecimal
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
@@ -56,6 +57,15 @@ fun bindDoctorRecyclerView(
     data: List<Doctor>?
 ) {
     val adapter = recyclerView.adapter as DoctorAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("listMessages")
+fun bindChatRecyclerView(
+    recyclerView: RecyclerView,
+    data: List<Message>?
+) {
+    val adapter = recyclerView.adapter as ChatRecyclerAdapter
     adapter.submitList(data)
 }
 

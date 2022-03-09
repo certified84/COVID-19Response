@@ -9,11 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.certified.covid19response.R
-import com.certified.covid19response.adapter.ChatDetailsAdapter
+import com.certified.covid19response.adapter.ChatRecyclerAdapter
 import com.certified.covid19response.data.model.Message
 import com.certified.covid19response.databinding.FragmentUserChatBinding
 import com.certified.covid19response.util.Extensions.showToast
@@ -22,13 +23,16 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class UserChatFragment : Fragment() {
 
     private var _binding: FragmentUserChatBinding? = null
     private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
     private val args: UserChatFragmentArgs by navArgs()
+    private val viewModel: ChatViewModel by activityViewModels()
     private lateinit var messageKeyListener: KeyListener
 
     override fun onCreateView(
@@ -43,6 +47,12 @@ class UserChatFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+        binding.uiState = viewModel.uiState
+        viewModel.getChat("${auth.currentUser!!.uid}_${args.doctor.id}")
+
         binding.apply {
             tvHeading.text = "You & ${args.doctor.name}"
             messageKeyListener = etMessage.keyListener
@@ -101,17 +111,9 @@ class UserChatFragment : Fragment() {
                 }
             })
 
-            val adapter = ChatDetailsAdapter(auth.currentUser!!.uid)
+            val adapter = ChatRecyclerAdapter(auth.currentUser!!.uid)
             recyclerViewChat.adapter = adapter
             recyclerViewChat.layoutManager = LinearLayoutManager(requireContext())
-            val query = Firebase.firestore.collection("messages")
-                .document("${auth.currentUser!!.uid}_${args.doctor.id}").collection("messages")
-                .orderBy("date", Query.Direction.ASCENDING)
-            query.addSnapshotListener { value, error ->
-                val chat = value?.toObjects(Message::class.java)
-                adapter.submitList(chat)
-                error?.printStackTrace()
-            }
         }
     }
 

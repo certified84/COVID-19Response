@@ -15,7 +15,7 @@ import com.certified.covid19response.databinding.FragmentSignupBinding
 import com.certified.covid19response.util.Extensions.checkFieldEmpty
 import com.certified.covid19response.util.Extensions.showToast
 import com.certified.covid19response.util.UIState
-import com.certified.covid19response.util.Util
+import com.certified.covid19response.util.verifyPassword
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.ktx.Firebase
@@ -116,7 +116,7 @@ class SignupFragment : Fragment() {
                 if (etPassword.checkFieldEmpty())
                     return@setOnClickListener
 
-                if (!Util.verifyPassword(password, etPassword))
+                if (!verifyPassword(password, etPassword))
                     return@setOnClickListener
 
                 viewModel.uiState.set(UIState.LOADING)

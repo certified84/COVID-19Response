@@ -1,6 +1,6 @@
 package com.certified.covid19response.data.model
 
-import com.certified.covid19response.util.Util.currentDate
+import com.certified.covid19response.util.currentDate
 
 data class Message(
     val id: String = "",

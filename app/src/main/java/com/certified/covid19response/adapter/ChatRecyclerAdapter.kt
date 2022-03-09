@@ -10,7 +10,7 @@ import com.certified.covid19response.data.model.News
 import com.certified.covid19response.databinding.ItemChatReceiverBinding
 import com.certified.covid19response.databinding.ItemChatSenderBinding
 
-class ChatDetailsAdapter(private val id: String) :
+class ChatRecyclerAdapter(private val id: String) :
     ListAdapter<Message, RecyclerView.ViewHolder>(diffCallback) {
 
     private lateinit var listener: OnItemClickedListener

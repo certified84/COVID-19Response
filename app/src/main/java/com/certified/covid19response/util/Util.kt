@@ -3,6 +3,7 @@ package com.certified.covid19response.util
 import com.google.android.material.textfield.TextInputEditText
 import java.math.RoundingMode
 import java.text.DecimalFormat
+import java.util.*
 import java.util.regex.Pattern
 
 object Util {
@@ -65,4 +66,6 @@ object Util {
         df.roundingMode = RoundingMode.CEILING
         return df.format(number).toFloat()
     }
+
+    fun currentDate(): Calendar = Calendar.getInstance()
 }

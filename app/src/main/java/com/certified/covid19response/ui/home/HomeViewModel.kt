@@ -39,7 +39,7 @@ class HomeViewModel @Inject constructor(
     val data: LiveData<List<DataProduct>> get() = _data
 
     init {
-        getNews()
+//        getNews()
     }
 
     fun getCatalog() {

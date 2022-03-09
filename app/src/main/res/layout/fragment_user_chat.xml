@@ -25,14 +25,19 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_heading"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
             android:fontFamily="@font/space_grotesk_semi_bold"
+            android:paddingStart="@dimen/_8sdp"
+            android:paddingEnd="@dimen/_8sdp"
+            android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="@dimen/_16ssp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="You &amp; Doctor Marvin" />
 
@@ -65,6 +70,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:id="@+id/recycler_view_chat"
             android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginBottom="@dimen/_10sdp"
             app:layout_constraintBottom_toTopOf="@+id/materialCardView5"
@@ -98,7 +104,7 @@
                 android:paddingBottom="@dimen/_2sdp">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/et_display_name_layout"
+                    android:id="@+id/et_message_layout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -112,7 +118,7 @@
                     app:layout_constraintStart_toStartOf="parent">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_display_name"
+                        android:id="@+id/et_message"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"

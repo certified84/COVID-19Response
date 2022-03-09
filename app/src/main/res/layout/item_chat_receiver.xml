@@ -3,17 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="message"
+            type="com.certified.covid19response.data.model.Message" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:paddingBottom="@dimen/_10sdp"
         android:layout_height="wrap_content">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_16sdp"
             android:foregroundGravity="right"
             app:cardBackgroundColor="#9999FF"
             app:cardCornerRadius="@dimen/_10sdp"
@@ -25,6 +31,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/space_grotesk_regular"
                 android:maxWidth="@dimen/_220sdp"
+                android:text="@{message.message}"
                 android:padding="@dimen/_8sdp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12ssp"

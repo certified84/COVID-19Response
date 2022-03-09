@@ -99,12 +99,12 @@ class ResultFragment : Fragment() {
             val doctors = value?.toObjects(Doctor::class.java)
             Log.d("TAG", "onCreateView: Doctors: $doctors")
             lifecycleScope.launch {
-                delay(5000L)
                 if (doctors?.isEmpty() == true)
                     viewModel.uiState.set(UIState.EMPTY)
                 else {
                     viewModel.uiState.set(UIState.HAS_DATA)
-                    val adapter = DoctorAdapter(doctors!!)
+                    val adapter = DoctorAdapter()
+                    adapter.submitList(doctors)
                     binding.recyclerViewDoctors.adapter = adapter
                     binding.recyclerViewDoctors.layoutManager =
                         LinearLayoutManager(requireContext())

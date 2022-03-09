@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.certified.covid19response.data.model.Doctor
 import com.certified.covid19response.databinding.ItemDoctorBinding
 
-class DoctorAdapter(private val doctors: List<Doctor>) :
+class DoctorAdapter() :
     ListAdapter<Doctor, DoctorAdapter.ViewHolder>(diffCallback) {
 
     init {
@@ -25,7 +25,7 @@ class DoctorAdapter(private val doctors: List<Doctor>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val currentItem = doctors[position]
+        val currentItem = getItem(position)
         Log.d("TAG", "onBindViewHolder: Doctor: $currentItem")
         holder.bind(currentItem)
     }

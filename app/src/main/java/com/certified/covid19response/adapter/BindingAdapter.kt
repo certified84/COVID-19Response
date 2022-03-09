@@ -7,6 +7,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.certified.covid19response.data.model.DataProduct
+import com.certified.covid19response.data.model.Doctor
 import com.certified.covid19response.data.model.News
 import com.certified.covid19response.util.Util.roundOffDecimal
 import com.facebook.shimmer.ShimmerFrameLayout
@@ -45,6 +46,15 @@ fun bindArticlesRecyclerView(
     data: List<News>?
 ) {
     val adapter = recyclerView.adapter as ArticlesRecyclerAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("listDoctors")
+fun bindDoctorRecyclerView(
+    recyclerView: RecyclerView,
+    data: List<Doctor>?
+) {
+    val adapter = recyclerView.adapter as DoctorAdapter
     adapter.submitList(data)
 }
 

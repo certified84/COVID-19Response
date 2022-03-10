@@ -3,7 +3,6 @@ package com.certified.covid19response.ui.chat
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.text.method.KeyListener
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,7 +33,6 @@ class UserChatFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private val args: UserChatFragmentArgs by navArgs()
     private val viewModel: ChatViewModel by activityViewModels()
-    private lateinit var messageKeyListener: KeyListener
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +54,6 @@ class UserChatFragment : Fragment() {
 
         binding.apply {
             tvHeading.text = "You & Doctor ${args.doctor.first_name}"
-            messageKeyListener = etMessage.keyListener
             btnBack.setOnClickListener { findNavController().navigate(UserChatFragmentDirections.actionUserChatFragmentToChatListFragment()) }
             fabAction.setOnClickListener {
                 val message = etMessage.text.toString().trim()
@@ -139,8 +136,14 @@ class UserChatFragment : Fragment() {
                 .document(id)
         db.runBatch {
             it.set(messagesRef, message)
-            it.set(senderLastMessageRef, UserConversation(senderLastMessageRef.id, args.doctor, message))
-            it.set(receiverLastMessageRef, DoctorConversation(receiverLastMessageRef.id, args.user, message))
+            it.set(
+                senderLastMessageRef,
+                UserConversation(senderLastMessageRef.id, args.doctor, message)
+            )
+            it.set(
+                receiverLastMessageRef,
+                DoctorConversation(receiverLastMessageRef.id, args.user, message)
+            )
         }.addOnSuccessListener {
             binding.etMessage.setText("")
         }.addOnFailureListener {
@@ -151,10 +154,6 @@ class UserChatFragment : Fragment() {
     private fun recordAudio() {
 //        TODO("Not yet implemented")
         showToast("Audio recording is on its way...")
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
     override fun onDestroyView() {

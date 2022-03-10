@@ -100,7 +100,16 @@
         android:id="@+id/doctorChatFragment"
         android:name="com.certified.covid19response.ui.chat.DoctorChatFragment"
         android:label="fragment_chat_details"
-        tools:layout="@layout/fragment_doctor_chat" />
+        tools:layout="@layout/fragment_doctor_chat" >
+        <argument
+            android:name="doctor"
+            app:argType="com.certified.covid19response.data.model.Doctor" />
+        <argument android:name="user"
+            app:argType="com.certified.covid19response.data.model.User" />
+        <action
+            android:id="@+id/action_doctorChatFragment_to_chatListFragment"
+            app:destination="@id/chatListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/notificationsFragment"
         android:name="com.certified.covid19response.ui.notification.NotificationsFragment"

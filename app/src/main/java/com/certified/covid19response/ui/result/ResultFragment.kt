@@ -2,7 +2,6 @@ package com.certified.covid19response.ui.result
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -102,9 +101,14 @@ class ResultFragment : Fragment() {
                     val adapter = DoctorAdapter()
                     adapter.apply {
                         submitList(doctors)
-                        setOnItemClickedListener(object: DoctorAdapter.OnItemClickedListener {
+                        setOnItemClickedListener(object : DoctorAdapter.OnItemClickedListener {
                             override fun onItemClick(doctor: Doctor) {
-                                findNavController().navigate(ResultFragmentDirections.actionResultFragmentToUserChatFragment(doctor))
+                                findNavController().navigate(
+                                    ResultFragmentDirections.actionResultFragmentToUserChatFragment(
+                                        args.user,
+                                        doctor
+                                    )
+                                )
                             }
                         })
                     }

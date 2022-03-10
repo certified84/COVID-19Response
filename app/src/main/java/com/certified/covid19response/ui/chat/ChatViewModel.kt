@@ -1,11 +1,13 @@
 package com.certified.covid19response.ui.chat
 
+import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.certified.covid19response.data.model.Message
+import com.certified.covid19response.data.model.UserConversation
 import com.certified.covid19response.util.UIState
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
@@ -18,20 +20,44 @@ import javax.inject.Inject
 class ChatViewModel @Inject constructor() : ViewModel() {
 
     val uiState = ObservableField(UIState.EMPTY)
+    val chatListUiState = ObservableField(UIState.EMPTY)
 
     private val _messages = MutableLiveData<List<Message>>()
     val messages: LiveData<List<Message>> get() = _messages
+
+    private val _userConversations = MutableLiveData<List<UserConversation>>()
+    val userConversations: LiveData<List<UserConversation>> get() = _userConversations
 
     fun getChat(id: String) {
         viewModelScope.launch {
             val query = Firebase.firestore.collection("messages")
                 .document(id).collection("messages")
-                .orderBy("date", Query.Direction.ASCENDING)
+                .orderBy("time", Query.Direction.ASCENDING)
             query.addSnapshotListener { value, error ->
                 _messages.value = value?.toObjects(Message::class.java)
+                Log.d("TAG", "getChat: ${value?.toObjects(Message::class.java)}")
                 error?.printStackTrace()
             }
         }
     }
 //    ${auth.currentUser!!.uid}_${args.doctor.id}
+
+    fun getUserConversations(userId: String) {
+        viewModelScope.launch {
+            val query = Firebase.firestore.collection("last_messages")
+                .document(userId).collection("messages")
+                .orderBy("date", Query.Direction.DESCENDING)
+            query.addSnapshotListener { value, error ->
+                if (value != null && !value.isEmpty) {
+                    chatListUiState.set(UIState.HAS_DATA)
+                    _userConversations.value = value.toObjects(UserConversation::class.java)
+                } else
+                    chatListUiState.set(UIState.EMPTY)
+                if (error != null) {
+                    chatListUiState.set(UIState.EMPTY)
+                    error.printStackTrace()
+                }
+            }
+        }
+    }
 }

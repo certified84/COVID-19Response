@@ -40,7 +40,7 @@ class ChatRecyclerAdapter(private val id: String) :
     companion object {
         private val diffCallback = object : DiffUtil.ItemCallback<Message>() {
             override fun areItemsTheSame(oldItem: Message, newItem: Message) =
-                oldItem.id == newItem.id
+                oldItem == newItem
 
             override fun areContentsTheSame(oldItem: Message, newItem: Message) =
                 oldItem == newItem
@@ -48,8 +48,8 @@ class ChatRecyclerAdapter(private val id: String) :
     }
 
     override fun getItemViewType(position: Int): Int {
-        val message = getItem(position)
-        return if (id == message.senderId) 0 else 1
+        val currentItem = getItem(position)
+        return if (id == currentItem.senderId) 0 else 1
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

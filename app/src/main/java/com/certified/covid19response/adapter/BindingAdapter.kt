@@ -7,10 +7,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.certified.covid19response.R
-import com.certified.covid19response.data.model.DataProduct
-import com.certified.covid19response.data.model.Doctor
-import com.certified.covid19response.data.model.Message
-import com.certified.covid19response.data.model.News
+import com.certified.covid19response.data.model.*
 import com.certified.covid19response.util.roundOffDecimal
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.imageview.ShapeableImageView
@@ -66,6 +63,15 @@ fun bindChatRecyclerView(
     data: List<Message>?
 ) {
     val adapter = recyclerView.adapter as ChatRecyclerAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("listUserChats")
+fun bindUserChatListRecyclerView(
+    recyclerView: RecyclerView,
+    data: List<UserConversation>?
+) {
+    val adapter = recyclerView.adapter as UserChatListRecyclerAdapter
     adapter.submitList(data)
 }
 

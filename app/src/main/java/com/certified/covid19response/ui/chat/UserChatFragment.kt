@@ -15,12 +15,13 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.certified.covid19response.R
 import com.certified.covid19response.adapter.ChatRecyclerAdapter
+import com.certified.covid19response.data.model.DoctorConversation
 import com.certified.covid19response.data.model.Message
+import com.certified.covid19response.data.model.UserConversation
 import com.certified.covid19response.databinding.FragmentUserChatBinding
 import com.certified.covid19response.util.Extensions.showToast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
@@ -118,19 +119,29 @@ class UserChatFragment : Fragment() {
     }
 
     private fun sendMessage(text: String) {
+
         val id = "${auth.currentUser!!.uid}_${args.doctor.id}"
+        val db = Firebase.firestore
+
         val message = Message(
             id = id,
             message = text,
             senderId = auth.currentUser!!.uid,
             receiverId = args.doctor.id
         )
-        val db = Firebase.firestore
+
         val messagesRef = db.collection("messages").document(id).collection("messages").document()
-        val lastMessageRef =
-            db.collection("lastMessages").document(auth.currentUser!!.uid).collection("messages")
-                .document()
-        messagesRef.set(message).addOnSuccessListener {
+        val senderLastMessageRef =
+            db.collection("last_messages").document(auth.currentUser!!.uid).collection("messages")
+                .document(id)
+        val receiverLastMessageRef =
+            db.collection("last_messages").document(args.doctor.id).collection("messages")
+                .document(id)
+        db.runBatch {
+            it.set(messagesRef, message)
+            it.set(senderLastMessageRef, UserConversation(senderLastMessageRef.id, args.doctor, message))
+            it.set(receiverLastMessageRef, DoctorConversation(receiverLastMessageRef.id, args.user, message))
+        }.addOnSuccessListener {
             binding.etMessage.setText("")
         }.addOnFailureListener {
             showToast("An error occurred: ${it.localizedMessage}")

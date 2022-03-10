@@ -1,5 +1,9 @@
 package com.certified.covid19response.data.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class User(
     val id: String = "",
     val name: String = "",
@@ -8,4 +12,4 @@ data class User(
     val location: String = "",
     val nin: String = "",
     val bio: String = ""
-)
+) : Parcelable

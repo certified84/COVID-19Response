@@ -86,6 +86,9 @@
         android:label="fragment_chat_details"
         tools:layout="@layout/fragment_user_chat" >
         <argument
+            android:name="user"
+            app:argType="com.certified.covid19response.data.model.User" />
+        <argument
             android:name="doctor"
             app:argType="com.certified.covid19response.data.model.Doctor" />
         <action
@@ -203,5 +206,12 @@
         android:id="@+id/chatListFragment"
         android:name="com.certified.covid19response.ui.chat.ChatListFragment"
         android:label="ChatListFragment"
-        tools:layout="@layout/fragment_chat_list"/>
+        tools:layout="@layout/fragment_chat_list">
+        <action
+            android:id="@+id/action_chatListFragment_to_userChatFragment"
+            app:destination="@id/userChatFragment" />
+        <action
+            android:id="@+id/action_chatListFragment_to_doctorChatFragment"
+            app:destination="@id/doctorChatFragment" />
+    </fragment>
 </navigation>

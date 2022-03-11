@@ -232,7 +232,16 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     }
 
     private fun signOut() {
-        preferences.edit { putBoolean(PreferenceKeys.PUSH_NOTIFICATIONS_KEY, false) }
+        preferences.edit {
+            putBoolean(PreferenceKeys.PUSH_NOTIFICATIONS_KEY, false)
+            putString(PreferenceKeys.USER_ID_KEY, null)
+            putString(PreferenceKeys.USER_NAME_KEY, null)
+            putString(PreferenceKeys.USER_EMAIL_KEY, null)
+            putString(PreferenceKeys.USER_PROFILE_IMAGE_KEY, null)
+            putString(PreferenceKeys.USER_LOCATION_KEY, null)
+            putString(PreferenceKeys.USER_NIN_KEY, null)
+            putString(PreferenceKeys.USER_BIO_KEY, null)
+        }
         auth.signOut()
         findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
     }

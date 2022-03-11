@@ -76,6 +76,7 @@
         <View
             android:id="@+id/view"
             android:layout_width="0dp"
+            android:visibility="invisible"
             android:layout_height="@dimen/_1sdp"
             android:layout_marginTop="@dimen/_8sdp"
             android:background="@color/grey"

@@ -75,6 +75,15 @@ fun bindUserChatListRecyclerView(
     adapter.submitList(data)
 }
 
+@BindingAdapter("listDoctorChats")
+fun bindDoctorChatListRecyclerView(
+    recyclerView: RecyclerView,
+    data: List<DoctorConversation>?
+) {
+    val adapter = recyclerView.adapter as DoctorChatListRecyclerAdapter
+    adapter.submitList(data)
+}
+
 @BindingAdapter("severePercentText")
 fun MaterialTextView.severePercentText(value: Float) {
     text = "${roundOffDecimal(value)}% Sever symptoms"

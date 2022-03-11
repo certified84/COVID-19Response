@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.certified.covid19response.data.model.DoctorConversation
 import com.certified.covid19response.data.model.Message
 import com.certified.covid19response.data.model.UserConversation
 import com.certified.covid19response.util.UIState
@@ -27,6 +28,9 @@ class ChatViewModel @Inject constructor() : ViewModel() {
 
     private val _userConversations = MutableLiveData<List<UserConversation>>()
     val userConversations: LiveData<List<UserConversation>> get() = _userConversations
+
+    private val _doctorConversations = MutableLiveData<List<DoctorConversation>>()
+    val doctorConversations: LiveData<List<DoctorConversation>> get() = _doctorConversations
 
     fun getChat(id: String) {
         viewModelScope.launch {
@@ -51,6 +55,25 @@ class ChatViewModel @Inject constructor() : ViewModel() {
                 if (value != null && !value.isEmpty) {
                     chatListUiState.set(UIState.HAS_DATA)
                     _userConversations.value = value.toObjects(UserConversation::class.java)
+                } else
+                    chatListUiState.set(UIState.EMPTY)
+                if (error != null) {
+                    chatListUiState.set(UIState.EMPTY)
+                    error.printStackTrace()
+                }
+            }
+        }
+    }
+
+    fun getDoctorConversations(userId: String) {
+        viewModelScope.launch {
+            val query = Firebase.firestore.collection("last_messages")
+                .document(userId).collection("messages")
+                .orderBy("date", Query.Direction.DESCENDING)
+            query.addSnapshotListener { value, error ->
+                if (value != null && !value.isEmpty) {
+                    chatListUiState.set(UIState.HAS_DATA)
+                    _doctorConversations.value = value.toObjects(DoctorConversation::class.java)
                 } else
                     chatListUiState.set(UIState.EMPTY)
                 if (error != null) {

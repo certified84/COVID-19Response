@@ -21,7 +21,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.chat.DoctorChatFragment">
+        tools:context=".ui.chat.ChatFragment">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_heading"

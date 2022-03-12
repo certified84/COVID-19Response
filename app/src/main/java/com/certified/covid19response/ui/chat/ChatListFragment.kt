@@ -9,7 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.certified.covid19response.adapter.UserChatListRecyclerAdapter
+import com.certified.covid19response.adapter.ChatListRecyclerAdapter
 import com.certified.covid19response.data.model.User
 import com.certified.covid19response.data.model.UserConversation
 import com.certified.covid19response.databinding.FragmentChatListBinding
@@ -43,9 +43,9 @@ class ChatListFragment : Fragment() {
         viewModel.getUserConversations(Firebase.auth.currentUser!!.uid)
 
         binding.apply {
-            val adapter = UserChatListRecyclerAdapter()
+            val adapter = ChatListRecyclerAdapter()
             adapter.setOnItemClickedListener(object :
-                UserChatListRecyclerAdapter.OnItemClickedListener {
+                ChatListRecyclerAdapter.OnItemClickedListener {
                 override fun onItemClick(conversation: UserConversation) {
 
                     val preferenceManager =
@@ -61,7 +61,7 @@ class ChatListFragment : Fragment() {
                             getString(PreferenceKeys.USER_BIO_KEY, "")!!
                         )
                         findNavController().navigate(
-                            ChatListFragmentDirections.actionChatListFragmentToUserChatFragment(
+                            ChatListFragmentDirections.actionUserChatListFragmentToUserChatFragment(
                                 user, conversation.doctor
                             )
                         )

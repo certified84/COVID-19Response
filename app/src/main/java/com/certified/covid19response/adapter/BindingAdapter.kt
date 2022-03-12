@@ -48,15 +48,6 @@ fun bindArticlesRecyclerView(
     adapter.submitList(data)
 }
 
-@BindingAdapter("listDoctors")
-fun bindDoctorRecyclerView(
-    recyclerView: RecyclerView,
-    data: List<Doctor>?
-) {
-    val adapter = recyclerView.adapter as DoctorAdapter
-    adapter.submitList(data)
-}
-
 @BindingAdapter("listMessages")
 fun bindChatRecyclerView(
     recyclerView: RecyclerView,
@@ -71,16 +62,7 @@ fun bindUserChatListRecyclerView(
     recyclerView: RecyclerView,
     data: List<UserConversation>?
 ) {
-    val adapter = recyclerView.adapter as UserChatListRecyclerAdapter
-    adapter.submitList(data)
-}
-
-@BindingAdapter("listDoctorChats")
-fun bindDoctorChatListRecyclerView(
-    recyclerView: RecyclerView,
-    data: List<DoctorConversation>?
-) {
-    val adapter = recyclerView.adapter as DoctorChatListRecyclerAdapter
+    val adapter = recyclerView.adapter as ChatListRecyclerAdapter
     adapter.submitList(data)
 }
 

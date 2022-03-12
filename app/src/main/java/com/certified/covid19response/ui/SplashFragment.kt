@@ -1,7 +1,6 @@
 package com.certified.covid19response.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,8 +36,9 @@ class SplashFragment : Fragment() {
             val currentUser = Firebase.auth.currentUser
             if (currentUser == null)
                 findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToOnboardingFragment())
-            else
+            else {
                 findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
+            }
         }
     }
 

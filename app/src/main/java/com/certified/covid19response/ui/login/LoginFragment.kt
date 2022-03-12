@@ -1,17 +1,22 @@
 package com.certified.covid19response.ui.login
 
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import com.certified.covid19response.R
+import com.certified.covid19response.data.model.AccountType
 import com.certified.covid19response.data.model.User
 import com.certified.covid19response.databinding.FragmentLoginBinding
+import com.certified.covid19response.ui.MainActivity
 import com.certified.covid19response.util.Extensions.checkFieldEmpty
 import com.certified.covid19response.util.Extensions.showToast
 import com.certified.covid19response.util.PreferenceKeys
@@ -28,6 +33,7 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
     private val viewModel: LoginViewModel by viewModels()
+    private lateinit var preferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,8 +46,27 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
         binding.lifecycleOwner = this
         binding.uiState = viewModel.uiState
+
+        viewModel.apply {
+            message.observe(viewLifecycleOwner) { if (it != null) showToast(it) }
+            success.observe(viewLifecycleOwner) {
+                if (it) {
+                    val user = Firebase.auth.currentUser!!
+                    if (user.isEmailVerified) {
+                        saveUserPreferences()
+                        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+                    } else {
+                        viewModel.uiState.set(UIState.FAILURE)
+                        Firebase.auth.signOut()
+                        showToast("Check your email for verification link")
+                    }
+                }
+            }
+        }
         binding.apply {
 
             btnForgotButton.setOnClickListener {
@@ -62,24 +87,6 @@ class LoginFragment : Fragment() {
 
                 viewModel.uiState.set(UIState.LOADING)
                 viewModel.signInWithEmailAndPassword(email, password)
-                    ?.addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-
-                            val user = Firebase.auth.currentUser!!
-
-                            if (user.isEmailVerified) {
-                                saveUserPreferences()
-                                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
-                            } else {
-                                viewModel.uiState.set(UIState.FAILURE)
-                                Firebase.auth.signOut()
-                                showToast("Check your email for verification link")
-                            }
-                        } else {
-                            viewModel.uiState.set(UIState.FAILURE)
-                            showToast("Authentication failed. ${task.exception}")
-                        }
-                    }
             }
 
             btnSignup.setOnClickListener { findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignupFragment()) }
@@ -87,11 +94,10 @@ class LoginFragment : Fragment() {
     }
 
     private fun saveUserPreferences() {
-        val preferenceManager = PreferenceManager.getDefaultSharedPreferences(requireContext())
         val query = Firebase.firestore.collection("users").document(Firebase.auth.currentUser!!.uid)
         query.get().addOnSuccessListener {
             val user = it.toObject(User::class.java)!!
-            preferenceManager.edit {
+            preferences.edit {
                 putString(PreferenceKeys.USER_ID_KEY, user.id)
                 putString(PreferenceKeys.USER_NAME_KEY, user.name)
                 putString(PreferenceKeys.USER_EMAIL_KEY, user.email)
@@ -100,7 +106,7 @@ class LoginFragment : Fragment() {
                 putString(PreferenceKeys.USER_NIN_KEY, user.nin)
                 putString(PreferenceKeys.USER_BIO_KEY, user.bio)
             }
-        }
+        }.addOnFailureListener { Log.d("TAG", "saveUserPreferences: ${it.localizedMessage}") }
     }
 
     override fun onResume() {

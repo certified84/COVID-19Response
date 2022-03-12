@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.certified.covid19response.data.model.UserConversation
-import com.certified.covid19response.databinding.ItemUserChatListBinding
+import com.certified.covid19response.databinding.ItemChatListBinding
 
-class UserChatListRecyclerAdapter :
-    ListAdapter<UserConversation, UserChatListRecyclerAdapter.ViewHolder>(diffCallback) {
+class ChatListRecyclerAdapter :
+    ListAdapter<UserConversation, ChatListRecyclerAdapter.ViewHolder>(diffCallback) {
 
     private lateinit var listener: OnItemClickedListener
 
-    inner class ViewHolder(val binding: ItemUserChatListBinding) :
+    inner class ViewHolder(val binding: ItemChatListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(conversation: UserConversation) {
             binding.conversation = conversation
@@ -49,7 +49,7 @@ class UserChatListRecyclerAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
-            ItemUserChatListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemChatListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 

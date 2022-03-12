@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_home"
         android:title="@string/home" />
     <item
-        android:id="@+id/chatListFragment"
+        android:id="@+id/userChatListFragment"
         android:icon="@drawable/ic_message"
         android:title="@string/chat" />
     <item

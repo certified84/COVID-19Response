@@ -17,7 +17,7 @@ import com.certified.covid19response.adapter.ChatRecyclerAdapter
 import com.certified.covid19response.data.model.DoctorConversation
 import com.certified.covid19response.data.model.Message
 import com.certified.covid19response.data.model.UserConversation
-import com.certified.covid19response.databinding.FragmentUserChatBinding
+import com.certified.covid19response.databinding.FragmentChatBinding
 import com.certified.covid19response.util.Extensions.showToast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -26,12 +26,12 @@ import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class UserChatFragment : Fragment() {
+class ChatFragment : Fragment() {
 
-    private var _binding: FragmentUserChatBinding? = null
+    private var _binding: FragmentChatBinding? = null
     private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
-    private val args: UserChatFragmentArgs by navArgs()
+    private val args: ChatFragmentArgs by navArgs()
     private val viewModel: ChatViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -39,7 +39,7 @@ class UserChatFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentUserChatBinding.inflate(inflater, container, false)
+        _binding = FragmentChatBinding.inflate(inflater, container, false)
         auth = Firebase.auth
         return binding.root
     }
@@ -54,7 +54,7 @@ class UserChatFragment : Fragment() {
 
         binding.apply {
             tvHeading.text = "You & Doctor ${args.doctor.first_name}"
-            btnBack.setOnClickListener { findNavController().navigate(UserChatFragmentDirections.actionUserChatFragmentToChatListFragment()) }
+            btnBack.setOnClickListener { findNavController().navigate(ChatFragmentDirections.actionUserChatFragmentToUserChatListFragment()) }
             fabAction.setOnClickListener {
                 val message = etMessage.text.toString().trim()
                 if (message.isBlank())

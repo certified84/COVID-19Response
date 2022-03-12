@@ -3,6 +3,7 @@
     package="com.certified.covid19response">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <queries>
         <intent>
             <action android:name="android.support.customtabs.action.CustomTabsService" />
@@ -22,6 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.COVID19Response"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ui.StartActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
             android:exported="true">

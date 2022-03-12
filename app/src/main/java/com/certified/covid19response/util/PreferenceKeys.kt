@@ -1,7 +1,5 @@
 package com.certified.covid19response.util
 
-import com.certified.covid19response.data.model.User
-
 object PreferenceKeys {
     const val PUSH_NOTIFICATIONS_KEY = "PUSH_NOTIFICATIONS_KEY"
     const val USER_ID_KEY = "USER_ID_KEY"
@@ -11,4 +9,5 @@ object PreferenceKeys {
     const val USER_LOCATION_KEY = "USER_LOCATION_KEY"
     const val USER_NIN_KEY = "USER_NIN_KEY"
     const val USER_BIO_KEY = "USER_BIO_KEY"
+    const val ACCOUNT_TYPE = "ACCOUNT_TYPE"
 }

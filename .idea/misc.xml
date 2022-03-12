@@ -18,6 +18,7 @@
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/drawable/ic_send_black_24dp.xml" value="0.2025" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/drawable/ic_settings.xml" value="0.2135" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/activity_main.xml" value="0.3080568720379147" />
+        <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/activity_start.xml" value="0.1514052583862194" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/dialog_covid_status.xml" value="0.25" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/dialog_edit_profile.xml" value="0.25" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_article.xml" value="0.1" />
@@ -25,9 +26,10 @@
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_chat_details.xml" value="0.1" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_chat_list.xml" value="0.33" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_doctor_chat.xml" value="0.2" />
+        <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_doctor_chat_list.xml" value="0.15185856754306437" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_edit_profile.xml" value="0.2527121888959796" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_home.xml" value="0.1" />
-        <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_login.xml" value="0.22" />
+        <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_login.xml" value="0.33" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_news.xml" value="0.1" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_notifications.xml" value="0.25" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/fragment_onboarding.xml" value="0.29819277108433734" />
@@ -54,6 +56,7 @@
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/item_news_shimmer.xml" value="0.25" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/layout/item_user_chat_list.xml" value="0.33" />
         <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
+        <entry key="..\:/Users/SAMSON/StudioProjects/COVID19Response/app/src/main/res/menu/doctor_bottom_nav_menu.xml" value="0.16930312099187686" />
       </map>
     </option>
   </component>

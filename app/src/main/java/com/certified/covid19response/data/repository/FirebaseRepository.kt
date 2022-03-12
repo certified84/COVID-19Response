@@ -1,6 +1,7 @@
 package com.certified.covid19response.data.repository
 
 import android.net.Uri
+import com.certified.covid19response.data.model.AccountType
 import com.certified.covid19response.data.model.User
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.ktx.auth
@@ -16,6 +17,10 @@ class FirebaseRepository @Inject constructor() {
 
     fun uploadDetails(userID: String, newUser: User): Task<Void> {
         return Firebase.firestore.collection("users").document(userID).set(newUser)
+    }
+
+    fun setAccountType(userID: String, accountType: AccountType): Task<Void> {
+        return Firebase.firestore.collection("account_type").document(userID).set(accountType)
     }
 
     fun signInWithEmailAndPassword(email: String, password: String) =

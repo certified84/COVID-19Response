@@ -54,7 +54,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginBottom="@dimen/_10sdp"
-            tools:listitem="@layout/item_user_chat_list"
+            tools:listitem="@layout/item_chat_list"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline6"
             app:layout_constraintStart_toStartOf="@+id/guideline5"

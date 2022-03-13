@@ -54,7 +54,7 @@ class ChatFragment : Fragment() {
 
         binding.apply {
             tvHeading.text = "You & Doctor ${args.doctor.first_name}"
-            btnBack.setOnClickListener { findNavController().navigate(ChatFragmentDirections.actionUserChatFragmentToUserChatListFragment()) }
+            btnBack.setOnClickListener { findNavController().navigate(ChatFragmentDirections.actionChatFragmentToChatListFragment()) }
             fabAction.setOnClickListener {
                 val message = etMessage.text.toString().trim()
                 if (message.isBlank())
@@ -149,6 +149,14 @@ class ChatFragment : Fragment() {
         }.addOnFailureListener {
             showToast("An error occurred: ${it.localizedMessage}")
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (args.message != null)
+            binding.etMessage.apply {
+                setText("Hi Doctor ${args.doctor.first_name}, my name is ${auth.currentUser!!.displayName}.\n\nRecently, i've been feeling ${args.message}")
+            }
     }
 
     private fun recordAudio() {

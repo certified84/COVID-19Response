@@ -81,10 +81,10 @@
             app:argType="string" />
     </fragment>
     <fragment
-        android:id="@+id/userChatFragment"
+        android:id="@+id/chatFragment"
         android:name="com.certified.covid19response.ui.chat.ChatFragment"
         android:label="fragment_chat_details"
-        tools:layout="@layout/fragment_chat" >
+        tools:layout="@layout/fragment_chat">
         <argument
             android:name="user"
             app:argType="com.certified.covid19response.data.model.User" />
@@ -92,29 +92,19 @@
             android:name="doctor"
             app:argType="com.certified.covid19response.data.model.Doctor" />
         <action
-            android:id="@+id/action_userChatFragment_to_userChatListFragment"
-            app:destination="@id/userChatListFragment"
+            android:id="@+id/action_chatFragment_to_chatListFragment"
+            app:destination="@id/chatListFragment"
             app:popUpTo="@id/homeFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/doctorChatFragment"
-        android:name="com.certified.covid19response.ui.chat.DoctorChatFragment"
-        android:label="fragment_chat_details"
-        tools:layout="@layout/fragment_doctor_chat" >
         <argument
-            android:name="doctor"
-            app:argType="com.certified.covid19response.data.model.Doctor" />
-        <argument android:name="user"
-            app:argType="com.certified.covid19response.data.model.User" />
-        <action
-            android:id="@+id/action_doctorChatFragment_to_doctorChatListFragment"
-            app:destination="@id/doctorChatListFragment" />
+            android:name="message"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/notificationsFragment"
         android:name="com.certified.covid19response.ui.notification.NotificationsFragment"
         android:label="fragment_notifications"
-        tools:layout="@layout/fragment_notifications" >
+        tools:layout="@layout/fragment_notifications">
         <action
             android:id="@+id/action_notificationsFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -195,9 +185,9 @@
             android:id="@+id/action_resultFragment_to_webFragment"
             app:destination="@id/webFragment" />
         <action
-            android:id="@+id/action_resultFragment_to_userChatFragment"
-            app:destination="@id/userChatFragment"
-            app:popUpTo="@id/userChatListFragment"
+            android:id="@+id/action_resultFragment_to_chatFragment"
+            app:destination="@id/chatFragment"
+            app:popUpTo="@id/chatListFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -212,21 +202,12 @@
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
-        android:id="@+id/userChatListFragment"
+        android:id="@+id/chatListFragment"
         android:name="com.certified.covid19response.ui.chat.ChatListFragment"
-        android:label="UserChatListFragment"
+        android:label="chatListFragment"
         tools:layout="@layout/fragment_chat_list">
         <action
-            android:id="@+id/action_userChatListFragment_to_userChatFragment"
-            app:destination="@id/userChatFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/doctorChatListFragment"
-        android:name="com.certified.covid19response.ui.chat.DoctorChatListFragment"
-        android:label="DoctorChatListFragment"
-        tools:layout="@layout/fragment_doctor_chat_list">
-        <action
-            android:id="@+id/action_doctorChatListFragment_to_doctorChatFragment"
-            app:destination="@id/doctorChatFragment" />
+            android:id="@+id/action_chatListFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
     </fragment>
 </navigation>

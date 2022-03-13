@@ -15,6 +15,7 @@ data class Result(
     var severePercent: Float = 0F,
     var lessPercent: Float = 0F,
     var mostPercent: Float = 0F,
+    var feeling: String = "",
     var message: String = ""
 ) : Parcelable {
     init {

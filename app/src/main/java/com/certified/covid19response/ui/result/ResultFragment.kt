@@ -104,9 +104,8 @@ class ResultFragment : Fragment() {
                         setOnItemClickedListener(object : DoctorAdapter.OnItemClickedListener {
                             override fun onItemClick(doctor: Doctor) {
                                 findNavController().navigate(
-                                    ResultFragmentDirections.actionResultFragmentToUserChatFragment(
-                                        args.user,
-                                        doctor
+                                    ResultFragmentDirections.actionResultFragmentToChatFragment(
+                                        args.user, doctor, args.result.feeling
                                     )
                                 )
                             }

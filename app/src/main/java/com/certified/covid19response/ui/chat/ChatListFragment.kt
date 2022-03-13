@@ -61,8 +61,8 @@ class ChatListFragment : Fragment() {
                             getString(PreferenceKeys.USER_BIO_KEY, "")!!
                         )
                         findNavController().navigate(
-                            ChatListFragmentDirections.actionUserChatListFragmentToUserChatFragment(
-                                user, conversation.doctor
+                            ChatListFragmentDirections.actionChatListFragmentToChatFragment(
+                                user, conversation.doctor, null
                             )
                         )
                     }

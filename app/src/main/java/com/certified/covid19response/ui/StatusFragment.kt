@@ -202,8 +202,16 @@ class StatusFragment : Fragment() {
     private fun performCheck() {
 
         binding.apply {
+            val userFeeling = etUserFeeling.text.toString().trim()
+
             if (totalNoOfSymptoms == 0F) {
                 showToast("Please select at least one symptom")
+                return
+            }
+
+            if (userFeeling.isBlank()) {
+                etUserFeeling.error = "Required *"
+                etUserFeeling.requestFocus()
                 return
             }
 
@@ -228,6 +236,7 @@ class StatusFragment : Fragment() {
                     lessSymptoms = lessSymptoms,
                     mostSymptoms = mostSymptoms
                 )
+                result.feeling = userFeeling
                 launchBottomSheetDialog(result, user)
             }
         }

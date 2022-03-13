@@ -55,6 +55,7 @@ class ChatFragment : Fragment() {
         binding.apply {
             tvHeading.text = "You & Doctor ${args.doctor.first_name}"
             btnBack.setOnClickListener { findNavController().navigate(ChatFragmentDirections.actionChatFragmentToChatListFragment()) }
+            btnAttachment.setOnClickListener { showAttachmentDialog() }
             fabAction.setOnClickListener {
                 val message = etMessage.text.toString().trim()
                 if (message.isBlank())
@@ -113,6 +114,11 @@ class ChatFragment : Fragment() {
             recyclerViewChat.adapter = adapter
             recyclerViewChat.layoutManager = LinearLayoutManager(requireContext())
         }
+    }
+
+    private fun showAttachmentDialog() {
+//        TODO("Not yet implemented")
+        showToast("You'll be able to send attachments soon...")
     }
 
     private fun sendMessage(text: String) {

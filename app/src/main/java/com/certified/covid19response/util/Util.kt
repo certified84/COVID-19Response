@@ -5,6 +5,7 @@ import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 
 fun verifyPassword(password: String, editText: TextInputEditText): Boolean {
@@ -70,3 +71,13 @@ fun currentDate(): Calendar = Calendar.getInstance()
 
 fun formatTime(date: Long): String =
     SimpleDateFormat("h:mm a", Locale.getDefault()).format(date)
+
+fun formatChatDate(date: Long): String {
+    val day = TimeUnit.MILLISECONDS.toDays(Date().time - date)
+    return when {
+        day <= 1 -> "Today"
+        day <= 2 -> "Yesterday"
+        else -> SimpleDateFormat("MMM, DD", Locale.getDefault()).format(date)
+    }
+//    SimpleDateFormat("h:mm a", Locale.getDefault()).format(date)
+}

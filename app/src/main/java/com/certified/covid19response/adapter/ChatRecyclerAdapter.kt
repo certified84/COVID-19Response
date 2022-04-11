@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.certified.covid19response.data.model.Message
 import com.certified.covid19response.data.model.News
+import com.certified.covid19response.databinding.ItemChatDateBinding
 import com.certified.covid19response.databinding.ItemChatReceiverBinding
 import com.certified.covid19response.databinding.ItemChatSenderBinding
 
@@ -23,6 +24,13 @@ class ChatRecyclerAdapter(private val id: String) :
     }
 
     inner class SenderViewHolder(val binding: ItemChatSenderBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(message: Message) {
+            binding.message = message
+        }
+    }
+
+    inner class ChatDateViewHolder(val binding: ItemChatDateBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(message: Message) {
             binding.message = message
@@ -49,7 +57,7 @@ class ChatRecyclerAdapter(private val id: String) :
 
     override fun getItemViewType(position: Int): Int {
         val currentItem = getItem(position)
-        return if (id == currentItem.senderId) 0 else 1
+        return if (id == currentItem.senderId) 0 else if(id) 1 else 2
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

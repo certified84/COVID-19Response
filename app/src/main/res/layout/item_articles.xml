@@ -7,7 +7,7 @@
 
         <variable
             name="article"
-            type="com.certified.covid19response.data.model.News" />
+            type="com.certified.covid19response.data.model.NewsApiOrgArticle" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -29,7 +29,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:alpha=".7"
                 android:fontFamily="@font/space_grotesk_regular"
-                android:text="@{article.publishedDateTime}"
+                app:server_time="@{article.publishedAt}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_4sdp"
                 android:fontFamily="@font/space_grotesk_regular"
-                android:text="@{article.provider.name}"
+                android:text="@{article.source.name}"
                 android:textColor="@color/red"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_date"
@@ -106,7 +106,7 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/space_grotesk_regular"
                 android:maxLines="4"
-                android:text="@{article.excerpt}"
+                android:text="@{article.description}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintEnd_toEndOf="@+id/tv_title"

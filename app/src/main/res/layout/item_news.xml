@@ -7,7 +7,7 @@
 
         <variable
             name="news"
-            type="com.certified.covid19response.data.model.News" />
+            type="com.certified.covid19response.data.model.NewsApiOrgArticle" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -19,8 +19,18 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:paddingBottom="@dimen/_10sdp"
             android:layout_height="wrap_content">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="0dp"
+                android:alpha=".5"
+                android:layout_height="0dp"
+                app:load_image="@{news.urlToImage}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/materialTextView14"
@@ -42,7 +52,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:alpha=".7"
                 android:textSize="@dimen/_12ssp"
-                android:text="@{news.publishedDateTime}"
+                app:server_time="@{news.publishedAt}"
                 android:textColor="@color/white"
                 android:fontFamily="@font/space_grotesk_regular"
                 app:layout_constraintStart_toStartOf="@+id/materialTextView14"
@@ -80,14 +90,16 @@
                 android:id="@+id/tv_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:ellipsize="end"
                 android:fontFamily="@font/space_grotesk_regular"
                 android:maxLines="2"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:text="@{news.title}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12ssp"
-                android:text="@{news.title}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/materialTextView14"
                 app:layout_constraintTop_toBottomOf="@+id/tv_date"

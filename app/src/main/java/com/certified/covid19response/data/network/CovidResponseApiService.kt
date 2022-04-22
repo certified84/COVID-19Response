@@ -1,16 +1,23 @@
 package com.certified.covid19response.data.network
 
-import com.certified.covid19response.data.model.CatalogResponse
-import com.certified.covid19response.data.model.RapidApiResponse
+import com.certified.covid19response.data.model.NewsApiOrgResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Query
 
 interface CovidResponseApiService {
 
-    @GET("rds/api/catalog")
-    suspend fun getCatalog(): Response<CatalogResponse>
+    @GET("everything")
+    suspend fun getNewsApiOrgNews(
+        @Header("X-Api-Key") apiKey: String,
+        @Query("q") query: String
+    ): Response<NewsApiOrgResponse>
 
-    @GET("news/v1/US/")
-    suspend fun getNews(@Header("x-rapidapi-key") apiKey: String): Response<RapidApiResponse>
+    @GET("top-headlines")
+    suspend fun getNewsApiOrgHeadlines(
+        @Header("X-Api-Key") apiKey: String,
+        @Query("country") country: String,
+        @Query("q") query: String
+    ): Response<NewsApiOrgResponse>
 }

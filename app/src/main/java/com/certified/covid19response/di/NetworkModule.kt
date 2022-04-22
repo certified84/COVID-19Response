@@ -4,8 +4,7 @@ import com.certified.covid19response.data.network.CovidResponseApiService
 import com.certified.covid19response.data.repository.FirebaseRepository
 import com.certified.covid19response.data.repository.Repository
 import com.certified.covid19response.util.ApiErrorUtil
-import com.certified.covid19response.util.Config.BASE_URL
-import com.certified.covid19response.util.Config.BASE_URL_OTHER
+import com.certified.covid19response.util.Config.BASE_URL_NEWS_API_ORG
 import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -32,7 +31,7 @@ class NetworkModule {
     @Provides
     fun provideRetrofit(gson: Gson): Retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create(gson))
-        .baseUrl(BASE_URL_OTHER)
+        .baseUrl(BASE_URL_NEWS_API_ORG)
         .build()
 
     @Provides

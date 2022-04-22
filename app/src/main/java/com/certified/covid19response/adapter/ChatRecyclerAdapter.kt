@@ -57,7 +57,7 @@ class ChatRecyclerAdapter(private val id: String) :
 
     override fun getItemViewType(position: Int): Int {
         val currentItem = getItem(position)
-        return if (id == currentItem.senderId) 0 else if(id) 1 else 2
+        return if (id == currentItem.senderId) 0 else 1
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

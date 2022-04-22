@@ -6,6 +6,7 @@ import android.view.View
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.transform.CircleCropTransformation
 import com.certified.covid19response.R
 import com.certified.covid19response.data.model.*
 import com.certified.covid19response.util.roundOffDecimal
@@ -21,28 +22,28 @@ fun View.setVisible(visible: Boolean) {
     visibility = if (visible) View.VISIBLE else View.GONE
 }
 
+//@BindingAdapter("listNews")
+//fun bindNewsRecyclerView(
+//    recyclerView: RecyclerView,
+//    data: List<News>?
+//) {
+//    val adapter = recyclerView.adapter as NewsRecyclerAdapter
+//    adapter.submitList(data)
+//}
+
 @BindingAdapter("listNews")
 fun bindNewsRecyclerView(
     recyclerView: RecyclerView,
-    data: List<News>?
+    data: List<NewsApiOrgArticle>?
 ) {
     val adapter = recyclerView.adapter as NewsRecyclerAdapter
-    adapter.submitList(data)
-}
-
-@BindingAdapter("listDataProducts")
-fun bindDataProductRecyclerView(
-    recyclerView: RecyclerView,
-    data: List<DataProduct>?
-) {
-    val adapter = recyclerView.adapter as DataProductsRecyclerAdapter
     adapter.submitList(data)
 }
 
 @BindingAdapter("listArticles")
 fun bindArticlesRecyclerView(
     recyclerView: RecyclerView,
-    data: List<News>?
+    data: List<NewsApiOrgArticle>?
 ) {
     val adapter = recyclerView.adapter as ArticlesRecyclerAdapter
     adapter.submitList(data)
@@ -101,7 +102,7 @@ fun MaterialTextView.parseServerTime(time: String) {
 
 @BindingAdapter("load_image")
 fun ShapeableImageView.loadImage(image: String?) {
-    if (image != null) this.load(image)
+    if (image != null) this.load(image) {}
     else this.load(R.drawable.no_profile_image)
 }
 

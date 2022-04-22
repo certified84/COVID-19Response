@@ -12,6 +12,7 @@ import com.certified.covid19response.R
 import com.certified.covid19response.adapter.ArticlesRecyclerAdapter
 import com.certified.covid19response.adapter.NewsRecyclerAdapter
 import com.certified.covid19response.data.model.News
+import com.certified.covid19response.data.model.NewsApiOrgArticle
 import com.certified.covid19response.databinding.FragmentHomeBinding
 import com.certified.covid19response.util.Config.RAPID_API_KEY
 import com.certified.covid19response.util.Extensions.openBrowser
@@ -52,11 +53,11 @@ class HomeFragment : Fragment() {
 
             articlesAdapter.setOnItemClickedListener(object :
                 ArticlesRecyclerAdapter.OnItemClickedListener {
-                override fun onItemClick(news: News) {
+                override fun onItemClick(news: NewsApiOrgArticle) {
                     requireContext().openBrowser(
-                        news.originalUrl,
+                        news.url,
                         findNavController(),
-                        HomeFragmentDirections.actionHomeFragmentToWebFragment(news.originalUrl)
+                        HomeFragmentDirections.actionHomeFragmentToWebFragment(news.url)
                     )
                 }
             })
@@ -72,11 +73,11 @@ class HomeFragment : Fragment() {
 
             newsAdapter.setOnItemClickedListener(object :
                 NewsRecyclerAdapter.OnItemClickedListener {
-                override fun onItemClick(news: News) {
+                override fun onItemClick(news: NewsApiOrgArticle) {
                     requireContext().openBrowser(
-                        news.originalUrl,
+                        news.url,
                         findNavController(),
-                        HomeFragmentDirections.actionHomeFragmentToWebFragment(news.originalUrl)
+                        HomeFragmentDirections.actionHomeFragmentToWebFragment(news.url)
                     )
                 }
             })

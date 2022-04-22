@@ -6,22 +6,23 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.certified.covid19response.data.model.News
-import com.certified.covid19response.databinding.ItemArticlesBinding
+import com.certified.covid19response.data.model.NewsApiOrgArticle
 import com.certified.covid19response.databinding.ItemNewsBinding
 
-class NewsRecyclerAdapter : ListAdapter<News, NewsRecyclerAdapter.ViewHolder>(diffCallback) {
+class NewsRecyclerAdapter :
+    ListAdapter<NewsApiOrgArticle, NewsRecyclerAdapter.ViewHolder>(diffCallback) {
 
     private lateinit var listener: OnItemClickedListener
 
     inner class ViewHolder(val binding: ItemNewsBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(news: News) {
+        fun bind(news: NewsApiOrgArticle) {
             binding.news = news
         }
 
         init {
             itemView.setOnClickListener {
-                val position = adapterPosition
+                val position = absoluteAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     listener.onItemClick(getItem(position))
                 }
@@ -30,7 +31,7 @@ class NewsRecyclerAdapter : ListAdapter<News, NewsRecyclerAdapter.ViewHolder>(di
     }
 
     interface OnItemClickedListener {
-        fun onItemClick(news: News)
+        fun onItemClick(news: NewsApiOrgArticle)
     }
 
     fun setOnItemClickedListener(listener: OnItemClickedListener) {
@@ -38,11 +39,14 @@ class NewsRecyclerAdapter : ListAdapter<News, NewsRecyclerAdapter.ViewHolder>(di
     }
 
     companion object {
-        private val diffCallback = object : DiffUtil.ItemCallback<News>() {
-            override fun areItemsTheSame(oldItem: News, newItem: News) =
-                oldItem.originalUrl == newItem.originalUrl
+        private val diffCallback = object : DiffUtil.ItemCallback<NewsApiOrgArticle>() {
+            override fun areItemsTheSame(oldItem: NewsApiOrgArticle, newItem: NewsApiOrgArticle) =
+                oldItem == newItem
 
-            override fun areContentsTheSame(oldItem: News, newItem: News) =
+            override fun areContentsTheSame(
+                oldItem: NewsApiOrgArticle,
+                newItem: NewsApiOrgArticle
+            ) =
                 oldItem == newItem
         }
     }

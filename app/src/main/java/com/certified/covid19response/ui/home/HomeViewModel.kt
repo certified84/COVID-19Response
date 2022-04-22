@@ -6,16 +6,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.certified.covid19response.data.model.Article
-import com.certified.covid19response.data.model.DataProduct
-import com.certified.covid19response.data.model.News
+import com.certified.covid19response.data.model.NewsApiOrgArticle
 import com.certified.covid19response.data.repository.FirebaseRepository
 import com.certified.covid19response.data.repository.Repository
 import com.certified.covid19response.util.ApiErrorUtil
 import com.certified.covid19response.util.Config
 import com.certified.covid19response.util.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,57 +26,54 @@ class HomeViewModel @Inject constructor(
 
     val uiState = ObservableField(UIState.LOADING)
 
-    private val _latestNews = MutableLiveData<List<News>>()
-    val latestNews: LiveData<List<News>> get() = _latestNews
+    private val _newsApiOrgNews = MutableLiveData<List<NewsApiOrgArticle>>()
+    val newsApiOrgNews: LiveData<List<NewsApiOrgArticle>> get() = _newsApiOrgNews
 
-    private val _latestArticles = MutableLiveData<List<Article>>()
-    val latestArticles: LiveData<List<Article>> get() = _latestArticles
-
-    private val _data = MutableLiveData<List<DataProduct>>()
-    val data: LiveData<List<DataProduct>> get() = _data
+    private val _newsApiOrgArticle = MutableLiveData<List<NewsApiOrgArticle>>()
+    val newsApiOrgArticle: LiveData<List<NewsApiOrgArticle>> get() = _newsApiOrgArticle
 
     init {
-        getNews()
+        getNewsApiOrgNews()
+        getNewsApiOrgHeadlines()
     }
 
-    fun getCatalog() {
+    private fun getNewsApiOrgNews() {
         viewModelScope.launch {
             try {
-                Log.d("TAG", "getData: Init")
-                val response = covidRepo.getCatalog()
-                if (response.isSuccessful) {
-                    Log.d("TAG", "getCatalog: ${response.body()}")
-                    _data.value = response.body()?.catalogs?.get(0)?.dataProducts
-                } else {
-                    uiState.set(UIState.FAILURE)
-                    val error = apiErrorUtil.parseError(response)
-                    Log.d("TAG", "getData: error: ${error?.error}")
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Log.d("TAG", "getCatalog: error2: ${e.localizedMessage}")
-            }
-        }
-    }
-
-    private fun getNews() {
-        viewModelScope.launch {
-            try {
-                Log.d("TAG", "getNews: Init")
-                val response = covidRepo.getNews(Config.RAPID_API_KEY)
+                val response = covidRepo.getNewsApiOrgNews(Config.NEWS_API_ORG_API_KEY, "covid-19")
                 if (response.isSuccessful) {
                     uiState.set(UIState.SUCCESS)
-                    Log.d("TAG", "getNews: ${response.body()}")
-                    _latestNews.value = response.body()?.news
-                    Log.d("TAG", "getNews: Image: ${response.body()?.news?.get(0)?.images?.get(0)}")
+                    _newsApiOrgArticle.value =
+                        response.body()?.articles?.sortedByDescending { it.publishedAt }
                 } else {
                     uiState.set(UIState.FAILURE)
-                    Log.d("TAG", "getNews: error: ${response.message()}")
+                    Log.d("TAG", "getNewsApiOrgNews: error: ${response.body()?.message}")
                 }
             } catch (e: Exception) {
                 uiState.set(UIState.FAILURE)
                 e.printStackTrace()
-                Log.d("TAG", "getCatalog: error2: ${e.localizedMessage}")
+                Log.d("TAG", "getNewsApiOrgNews: error2: ${e.localizedMessage}")
+            }
+        }
+    }
+
+    private fun getNewsApiOrgHeadlines() {
+        viewModelScope.launch {
+            try {
+                val response =
+                    covidRepo.getNewsApiOrgHeadlines(Config.NEWS_API_ORG_API_KEY, "ng", "covid")
+                if (response.isSuccessful) {
+                    uiState.set(UIState.SUCCESS)
+                    _newsApiOrgNews.value =
+                        response.body()?.articles?.sortedByDescending { it.publishedAt }
+                } else {
+                    uiState.set(UIState.FAILURE)
+                    Log.d("TAG", "getNewsApiOrgHeadlines: error: ${response.body()?.message}")
+                }
+            } catch (e: Exception) {
+                uiState.set(UIState.FAILURE)
+                e.printStackTrace()
+                Log.d("TAG", "getNewsApiOrgHeadlines: error2: ${e.localizedMessage}")
             }
         }
     }

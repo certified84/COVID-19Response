@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.certified.covid19response.BuildConfig
 import com.certified.covid19response.data.model.NewsApiOrgArticle
 import com.certified.covid19response.data.repository.FirebaseRepository
 import com.certified.covid19response.data.repository.Repository
@@ -32,6 +33,8 @@ class HomeViewModel @Inject constructor(
     private val _newsApiOrgArticle = MutableLiveData<List<NewsApiOrgArticle>>()
     val newsApiOrgArticle: LiveData<List<NewsApiOrgArticle>> get() = _newsApiOrgArticle
 
+    private val apiKey = BuildConfig.NEWS_API_ORG_API_KEY
+
     init {
         getNewsApiOrgNews()
         getNewsApiOrgHeadlines()
@@ -40,7 +43,7 @@ class HomeViewModel @Inject constructor(
     private fun getNewsApiOrgNews() {
         viewModelScope.launch {
             try {
-                val response = covidRepo.getNewsApiOrgNews(Config.NEWS_API_ORG_API_KEY, "covid-19")
+                val response = covidRepo.getNewsApiOrgNews(apiKey, "covid")
                 if (response.isSuccessful) {
                     uiState.set(UIState.SUCCESS)
                     _newsApiOrgArticle.value =
@@ -61,7 +64,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val response =
-                    covidRepo.getNewsApiOrgHeadlines(Config.NEWS_API_ORG_API_KEY, "ng", "covid")
+                    covidRepo.getNewsApiOrgHeadlines(apiKey, "us", "covid")
                 if (response.isSuccessful) {
                     uiState.set(UIState.SUCCESS)
                     _newsApiOrgNews.value =

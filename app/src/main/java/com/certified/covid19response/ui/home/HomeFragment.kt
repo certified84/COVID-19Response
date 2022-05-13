@@ -14,7 +14,6 @@ import com.certified.covid19response.adapter.NewsRecyclerAdapter
 import com.certified.covid19response.data.model.News
 import com.certified.covid19response.data.model.NewsApiOrgArticle
 import com.certified.covid19response.databinding.FragmentHomeBinding
-import com.certified.covid19response.util.Config.RAPID_API_KEY
 import com.certified.covid19response.util.Extensions.openBrowser
 import dagger.hilt.android.AndroidEntryPoint
 import me.ibrahimsn.lib.SmoothBottomBar

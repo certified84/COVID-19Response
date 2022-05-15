@@ -102,7 +102,7 @@ You need to have [Android Studio](https://developer.android.com/studio) to build
 
 ## Contribute 🤝
 If you want to contribute to this app, you're always welcome!
-See [Contributing Guidelines](https://github.com/certified84/COVID-19Response/blob/master/CONTRIBUTING.md). 
+See [Contributing Guidelines](https://github.com/certified84/COVID-19Response/blob/master/CONTRIBUTION.md). 
 
 <br>
 

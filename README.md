@@ -16,9 +16,9 @@ A simple covid-19 response application to give users an idea of the severity of 
 <br />
 
 ## Screenshots 🌞
-Splash | Onboarding | Home(empty) | Home(content) | 
+Splash | Onboarding | Login | Signup | 
 --- | --- | --- | --- | 
-![](https://github.com/certified84/AudioNote/blob/master/Screenshots/splash_day.png) | ![](https://github.com/certified84/AudioNote/blob/master/Screenshots/onboarding_day.png) | ![](https://github.com/certified84/AudioNote/blob/master/Screenshots/home_empty_day.png) | ![](https://github.com/certified84/AudioNote/blob/master/Screenshots/home_day.png) |
+![](https://github.com/certified84/COVID-19Response/blob/master/Screenshots/splash.png) | ![](https://github.com/certified84/COVID-19Response/blob/master/Screenshots/onboarding.png) | ![](https://github.com/certified84/COVID-19Response/blob/master/Screenshots/login.png) | ![](https://github.com/certified84/COVID-19Response/blob/master/Screenshots/sighup.png) |
 
 Home | Chat | Notifications | Settings | 
 --- | --- | --- | --- | 

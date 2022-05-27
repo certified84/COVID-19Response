@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -32,6 +33,8 @@ class SignupFragment : Fragment() {
     private lateinit var name: String
     private lateinit var location: String
     private lateinit var nin: String
+    private lateinit var position: String
+    private lateinit var sex: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,7 +67,9 @@ class SignupFragment : Fragment() {
                         name = name,
                         email = currentUser.email.toString(),
                         location = location,
-                        nin = nin
+                        nin = nin,
+                        sex = sex,
+                        position = position
                     )
                     uploadDetails(currentUser.uid, newUser)
                 }
@@ -103,9 +108,11 @@ class SignupFragment : Fragment() {
             btnSignup.setOnClickListener {
                 name = etDisplayName.text.toString().trim()
                 val email = etEmail.text.toString().trim()
+                val password = etPassword.text.toString().trim()
                 location = etLocation.text.toString().trim()
                 nin = etNin.text.toString().trim()
-                val password = etPassword.text.toString().trim()
+                sex = etSex.text.toString().trim()
+                position = etPosition.text.toString().trim()
 
                 if (etDisplayName.checkFieldEmpty())
                     return@setOnClickListener
@@ -115,7 +122,7 @@ class SignupFragment : Fragment() {
 
                 checkEmail(email)
 
-                if (location.isBlank()) {
+                if (groupUser.isVisible && location.isBlank()) {
                     with(etLocation) {
                         error = "Required *"
                         requestFocus()
@@ -123,7 +130,18 @@ class SignupFragment : Fragment() {
                     return@setOnClickListener
                 }
 
-                if (etNin.checkFieldEmpty())
+                if (groupUser.isVisible && etNin.checkFieldEmpty())
+                    return@setOnClickListener
+
+                if (groupDoctor.isVisible && sex.isBlank()) {
+                    with(etSex) {
+                        error = "Required *"
+                        requestFocus()
+                    }
+                    return@setOnClickListener
+                }
+
+                if (groupDoctor.isVisible && etPosition.checkFieldEmpty())
                     return@setOnClickListener
 
                 if (etPassword.checkFieldEmpty())
@@ -131,6 +149,14 @@ class SignupFragment : Fragment() {
 
                 if (!verifyPassword(password, etPassword))
                     return@setOnClickListener
+
+                etDisplayName.error = null
+                etEmail.error = null
+                etLocation.error = null
+                etSex.error = null
+                etNin.error = null
+                etPosition.error = null
+                etPassword.error = null
 
                 viewModel.uiState.set(UIState.LOADING)
                 viewModel.createUserWithEmailAndPassword(email, password)
@@ -151,13 +177,21 @@ class SignupFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        val locations = resources.getStringArray(R.array.locations)
-        val arrayAdapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_spinner_dropdown_item,
-            locations
-        )
-        binding.etLocation.setAdapter(arrayAdapter)
+        binding.apply {
+            val locationArrayAdapter = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_dropdown_item,
+                resources.getStringArray(R.array.locations)
+            )
+            etLocation.setAdapter(locationArrayAdapter)
+
+            val sexArrayAdapter = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_dropdown_item,
+                resources.getStringArray(R.array.sex)
+            )
+            etSex.setAdapter(sexArrayAdapter)
+        }
     }
 
     override fun onDestroyView() {

@@ -110,3 +110,8 @@ fun ShapeableImageView.loadImage(image: String?) {
 fun ShimmerFrameLayout.setShimmerAnimation(visible: Boolean) {
     if (visible) startShimmerAnimation() else stopShimmerAnimation()
 }
+
+@BindingAdapter("doctor_name")
+fun MaterialTextView.doctorName(value: String) {
+    text = "Doctor ${value.substringAfter("D_")}"
+}

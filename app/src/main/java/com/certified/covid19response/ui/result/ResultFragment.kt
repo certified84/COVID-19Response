@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.certified.covid19response.adapter.DoctorAdapter
-import com.certified.covid19response.data.model.Doctor
+import com.certified.covid19response.data.model.User
 import com.certified.covid19response.databinding.FragmentResultBinding
 import com.certified.covid19response.util.Extensions.openBrowser
 import com.certified.covid19response.util.UIState
@@ -90,9 +90,9 @@ class ResultFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        val query = Firebase.firestore.collection("doctors")
+        val query = Firebase.firestore.collection("users")
         query.addSnapshotListener { value, error ->
-            val doctors = value?.toObjects(Doctor::class.java)
+            val doctors = value?.toObjects(User::class.java)
             lifecycleScope.launch {
                 if (doctors?.isEmpty() == true)
                     viewModel.uiState.set(UIState.EMPTY)
@@ -100,9 +100,9 @@ class ResultFragment : Fragment() {
                     viewModel.uiState.set(UIState.HAS_DATA)
                     val adapter = DoctorAdapter()
                     adapter.apply {
-                        submitList(doctors)
+                        submitList(doctors?.filter { it.account_type == "doctor" })
                         setOnItemClickedListener(object : DoctorAdapter.OnItemClickedListener {
-                            override fun onItemClick(doctor: Doctor) {
+                            override fun onItemClick(doctor: User) {
                                 findNavController().navigate(
                                     ResultFragmentDirections.actionResultFragmentToChatFragment(
                                         args.user, doctor, args.result.feeling

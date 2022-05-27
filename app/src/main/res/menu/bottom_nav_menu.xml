@@ -6,13 +6,13 @@
         android:icon="@drawable/ic_home"
         android:title="@string/home" />
     <item
-        android:id="@+id/chatListFragment"
-        android:icon="@drawable/ic_message"
-        android:title="@string/chat" />
-    <item
         android:id="@+id/statusFragment"
         android:icon="@drawable/ic_scan"
         android:title="@string/status_check" />
+    <item
+        android:id="@+id/chatListFragment"
+        android:icon="@drawable/ic_message"
+        android:title="@string/chat" />
 
     <item
         android:id="@+id/profileFragment"

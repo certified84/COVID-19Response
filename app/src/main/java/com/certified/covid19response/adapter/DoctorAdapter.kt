@@ -6,16 +6,17 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.certified.covid19response.data.model.Doctor
+import com.certified.covid19response.data.model.User
 import com.certified.covid19response.databinding.ItemDoctorBinding
 
 class DoctorAdapter :
-    ListAdapter<Doctor, DoctorAdapter.ViewHolder>(diffCallback) {
+    ListAdapter<User, DoctorAdapter.ViewHolder>(diffCallback) {
 
     private lateinit var listener: OnItemClickedListener
 
     inner class ViewHolder(val binding: ItemDoctorBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(doctor: Doctor) {
+        fun bind(doctor: User) {
             binding.doctor = doctor
         }
 
@@ -30,7 +31,7 @@ class DoctorAdapter :
     }
 
     interface OnItemClickedListener {
-        fun onItemClick(doctor: Doctor)
+        fun onItemClick(doctor: User)
     }
 
     fun setOnItemClickedListener(listener: OnItemClickedListener) {
@@ -38,11 +39,11 @@ class DoctorAdapter :
     }
 
     companion object {
-        private val diffCallback = object : DiffUtil.ItemCallback<Doctor>() {
-            override fun areItemsTheSame(oldItem: Doctor, newItem: Doctor) =
+        private val diffCallback = object : DiffUtil.ItemCallback<User>() {
+            override fun areItemsTheSame(oldItem: User, newItem: User) =
                 oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: Doctor, newItem: Doctor) =
+            override fun areContentsTheSame(oldItem: User, newItem: User) =
                 oldItem == newItem
         }
     }

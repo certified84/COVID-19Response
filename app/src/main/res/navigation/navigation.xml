@@ -90,7 +90,7 @@
             app:argType="com.certified.covid19response.data.model.User" />
         <argument
             android:name="doctor"
-            app:argType="com.certified.covid19response.data.model.Doctor" />
+            app:argType="com.certified.covid19response.data.model.User" />
         <action
             android:id="@+id/action_chatFragment_to_chatListFragment"
             app:destination="@id/chatListFragment"

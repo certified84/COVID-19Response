@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.certified.covid19response.data.model.AccountType
 import com.certified.covid19response.data.model.User
 import com.certified.covid19response.data.repository.FirebaseRepository
 import com.certified.covid19response.util.UIState
@@ -46,7 +45,6 @@ class SignupViewModel @Inject constructor(private val repository: FirebaseReposi
         viewModelScope.launch {
             try {
                 repository.uploadDetails(userID, newUser).await()
-                repository.setAccountType(userID, AccountType()).await()
                 uiState.set(UIState.SUCCESS)
                 _uploadSuccess.value = true
                 _message.value =

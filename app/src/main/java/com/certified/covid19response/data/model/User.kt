@@ -12,4 +12,6 @@ data class User(
     val location: String = "",
     val nin: String = "",
     val bio: String = ""
-) : Parcelable
+) : Parcelable {
+    val account_type = if (name.startsWith("D_", ignoreCase = true)) "doctor" else "user"
+}

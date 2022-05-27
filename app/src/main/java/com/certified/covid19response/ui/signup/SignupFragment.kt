@@ -73,7 +73,7 @@ class SignupFragment : Fragment() {
                     _uploadSuccess.postValue(false)
                     Firebase.auth.apply {
                         val profileChangeRequest = userProfileChangeRequest {
-                            displayName = name
+                            displayName = name.substringAfter("D_")
                         }
                         currentUser!!.updateProfile(profileChangeRequest)
                         currentUser!!.sendEmailVerification()

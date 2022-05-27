@@ -6,17 +6,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.PopupMenu
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import com.certified.covid19response.R
-import com.certified.covid19response.data.model.AccountType
 import com.certified.covid19response.data.model.User
 import com.certified.covid19response.databinding.FragmentLoginBinding
-import com.certified.covid19response.ui.MainActivity
 import com.certified.covid19response.util.Extensions.checkFieldEmpty
 import com.certified.covid19response.util.Extensions.showToast
 import com.certified.covid19response.util.PreferenceKeys

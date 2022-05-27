@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -86,6 +87,18 @@ class SignupFragment : Fragment() {
 
         binding.apply {
             btnLogin.setOnClickListener { findNavController().navigate(R.id.action_signupFragment_to_loginFragment) }
+
+            etDisplayName.doOnTextChanged { text, _, _, _ ->
+                if (text != null) {
+                    if (text.startsWith("D_", ignoreCase = true)) {
+                        groupDoctor.visibility = View.VISIBLE
+                        groupUser.visibility = View.INVISIBLE
+                    } else {
+                        groupUser.visibility = View.VISIBLE
+                        groupDoctor.visibility = View.INVISIBLE
+                    }
+                }
+            }
 
             btnSignup.setOnClickListener {
                 name = etDisplayName.text.toString().trim()

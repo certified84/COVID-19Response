@@ -13,6 +13,10 @@
         <variable
             name="uiState"
             type="ObservableField&lt;UIState>" />
+
+        <variable
+            name="type"
+            type="String" />
     </data>
 
     <ScrollView
@@ -178,6 +182,48 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/space_grotesk_medium"
+                android:text="@string/choose_sex"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintStart_toStartOf="@+id/materialTextView4"
+                app:layout_constraintTop_toBottomOf="@+id/et_email_layout" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_sex_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@color/editTextColor"
+                app:boxCornerRadiusBottomEnd="@dimen/_6sdp"
+                app:boxCornerRadiusBottomStart="@dimen/_6sdp"
+                app:boxCornerRadiusTopEnd="@dimen/_6sdp"
+                app:boxCornerRadiusTopStart="@dimen/_6sdp"
+                app:boxStrokeWidth=".2dp"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="@+id/materialTextView4"
+                app:layout_constraintStart_toStartOf="@+id/materialTextView5"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView6">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/et_sex"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/space_grotesk_regular"
+                    android:hint="@string/hint_sex"
+                    android:inputType="none"
+                    android:paddingTop="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:textColor="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/materialTextView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -213,6 +259,48 @@
                     android:fontFamily="@font/space_grotesk_regular"
                     android:hint="@string/hint_nin"
                     android:inputType="number"
+                    android:paddingTop="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:textColor="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/space_grotesk_medium"
+                android:text="@string/enter_position"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintStart_toStartOf="@+id/materialTextView4"
+                app:layout_constraintTop_toBottomOf="@+id/et_location_layout" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_position_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@color/editTextColor"
+                app:boxCornerRadiusBottomEnd="@dimen/_6sdp"
+                app:boxCornerRadiusBottomStart="@dimen/_6sdp"
+                app:boxCornerRadiusTopEnd="@dimen/_6sdp"
+                app:boxCornerRadiusTopStart="@dimen/_6sdp"
+                app:boxStrokeWidth=".2dp"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="@+id/materialTextView4"
+                app:layout_constraintStart_toStartOf="@+id/materialTextView5"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView13">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_position"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/space_grotesk_regular"
+                    android:hint="@string/hint_position"
+                    android:inputType="text"
                     android:paddingTop="@dimen/_8sdp"
                     android:paddingBottom="@dimen/_8sdp"
                     android:textColor="@color/black" />
@@ -339,6 +427,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:visible="@{uiState == UIState.LOADING}" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:constraint_referenced_ids="et_location_layout,materialTextView6,et_nin_layout,materialTextView7" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_doctor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:constraint_referenced_ids="et_sex_layout,materialTextView12,materialTextView13,et_position_layout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

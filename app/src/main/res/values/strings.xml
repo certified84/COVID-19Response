@@ -117,4 +117,8 @@
     <string name="reset_password">Reset Password</string>
     <string name="password_recovery">Password Recovery</string>
     <string name="password_recovery_summary">Hi there, Kindly enter to email to reset your password</string>
+    <string name="hint_sex">e.g Male</string>
+    <string name="choose_sex">Choose Sex</string>
+    <string name="hint_position">e.g Gynacologist</string>
+    <string name="enter_position">Enter Position</string>
 </resources>

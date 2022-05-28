@@ -7,7 +7,7 @@
 
         <variable
             name="conversation"
-            type="com.certified.covid19response.data.model.UserConversation" />
+            type="com.certified.covid19response.data.model.Conversation" />
 
         <import type="com.certified.covid19response.util.UtilKt" />
     </data>
@@ -23,7 +23,7 @@
             android:layout_marginTop="@dimen/_8sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:load_image="@{conversation.doctor.profile_image}"
+            app:load_image="@{conversation.receiver.profile_image}"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Covid19Response"
             tools:src="@tools:sample/avatars" />
 
@@ -36,9 +36,9 @@
             android:ellipsize="end"
             android:fontFamily="@font/space_grotesk_regular"
             android:maxLines="1"
-            android:text="@{conversation.doctor.full_name}"
             android:textColor="@color/black"
             android:textSize="@dimen/_13ssp"
+            android:text="@{conversation.receiver.name}"
             app:layout_constraintBottom_toTopOf="@+id/materialTextView37"
             app:layout_constraintEnd_toStartOf="@+id/materialTextView41"
             app:layout_constraintStart_toEndOf="@+id/iv_profile_image"
@@ -76,10 +76,10 @@
         <View
             android:id="@+id/view"
             android:layout_width="0dp"
-            android:visibility="invisible"
             android:layout_height="@dimen/_1sdp"
             android:layout_marginTop="@dimen/_8sdp"
             android:background="@color/grey"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="@+id/iv_profile_image"
             app:layout_constraintTop_toBottomOf="@+id/iv_profile_image" />
 

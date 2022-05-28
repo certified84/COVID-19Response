@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.certified.covid19response.R
-import com.certified.covid19response.data.model.*
+import com.certified.covid19response.data.model.Conversation
+import com.certified.covid19response.data.model.Message
+import com.certified.covid19response.data.model.NewsApiOrgArticle
 import com.certified.covid19response.util.roundOffDecimal
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.imageview.ShapeableImageView
@@ -21,15 +23,6 @@ import java.time.format.DateTimeFormatter
 fun View.setVisible(visible: Boolean) {
     visibility = if (visible) View.VISIBLE else View.GONE
 }
-
-//@BindingAdapter("listNews")
-//fun bindNewsRecyclerView(
-//    recyclerView: RecyclerView,
-//    data: List<News>?
-//) {
-//    val adapter = recyclerView.adapter as NewsRecyclerAdapter
-//    adapter.submitList(data)
-//}
 
 @BindingAdapter("listNews")
 fun bindNewsRecyclerView(
@@ -58,10 +51,10 @@ fun bindChatRecyclerView(
     adapter.submitList(data)
 }
 
-@BindingAdapter("listUserChats")
-fun bindUserChatListRecyclerView(
+@BindingAdapter("listChats")
+fun bindChatListRecyclerView(
     recyclerView: RecyclerView,
-    data: List<UserConversation>?
+    data: List<Conversation>?
 ) {
     val adapter = recyclerView.adapter as ChatListRecyclerAdapter
     adapter.submitList(data)
@@ -95,14 +88,17 @@ fun MaterialTextView.parseServerTime(time: String) {
     text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
         ZonedDateTime.parse(time)
             .withZoneSameInstant(ZoneId.systemDefault())
-            .format(DateTimeFormatter.ofPattern("dd/MM/YYYY hh:mm a")).toString()
+            .format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a")).toString()
     else
         time
 }
 
 @BindingAdapter("load_image")
 fun ShapeableImageView.loadImage(image: String?) {
-    if (image != null) this.load(image) {}
+    if (image != null) this.load(image) {
+        CircleCropTransformation()
+        placeholder(R.drawable.no_profile_image)
+    }
     else this.load(R.drawable.no_profile_image)
 }
 

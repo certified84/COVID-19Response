@@ -147,11 +147,9 @@ class ChatFragment : Fragment() {
 
         val messagesRef = db.collection("messages").document(id).collection("messages").document()
         val senderLastMessageRef =
-            db.collection("last_messages").document(args.conversation?.sender!!.id).collection("messages")
-                .document("last_message")
+            db.collection("messages").document("last_messages").collection(args.conversation?.sender!!.id).document(id)
         val receiverLastMessageRef =
-            db.collection("last_messages").document(args.conversation?.receiver!!.id).collection("messages")
-                .document("last_message")
+            db.collection("messages").document("last_messages").collection(args.conversation?.receiver!!.id).document(id)
         db.runBatch {
             it.set(messagesRef, message)
             it.set(

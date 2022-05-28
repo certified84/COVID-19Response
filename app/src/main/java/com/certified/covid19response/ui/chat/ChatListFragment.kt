@@ -54,15 +54,6 @@ class ChatListFragment : Fragment() {
                     val preferenceManager =
                         PreferenceManager.getDefaultSharedPreferences(requireContext())
                     preferenceManager.apply {
-                        val user = User(
-                            getString(PreferenceKeys.USER_ID_KEY, "")!!,
-                            getString(PreferenceKeys.USER_NAME_KEY, "")!!,
-                            getString(PreferenceKeys.USER_EMAIL_KEY, "")!!,
-                            getString(PreferenceKeys.USER_PROFILE_IMAGE_KEY, "")!!,
-                            getString(PreferenceKeys.USER_LOCATION_KEY, "")!!,
-                            getString(PreferenceKeys.USER_NIN_KEY, "")!!,
-                            getString(PreferenceKeys.USER_BIO_KEY, "")!!
-                        )
                         findNavController().navigate(
                             ChatListFragmentDirections.actionChatListFragmentToChatFragment(
                                 conversation = conversation, message = null

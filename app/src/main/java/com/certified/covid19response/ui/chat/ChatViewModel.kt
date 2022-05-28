@@ -40,12 +40,11 @@ class ChatViewModel @Inject constructor() : ViewModel() {
             }
         }
     }
-//    ${auth.currentUser!!.uid}_${args.doctor.id}
 
     fun getUserConversations(userId: String) {
         viewModelScope.launch {
-            val query = Firebase.firestore.collection("last_messages")
-                .document(userId).collection("messages")
+            val query = Firebase.firestore.collection("messages")
+                .document("last_messages").collection(userId)
                 .orderBy("date", Query.Direction.DESCENDING)
             query.addSnapshotListener { value, error ->
                 if (value != null && !value.isEmpty) {

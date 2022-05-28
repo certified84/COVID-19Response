@@ -8,6 +8,8 @@
         <variable
             name="message"
             type="com.certified.covid19response.data.model.Message" />
+
+        <import type="com.certified.covid19response.util.UtilKt" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,8 +20,8 @@
             android:id="@+id/materialCardView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:foregroundGravity="right"
             app:cardBackgroundColor="#9999FF"
             app:cardCornerRadius="@dimen/_10sdp"
@@ -45,6 +47,7 @@
             android:layout_marginTop="@dimen/_4sdp"
             android:fontFamily="@font/space_grotesk_regular"
             android:textSize="@dimen/_10ssp"
+            android:text="@{UtilKt.formatTime(message.time)}"
             app:layout_constraintStart_toStartOf="@+id/materialCardView3"
             app:layout_constraintTop_toBottomOf="@+id/materialCardView3"
             tools:text="9:23 PM" />

@@ -69,8 +69,8 @@ fun roundOffDecimal(number: Float): Float {
 
 fun currentDate(): Calendar = Calendar.getInstance()
 
-fun formatTime(date: Date): String =
-    SimpleDateFormat("h:mm a", Locale.getDefault()).format(date)
+fun formatTime(date: Date?): String =
+    SimpleDateFormat("h:mm a", Locale.getDefault()).format(date!!)
 
 fun formatChatDate(date: Date): String {
     val day = TimeUnit.MILLISECONDS.toDays(Date().time - date.time)

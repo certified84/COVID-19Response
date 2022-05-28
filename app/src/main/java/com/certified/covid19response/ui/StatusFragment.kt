@@ -218,14 +218,15 @@ class StatusFragment : Fragment() {
             val preferenceManager = PreferenceManager.getDefaultSharedPreferences(requireContext())
             preferenceManager.apply {
                 val user = User(
-                    getString(PreferenceKeys.USER_ID_KEY, "")!!,
-                    getString(PreferenceKeys.USER_NAME_KEY, "")!!,
-                    getString(PreferenceKeys.USER_EMAIL_KEY, "")!!,
-                    getString(PreferenceKeys.USER_PROFILE_IMAGE_KEY, "")!!,
-                    getString(PreferenceKeys.USER_LOCATION_KEY, "")!!,
-                    getString(PreferenceKeys.USER_NIN_KEY, "")!!,
-                    getString(PreferenceKeys.USER_BIO_KEY, "")!!
+                    id = getString(PreferenceKeys.USER_ID_KEY, "")!!,
+                    name = getString(PreferenceKeys.USER_NAME_KEY, "")!!,
+                    email = getString(PreferenceKeys.USER_EMAIL_KEY, "")!!,
+                    profile_image = getString(PreferenceKeys.USER_PROFILE_IMAGE_KEY, "")!!,
+                    location = getString(PreferenceKeys.USER_LOCATION_KEY, "")!!,
+                    nin = getString(PreferenceKeys.USER_NIN_KEY, "")!!,
+                    bio = getString(PreferenceKeys.USER_BIO_KEY, "")!!
                 )
+                user.account_type = getString(PreferenceKeys.ACCOUNT_TYPE, "")!!
 
                 val result = Result(
                     noOfSevereSymptoms = noOfSevereSymptoms,

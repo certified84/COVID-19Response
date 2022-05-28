@@ -54,12 +54,14 @@
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginBottom="@dimen/_10sdp"
-            tools:listitem="@layout/item_chat_list"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline5"
             app:layout_constraintTop_toBottomOf="@+id/btn_back"
-            app:listUserChats="@{viewModel.userConversations}" />
+            app:layout_constraintVertical_bias="0.0"
+            app:listChats="@{viewModel.conversations}"
+            tools:listitem="@layout/item_sender_chat_list" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/materialTextView40"

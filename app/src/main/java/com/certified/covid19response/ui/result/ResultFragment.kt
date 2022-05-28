@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.certified.covid19response.adapter.DoctorAdapter
+import com.certified.covid19response.data.model.Conversation
 import com.certified.covid19response.data.model.User
 import com.certified.covid19response.databinding.FragmentResultBinding
 import com.certified.covid19response.util.Extensions.openBrowser
@@ -105,7 +106,10 @@ class ResultFragment : Fragment() {
                             override fun onItemClick(doctor: User) {
                                 findNavController().navigate(
                                     ResultFragmentDirections.actionResultFragmentToChatFragment(
-                                        args.user, doctor, args.result.feeling
+                                        conversation = Conversation(
+                                            sender = args.user,
+                                            receiver = doctor
+                                        ), message = args.result.feeling
                                     )
                                 )
                             }

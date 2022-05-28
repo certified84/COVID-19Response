@@ -85,12 +85,6 @@
         android:name="com.certified.covid19response.ui.chat.ChatFragment"
         android:label="fragment_chat_details"
         tools:layout="@layout/fragment_chat">
-        <argument
-            android:name="user"
-            app:argType="com.certified.covid19response.data.model.User" />
-        <argument
-            android:name="doctor"
-            app:argType="com.certified.covid19response.data.model.User" />
         <action
             android:id="@+id/action_chatFragment_to_chatListFragment"
             app:destination="@id/chatListFragment"
@@ -98,6 +92,10 @@
         <argument
             android:name="message"
             app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="conversation"
+            app:argType="com.certified.covid19response.data.model.Conversation"
             app:nullable="true" />
     </fragment>
     <fragment

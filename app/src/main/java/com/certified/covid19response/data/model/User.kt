@@ -17,5 +17,5 @@ data class User(
     val position: String = "",
 ) : Parcelable {
     @IgnoredOnParcel
-    val account_type = if (name.startsWith("D_", ignoreCase = true)) "doctor" else "user"
+    var account_type = if (name.startsWith("D_", ignoreCase = true)) "doctor" else "user"
 }

@@ -102,6 +102,7 @@ class LoginFragment : Fragment() {
                 putString(PreferenceKeys.USER_LOCATION_KEY, user.location)
                 putString(PreferenceKeys.USER_NIN_KEY, user.nin)
                 putString(PreferenceKeys.USER_BIO_KEY, user.bio)
+                putString(PreferenceKeys.ACCOUNT_TYPE, user.account_type)
             }
         }.addOnFailureListener { Log.d("TAG", "saveUserPreferences: ${it.localizedMessage}") }
     }

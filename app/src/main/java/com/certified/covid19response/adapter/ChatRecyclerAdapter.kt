@@ -14,8 +14,6 @@ import com.certified.covid19response.databinding.ItemChatSenderBinding
 class ChatRecyclerAdapter(private val id: String) :
     ListAdapter<Message, RecyclerView.ViewHolder>(diffCallback) {
 
-    private lateinit var listener: OnItemClickedListener
-
     inner class ReceiverViewHolder(val binding: ItemChatReceiverBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(message: Message) {
@@ -35,14 +33,6 @@ class ChatRecyclerAdapter(private val id: String) :
         fun bind(message: Message) {
             binding.message = message
         }
-    }
-
-    interface OnItemClickedListener {
-        fun onItemClick(news: News)
-    }
-
-    fun setOnItemClickedListener(listener: OnItemClickedListener) {
-        this.listener = listener
     }
 
     companion object {

@@ -11,14 +11,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.certified.covid19response.R
 import com.certified.covid19response.adapter.ChatRecyclerAdapter
-import com.certified.covid19response.data.model.DoctorConversation
+import com.certified.covid19response.data.model.Conversation
 import com.certified.covid19response.data.model.Message
-import com.certified.covid19response.data.model.UserConversation
 import com.certified.covid19response.databinding.FragmentChatBinding
 import com.certified.covid19response.util.Extensions.showToast
+import com.certified.covid19response.util.PreferenceKeys
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -33,6 +34,7 @@ class ChatFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private val args: ChatFragmentArgs by navArgs()
     private val viewModel: ChatViewModel by activityViewModels()
+    private val preferences by lazy { PreferenceManager.getDefaultSharedPreferences(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,10 +52,20 @@ class ChatFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         binding.uiState = viewModel.uiState
-        viewModel.getChat("${auth.currentUser!!.uid}_${args.doctor.id}")
+        viewModel.getChats("${args.conversation?.sender?.id}_${args.conversation?.receiver?.id}")
 
         binding.apply {
-            tvHeading.text = "You & Doctor ${args.doctor.first_name}"
+            tvHeading.text = if (preferences.getString(PreferenceKeys.ACCOUNT_TYPE, "") == "user") {
+                if (auth.currentUser?.uid == args.conversation?.receiver?.id)
+                    "You & Doctor ${args.conversation?.sender?.name?.substringAfter("D_")}"
+                else
+                    "You & Doctor ${args.conversation?.receiver?.name?.substringAfter("D_")}"
+            } else {
+                if (auth.currentUser?.uid == args.conversation?.receiver?.id)
+                    "You & ${args.conversation?.sender?.name}"
+                else
+                    "You & ${args.conversation?.receiver?.name}"
+            }
             btnBack.setOnClickListener { findNavController().navigate(ChatFragmentDirections.actionChatFragmentToChatListFragment()) }
             btnAttachment.setOnClickListener { showAttachmentDialog() }
             fabAction.setOnClickListener {
@@ -123,34 +135,43 @@ class ChatFragment : Fragment() {
 
     private fun sendMessage(text: String) {
 
-        val id = "${auth.currentUser!!.uid}_${args.doctor.id}"
+        val id = "${args.conversation?.sender?.id}_${args.conversation?.receiver?.id}"
         val db = Firebase.firestore
 
         val message = Message(
             id = id,
             message = text,
             senderId = auth.currentUser!!.uid,
-            receiverId = args.doctor.id
+            receiverId = args.conversation?.receiver!!.id
         )
 
         val messagesRef = db.collection("messages").document(id).collection("messages").document()
         val senderLastMessageRef =
-            db.collection("last_messages").document(auth.currentUser!!.uid).collection("messages")
-                .document(id)
+            db.collection("last_messages").document(args.conversation?.sender!!.id).collection("messages")
+                .document("last_message")
         val receiverLastMessageRef =
-            db.collection("last_messages").document(args.doctor.id).collection("messages")
-                .document(id)
+            db.collection("last_messages").document(args.conversation?.receiver!!.id).collection("messages")
+                .document("last_message")
         db.runBatch {
             it.set(messagesRef, message)
             it.set(
                 senderLastMessageRef,
-                UserConversation(senderLastMessageRef.id, args.doctor, message)
+                Conversation(
+                    id = senderLastMessageRef.id,
+                    sender = args.conversation?.sender,
+                    receiver = args.conversation?.receiver,
+                    message = message
+                )
             )
             it.set(
                 receiverLastMessageRef,
-                DoctorConversation(receiverLastMessageRef.id, args.user, message)
+                Conversation(
+                    id = receiverLastMessageRef.id,
+                    sender = args.conversation?.sender,
+                    receiver = args.conversation?.receiver,
+                    message = message
+                )
             )
-        }.addOnSuccessListener {
             binding.etMessage.setText("")
         }.addOnFailureListener {
             showToast("An error occurred: ${it.localizedMessage}")
@@ -161,7 +182,7 @@ class ChatFragment : Fragment() {
         super.onResume()
         if (args.message != null)
             binding.etMessage.apply {
-                setText("Hi Doctor ${args.doctor.first_name}, my name is ${auth.currentUser!!.displayName}.\n\nRecently, i've been feeling ${args.message}")
+                setText("Hi Doctor ${args.conversation?.receiver?.name?.substringAfter("D_")}, my name is ${auth.currentUser!!.displayName}.\n\nRecently, i've been feeling ${args.message}")
             }
     }
 

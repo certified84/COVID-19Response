@@ -1,15 +1,17 @@
 package com.certified.covid19response.data.model
 
 import android.os.Parcelable
-import com.certified.covid19response.util.currentDate
+import com.google.firebase.firestore.ServerTimestamp
 import kotlinx.parcelize.Parcelize
+import java.util.*
 
 @Parcelize
 data class Message(
     val id: String = "",
     val message: String = "",
-    val time: Long = currentDate().timeInMillis,
+    @ServerTimestamp
+    val time: Date? = null,
     val senderId: String = "",
     val receiverId: String = "",
     val read: Boolean = false
-): Parcelable
+) : Parcelable

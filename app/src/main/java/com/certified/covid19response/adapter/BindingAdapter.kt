@@ -95,7 +95,7 @@ fun MaterialTextView.parseServerTime(time: String) {
 
 @BindingAdapter("load_image")
 fun ShapeableImageView.loadImage(image: String?) {
-    if (image != null) this.load(image) {
+    if (image != null && image.isNotBlank()) this.load(image) {
         CircleCropTransformation()
         placeholder(R.drawable.no_profile_image)
     }

@@ -69,11 +69,11 @@ fun roundOffDecimal(number: Float): Float {
 
 fun currentDate(): Calendar = Calendar.getInstance()
 
-fun formatTime(date: Long): String =
+fun formatTime(date: Date): String =
     SimpleDateFormat("h:mm a", Locale.getDefault()).format(date)
 
-fun formatChatDate(date: Long): String {
-    val day = TimeUnit.MILLISECONDS.toDays(Date().time - date)
+fun formatChatDate(date: Date): String {
+    val day = TimeUnit.MILLISECONDS.toDays(Date().time - date.time)
     return when {
         day <= 1 -> "Today"
         day <= 2 -> "Yesterday"

@@ -284,6 +284,16 @@ class StatusFragment : Fragment() {
         bottomSheetDialog.show()
     }
 
+    override fun onResume() {
+        super.onResume()
+        val preferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        if (preferences.getString(PreferenceKeys.ACCOUNT_TYPE, "") == "doctor")
+            binding.apply {
+                tvFeatureNotAvailable.visibility = View.VISIBLE
+                scrollView.visibility = View.GONE
+            }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

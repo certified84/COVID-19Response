@@ -121,4 +121,7 @@
     <string name="choose_sex">Choose Sex</string>
     <string name="hint_position">e.g Gynacologist</string>
     <string name="enter_position">Enter Position</string>
+    <string name="notification_subtitle">When there are new updates; news and articles, we\'ll post it here</string>
+    <string name="notification_title">There\'s nothing new here.</string>
+    <string name="feature_not_available">This feature is currently not available to doctors. Kindly check back later.</string>
 </resources>

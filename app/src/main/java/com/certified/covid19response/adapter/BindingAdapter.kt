@@ -7,6 +7,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
+import coil.transform.RoundedCornersTransformation
 import com.certified.covid19response.R
 import com.certified.covid19response.data.model.Conversation
 import com.certified.covid19response.data.model.Message
@@ -107,6 +108,15 @@ fun MaterialTextView.parseServerTime(time: String) {
 fun ShapeableImageView.loadImage(image: String?) {
     if (image != null && image.isNotBlank()) this.load(image) {
         CircleCropTransformation()
+        placeholder(R.drawable.no_profile_image)
+    }
+    else this.load(R.drawable.no_profile_image)
+}
+
+@BindingAdapter("load_newsImage")
+fun ShapeableImageView.loadNewsImage(image: String?) {
+    if (image != null && image.isNotBlank()) this.load(image) {
+        RoundedCornersTransformation(0f)
         placeholder(R.drawable.no_profile_image)
     }
     else this.load(R.drawable.no_profile_image)

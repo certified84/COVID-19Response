@@ -79,13 +79,29 @@ class ChatFragment : Fragment() {
                             profile_image = preferences.getString(
                                 PreferenceKeys.USER_PROFILE_IMAGE_KEY,
                                 ""
-                            )
+                            ),
+                            location = preferences.getString(
+                                PreferenceKeys.USER_LOCATION_KEY,
+                                ""
+                            )!!,
+                            nin = preferences.getString(PreferenceKeys.USER_NIN_KEY, "")!!,
+                            bio = preferences.getString(PreferenceKeys.USER_BIO_KEY, "")!!,
+                            sex = preferences.getString(PreferenceKeys.USER_SEX_KEY, "")!!,
+                            position = preferences.getString(PreferenceKeys.USER_POSITION_KEY, "")!!
                         ) else args.conversation?.sender,
                         receiver = if (args.conversation?.receiver?.id == auth.currentUser?.uid) args.conversation?.receiver?.copy(
                             profile_image = preferences.getString(
                                 PreferenceKeys.USER_PROFILE_IMAGE_KEY,
                                 ""
-                            )
+                            ),
+                            location = preferences.getString(
+                                PreferenceKeys.USER_LOCATION_KEY,
+                                ""
+                            )!!,
+                            nin = preferences.getString(PreferenceKeys.USER_NIN_KEY, "")!!,
+                            bio = preferences.getString(PreferenceKeys.USER_BIO_KEY, "")!!,
+                            sex = preferences.getString(PreferenceKeys.USER_SEX_KEY, "")!!,
+                            position = preferences.getString(PreferenceKeys.USER_POSITION_KEY, "")!!
                         ) else args.conversation?.receiver
                     )
                     binding.etMessage.setText("")

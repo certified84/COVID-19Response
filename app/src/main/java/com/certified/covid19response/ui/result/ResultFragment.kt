@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,15 +15,11 @@ import com.certified.covid19response.data.model.Conversation
 import com.certified.covid19response.data.model.User
 import com.certified.covid19response.databinding.FragmentResultBinding
 import com.certified.covid19response.util.Extensions.openBrowser
-import com.certified.covid19response.util.UIState
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ResultFragment : Fragment() {
@@ -86,41 +81,24 @@ class ResultFragment : Fragment() {
                 data = PieData(pieDataSet)
                 invalidate()
             }
-        }
-    }
 
-    override fun onResume() {
-        super.onResume()
-        val query = Firebase.firestore.collection("users")
-        query.addSnapshotListener { value, error ->
-            val doctors = value?.toObjects(User::class.java)
-            lifecycleScope.launch {
-                if (doctors?.isEmpty() == true)
-                    viewModel.uiState.set(UIState.EMPTY)
-                else {
-                    viewModel.uiState.set(UIState.HAS_DATA)
-                    val adapter = DoctorAdapter()
-                    adapter.apply {
-                        submitList(doctors?.filter { it.account_type == "doctor" })
-                        setOnItemClickedListener(object : DoctorAdapter.OnItemClickedListener {
-                            override fun onItemClick(doctor: User) {
-                                findNavController().navigate(
-                                    ResultFragmentDirections.actionResultFragmentToChatFragment(
-                                        conversation = Conversation(
-                                            sender = args.user,
-                                            receiver = doctor
-                                        ), message = args.result.feeling
-                                    )
-                                )
-                            }
-                        })
-                    }
-                    binding.recyclerViewDoctors.adapter = adapter
-                    binding.recyclerViewDoctors.layoutManager =
-                        LinearLayoutManager(requireContext())
+            val adapter = DoctorAdapter()
+            adapter.setOnItemClickedListener(object : DoctorAdapter.OnItemClickedListener {
+                override fun onItemClick(doctor: User) {
+                    findNavController().navigate(
+                        ResultFragmentDirections.actionResultFragmentToChatFragment(
+                            conversation = Conversation(
+                                sender = args.user,
+                                receiver = doctor
+                            ), message = args.result.feeling
+                        )
+                    )
                 }
-            }
-            error?.printStackTrace()
+            })
+
+            recyclerViewDoctors.adapter = adapter
+            recyclerViewDoctors.layoutManager =
+                LinearLayoutManager(requireContext())
         }
     }
 

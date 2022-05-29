@@ -315,6 +315,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/_100sdp"
+                    app:listDoctors="@{viewModel.doctors}"
                     app:layout_constraintEnd_toStartOf="@+id/guideline6"
                     app:layout_constraintStart_toStartOf="@+id/guideline5"
                     app:layout_constraintTop_toBottomOf="@+id/materialTextView39"

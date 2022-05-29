@@ -11,6 +11,7 @@ import com.certified.covid19response.R
 import com.certified.covid19response.data.model.Conversation
 import com.certified.covid19response.data.model.Message
 import com.certified.covid19response.data.model.NewsApiOrgArticle
+import com.certified.covid19response.data.model.User
 import com.certified.covid19response.util.roundOffDecimal
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.imageview.ShapeableImageView
@@ -57,6 +58,15 @@ fun bindChatListRecyclerView(
     data: List<Conversation>?
 ) {
     val adapter = recyclerView.adapter as ChatListRecyclerAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("listDoctors")
+fun bindDoctorsRecyclerView(
+    recyclerView: RecyclerView,
+    data: List<User>?
+) {
+    val adapter = recyclerView.adapter as DoctorAdapter
     adapter.submitList(data)
 }
 

@@ -15,14 +15,11 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.certified.covid19response.R
 import com.certified.covid19response.adapter.ChatRecyclerAdapter
-import com.certified.covid19response.data.model.Conversation
-import com.certified.covid19response.data.model.Message
 import com.certified.covid19response.databinding.FragmentChatBinding
 import com.certified.covid19response.util.Extensions.showToast
 import com.certified.covid19response.util.PreferenceKeys
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -66,15 +63,25 @@ class ChatFragment : Fragment() {
                 else
                     "You & ${args.conversation?.receiver?.name}"
             }
+
             btnBack.setOnClickListener { findNavController().navigate(ChatFragmentDirections.actionChatFragmentToChatListFragment()) }
             btnAttachment.setOnClickListener { showAttachmentDialog() }
             fabAction.setOnClickListener {
                 val message = etMessage.text.toString().trim()
                 if (message.isBlank())
                     recordAudio()
-                else
-                    sendMessage(message)
+                else {
+                    val id = "${args.conversation?.sender?.id}_${args.conversation?.receiver?.id}"
+                    viewModel?.sendMessage(
+                        id = id,
+                        text = message,
+                        sender = args.conversation?.sender,
+                        receiver = args.conversation?.receiver
+                    )
+                    binding.etMessage.setText("")
+                }
             }
+
             etMessage.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
                     s: CharSequence?,
@@ -131,49 +138,6 @@ class ChatFragment : Fragment() {
     private fun showAttachmentDialog() {
 //        TODO("Not yet implemented")
         showToast("You'll be able to send attachments soon...")
-    }
-
-    private fun sendMessage(text: String) {
-
-        val id = "${args.conversation?.sender?.id}_${args.conversation?.receiver?.id}"
-        val db = Firebase.firestore
-
-        val message = Message(
-            id = id,
-            message = text,
-            senderId = auth.currentUser!!.uid,
-            receiverId = args.conversation?.receiver!!.id
-        )
-
-        val messagesRef = db.collection("messages").document(id).collection("messages").document()
-        val senderLastMessageRef =
-            db.collection("messages").document("last_messages").collection(args.conversation?.sender!!.id).document(id)
-        val receiverLastMessageRef =
-            db.collection("messages").document("last_messages").collection(args.conversation?.receiver!!.id).document(id)
-        db.runBatch {
-            it.set(messagesRef, message)
-            it.set(
-                senderLastMessageRef,
-                Conversation(
-                    id = senderLastMessageRef.id,
-                    sender = args.conversation?.sender,
-                    receiver = args.conversation?.receiver,
-                    message = message
-                )
-            )
-            it.set(
-                receiverLastMessageRef,
-                Conversation(
-                    id = receiverLastMessageRef.id,
-                    sender = args.conversation?.sender,
-                    receiver = args.conversation?.receiver,
-                    message = message
-                )
-            )
-            binding.etMessage.setText("")
-        }.addOnFailureListener {
-            showToast("An error occurred: ${it.localizedMessage}")
-        }
     }
 
     override fun onResume() {

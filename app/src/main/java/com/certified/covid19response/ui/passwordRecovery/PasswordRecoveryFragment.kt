@@ -10,8 +10,6 @@ import androidx.navigation.fragment.findNavController
 import com.certified.covid19response.databinding.FragmentPasswordRecoveryBinding
 import com.certified.covid19response.util.Extensions.showToast
 import com.certified.covid19response.util.UIState
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,8 +32,25 @@ class PasswordRecoveryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
+
             binding.lifecycleOwner = this@PasswordRecoveryFragment
             binding.uiState = viewModel.uiState
+
+            with(viewModel){message.observe(viewLifecycleOwner) {
+                if (it != null) {
+                    showToast(it)
+                    _message.postValue(null)
+                }
+            }
+            success.observe(viewLifecycleOwner) {
+                if (it) {
+                    _success.postValue(false)
+                    findNavController().navigate(
+                        PasswordRecoveryFragmentDirections.actionPasswordRecoveryFragmentToLoginFragment()
+                    )
+                }
+            }}
+
             btnBack.setOnClickListener {
                 findNavController().navigate(
                     PasswordRecoveryFragmentDirections.actionPasswordRecoveryFragmentToLoginFragment()
@@ -52,16 +67,6 @@ class PasswordRecoveryFragment : Fragment() {
 
                 viewModel.uiState.set(UIState.LOADING)
                 viewModel.sendPasswordResetEmail(email)
-                Firebase.auth.sendPasswordResetEmail(email).addOnSuccessListener {
-                    viewModel.uiState.set(UIState.SUCCESS)
-                    showToast("An email reset link has been to sent to $email")
-                    findNavController().navigate(
-                        PasswordRecoveryFragmentDirections.actionPasswordRecoveryFragmentToLoginFragment()
-                    )
-                }.addOnFailureListener {
-                    viewModel.uiState.set(UIState.FAILURE)
-                    showToast("An error occurred: ${it.localizedMessage}")
-                }
             }
         }
     }

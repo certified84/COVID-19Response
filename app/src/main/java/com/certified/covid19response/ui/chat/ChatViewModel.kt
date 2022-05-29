@@ -8,7 +8,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.certified.covid19response.data.model.Conversation
 import com.certified.covid19response.data.model.Message
+import com.certified.covid19response.data.model.User
+import com.certified.covid19response.util.Extensions.showToast
 import com.certified.covid19response.util.UIState
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -27,6 +30,9 @@ class ChatViewModel @Inject constructor() : ViewModel() {
 
     private val _conversations = MutableLiveData<List<Conversation>>()
     val conversations: LiveData<List<Conversation>> get() = _conversations
+
+    private val _toastMessage = MutableLiveData<String>()
+    val toastMessage: LiveData<String> get() = _toastMessage
 
     fun getChats(id: String) {
         viewModelScope.launch {
@@ -57,6 +63,47 @@ class ChatViewModel @Inject constructor() : ViewModel() {
                     error.printStackTrace()
                 }
             }
+        }
+    }
+
+    fun sendMessage(id: String, text: String, sender: User?, receiver: User?) {
+
+        val db = Firebase.firestore
+
+        val message = Message(
+            id = id,
+            message = text,
+            senderId = Firebase.auth.currentUser!!.uid,
+            receiverId = receiver!!.id
+        )
+
+        val messagesRef = db.collection("messages").document(id).collection("messages").document()
+        val senderLastMessageRef =
+            db.collection("messages").document("last_messages").collection(sender!!.id).document(id)
+        val receiverLastMessageRef =
+            db.collection("messages").document("last_messages").collection(receiver.id).document(id)
+        db.runBatch {
+            it.set(messagesRef, message)
+            it.set(
+                senderLastMessageRef,
+                Conversation(
+                    id = senderLastMessageRef.id,
+                    sender = sender,
+                    receiver = receiver,
+                    message = message
+                )
+            )
+            it.set(
+                receiverLastMessageRef,
+                Conversation(
+                    id = receiverLastMessageRef.id,
+                    sender = sender,
+                    receiver = receiver,
+                    message = message
+                )
+            )
+        }.addOnFailureListener {
+            _toastMessage.value = "An error occurred: ${it.localizedMessage}"
         }
     }
 }

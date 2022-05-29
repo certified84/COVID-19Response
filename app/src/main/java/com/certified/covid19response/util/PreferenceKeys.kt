@@ -9,5 +9,7 @@ object PreferenceKeys {
     const val USER_LOCATION_KEY = "USER_LOCATION_KEY"
     const val USER_NIN_KEY = "USER_NIN_KEY"
     const val USER_BIO_KEY = "USER_BIO_KEY"
+    const val USER_SEX_KEY = "USER_SEX_KEY"
+    const val USER_POSITION_KEY = "USER_POSITION_KEY"
     const val ACCOUNT_TYPE = "ACCOUNT_TYPE"
 }

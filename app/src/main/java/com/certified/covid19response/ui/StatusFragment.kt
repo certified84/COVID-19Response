@@ -16,6 +16,9 @@ import com.certified.covid19response.util.Extensions.openBrowser
 import com.certified.covid19response.util.Extensions.showToast
 import com.certified.covid19response.util.PreferenceKeys
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -23,6 +26,7 @@ class StatusFragment : Fragment() {
 
     private var _binding: FragmentStatusBinding? = null
     private val binding get() = _binding!!
+    private lateinit var auth: FirebaseAuth
 
     private var noOfSevereSymptoms: Int = 0
     private var noOfLessSymptoms: Int = 0
@@ -39,6 +43,7 @@ class StatusFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentStatusBinding.inflate(inflater, container, false)
+        auth = Firebase.auth
         return binding.root
     }
 
@@ -218,13 +223,18 @@ class StatusFragment : Fragment() {
             val preferenceManager = PreferenceManager.getDefaultSharedPreferences(requireContext())
             preferenceManager.apply {
                 val user = User(
-                    id = getString(PreferenceKeys.USER_ID_KEY, "")!!,
-                    name = getString(PreferenceKeys.USER_NAME_KEY, "")!!,
-                    email = getString(PreferenceKeys.USER_EMAIL_KEY, "")!!,
-                    profile_image = getString(PreferenceKeys.USER_PROFILE_IMAGE_KEY, "")!!,
+                    id = auth.currentUser!!.uid,
+                    name = auth.currentUser!!.displayName!!,
+                    email = auth.currentUser!!.email!!,
+                    profile_image = getString(
+                        PreferenceKeys.USER_PROFILE_IMAGE_KEY,
+                        ""
+                    ),
                     location = getString(PreferenceKeys.USER_LOCATION_KEY, "")!!,
                     nin = getString(PreferenceKeys.USER_NIN_KEY, "")!!,
-                    bio = getString(PreferenceKeys.USER_BIO_KEY, "")!!
+                    bio = getString(PreferenceKeys.USER_BIO_KEY, "")!!,
+                    sex = getString(PreferenceKeys.USER_SEX_KEY, "")!!,
+                    position = getString(PreferenceKeys.USER_POSITION_KEY, "")!!
                 )
                 user.account_type = getString(PreferenceKeys.ACCOUNT_TYPE, "")!!
 

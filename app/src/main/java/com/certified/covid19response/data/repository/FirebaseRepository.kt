@@ -29,13 +29,13 @@ class FirebaseRepository @Inject constructor() {
         return Firebase.auth.currentUser?.updateProfile(profileChangeRequest)
     }
 
-    fun updateProfile(userID: String): Task<Void> {
-        return Firebase.firestore.collection("accounts").document(userID)
-            .update("profile_image", Firebase.auth.currentUser!!.photoUrl)
+    fun updateProfile(imageUrl: String): Task<Void> {
+        return Firebase.firestore.collection("users").document(Firebase.auth.currentUser!!.uid)
+            .update("profile_image", imageUrl)
     }
 
     fun updateNIN(nin: String, userID: String): Task<Void> {
-        return Firebase.firestore.collection("accounts").document(userID).update("nin", nin)
+        return Firebase.firestore.collection("users").document(userID).update("nin", nin)
     }
 
     fun updateBio(bio: String, userID: String): Task<Void> {

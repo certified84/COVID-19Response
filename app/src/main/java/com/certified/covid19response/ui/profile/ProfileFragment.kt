@@ -69,10 +69,17 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             uiState = viewModel.uiState
             lifecycleOwner = this@ProfileFragment
 
-            viewModel.message.observe(viewLifecycleOwner) {
-                if (it != null) {
-                    showToast(it)
-                    viewModel._message.postValue(null)
+            with(viewModel) {
+                message.observe(viewLifecycleOwner) {
+                    if (it != null) {
+                        showToast(it)
+                        _message.postValue(null)
+                    }
+                }
+                profileImage.observe(viewLifecycleOwner) {
+                    if (it != null) {
+                        preferences.edit { putString(PreferenceKeys.USER_PROFILE_IMAGE_KEY, it) }
+                    }
                 }
             }
 

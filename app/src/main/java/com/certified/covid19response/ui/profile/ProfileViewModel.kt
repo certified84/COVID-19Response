@@ -24,6 +24,9 @@ class ProfileViewModel @Inject constructor(private val repository: FirebaseRepos
     val uiState = ObservableField(UIState.EMPTY)
     val editProfileUiState = ObservableField(UIState.EMPTY)
 
+    val _profileImage = MutableLiveData<String?>()
+    val profileImage: LiveData<String?> get() = _profileImage
+
     val _message = MutableLiveData<String?>()
     val message: LiveData<String?> get() = _message
 
@@ -37,13 +40,15 @@ class ProfileViewModel @Inject constructor(private val repository: FirebaseRepos
                 profileImageRef.putFile(uri!!).await()
                 val downloadUrl = profileImageRef.downloadUrl.await()
                 repository.uploadImage(downloadUrl)?.await()
-//                repository.updateProfile(userID).await()
+                repository.updateProfile(downloadUrl.toString()).await()
                 uiState.set(UIState.SUCCESS)
+                _profileImage.value = downloadUrl.toString()
                 _message.value = "Image uploaded successfully"
             } catch (e: Exception) {
                 uiState.set(UIState.FAILURE)
                 _message.value = "An error occurred: ${e.localizedMessage}"
                 Log.d("TAG", "uploadImage: Error: ${e.localizedMessage}")
+                _profileImage.value = null
             }
         }
     }

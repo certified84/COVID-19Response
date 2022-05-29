@@ -75,8 +75,18 @@ class ChatFragment : Fragment() {
                     viewModel?.sendMessage(
                         id = id,
                         text = message,
-                        sender = args.conversation?.sender,
-                        receiver = args.conversation?.receiver
+                        sender = if (args.conversation?.sender?.id == auth.currentUser?.uid) args.conversation?.sender?.copy(
+                            profile_image = preferences.getString(
+                                PreferenceKeys.USER_PROFILE_IMAGE_KEY,
+                                ""
+                            )
+                        ) else args.conversation?.sender,
+                        receiver = if (args.conversation?.receiver?.id == auth.currentUser?.uid) args.conversation?.receiver?.copy(
+                            profile_image = preferences.getString(
+                                PreferenceKeys.USER_PROFILE_IMAGE_KEY,
+                                ""
+                            )
+                        ) else args.conversation?.receiver
                     )
                     binding.etMessage.setText("")
                 }

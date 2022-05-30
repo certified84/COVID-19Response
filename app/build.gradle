@@ -105,4 +105,10 @@ dependencies {
 
 //    Shimmer Layout
     implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+
+//    TimerX
+    implementation 'com.arsvechkarev:timerx:2.3.2'
+
+//    Easy Permissions
+    implementation 'com.vmadalin:easypermissions-ktx:1.0.0'
 }

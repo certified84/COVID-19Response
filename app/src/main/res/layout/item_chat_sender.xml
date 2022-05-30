@@ -32,10 +32,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <com.google.android.material.imageview.ShapeableImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/shapeableImageView"
-                    android:layout_width="@dimen/_150sdp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/_170sdp"
+                    android:layout_height="@dimen/_200sdp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -80,7 +82,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/space_grotesk_regular"
-                    android:maxWidth="@dimen/_220sdp"
+                    android:maxWidth="@dimen/_200sdp"
                     android:padding="@dimen/_8sdp"
                     android:text="@{message.message}"
                     android:textColor="@color/white"
@@ -101,7 +103,7 @@
                     tools:visibility="gone" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-            
+
         </com.google.android.material.card.MaterialCardView>
 
         <androidx.appcompat.widget.AppCompatImageView

@@ -190,6 +190,11 @@ class ChatFragment : Fragment() {
             val adapter = ChatRecyclerAdapter(auth.currentUser!!.uid)
             recyclerViewChat.adapter = adapter
             recyclerViewChat.layoutManager = LinearLayoutManager(requireContext())
+
+            viewModel?.messages?.observe(viewLifecycleOwner) {
+                adapter.notifyDataSetChanged()
+                    .run { recyclerViewChat.scrollToPosition(it.size - 1) }
+            }
         }
     }
 

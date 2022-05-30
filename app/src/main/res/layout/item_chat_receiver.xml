@@ -24,7 +24,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:foregroundGravity="right"
             app:cardBackgroundColor="#9999FF"
-            app:cardCornerRadius="@dimen/_15sdp"
+            app:cardCornerRadius="@dimen/_10sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -32,12 +32,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <com.google.android.material.imageview.ShapeableImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/shapeableImageView"
-                    android:layout_width="@dimen/_150sdp"
-                    app:layout_constraintDimensionRatio="1:1"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/_170sdp"
+                    android:layout_height="@dimen/_200sdp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -80,17 +82,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/space_grotesk_regular"
-                    android:maxWidth="@dimen/_220sdp"
+                    android:maxWidth="@dimen/_200sdp"
                     android:padding="@dimen/_8sdp"
                     android:text="@{message.message}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_12ssp"
-                    tools:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="jaojfiajdoiafodoajoidfasdnafafafajiojoiajfoiajfiojijaofijiofajoiejfoaijfoiajfoiajoifjaoiejfioaaijfoajfioajoijfaoijfaoijaijiofjaoijfiaojfoiajoifjoaiejfioajoiefjajfawojfiaoaoijfoiajoifofadfioaneoifenaiodfenja" />
+                    tools:text="jaojfiajdoiafodoajoidfasdnafafafajiojoiajfoiajfiojijaofijiofajoiejfoaijfoiajfoiajoifjaoiejfioaaijfoajfioajoijfaoijfaoijaijiofjaoijfiaojfoiajoifjoaiejfioajoiefjajfawojfiaoaoijfoiajoifofadfioaneoifenaiodfenja"
+                    tools:visibility="gone" />
 
                 <androidx.constraintlayout.widget.Group
                     android:id="@+id/group_recording"
@@ -99,9 +101,9 @@
                     app:constraint_referenced_ids="btn_play_recording,tv_timer"
                     app:visible="@{message.record != null}"
                     tools:visibility="gone" />
-                
+
             </androidx.constraintlayout.widget.ConstraintLayout>
-            
+
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.textview.MaterialTextView
@@ -110,8 +112,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
             android:fontFamily="@font/space_grotesk_regular"
-            android:textSize="@dimen/_10ssp"
             android:text="@{UtilKt.formatTime(message.time)}"
+            android:textSize="@dimen/_10ssp"
             app:layout_constraintStart_toStartOf="@+id/materialCardView3"
             app:layout_constraintTop_toBottomOf="@+id/materialCardView3"
             tools:text="9:23 PM" />

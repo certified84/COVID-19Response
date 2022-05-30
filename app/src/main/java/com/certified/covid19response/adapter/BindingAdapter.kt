@@ -3,6 +3,8 @@ package com.certified.covid19response.adapter
 import android.os.Build
 import android.text.Html
 import android.view.View
+import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -123,7 +125,7 @@ fun ShapeableImageView.loadNewsImage(image: String?) {
 }
 
 @BindingAdapter("load_chatImage")
-fun ShapeableImageView.loadChatImage(image: String?) {
+fun AppCompatImageView.loadChatImage(image: String?) {
     if (image != null && image.isNotBlank()) this.load(image) {
         RoundedCornersTransformation(0f)
     }

@@ -36,6 +36,7 @@
                     android:id="@+id/shapeableImageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:load_chatImage="@{message.image}"
                     android:maxWidth="@dimen/_220sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

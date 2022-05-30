@@ -13,5 +13,10 @@ data class Message(
     val time: Date? = null,
     val senderId: String = "",
     val receiverId: String = "",
-    val read: Boolean = false
+    val read: Boolean = false,
+    val record: Record? = null,
+    val image: String? = null
 ) : Parcelable
+
+@Parcelize
+data class Record(val record: String, val length: Int): Parcelable

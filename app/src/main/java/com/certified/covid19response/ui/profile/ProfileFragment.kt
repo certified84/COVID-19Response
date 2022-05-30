@@ -307,7 +307,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     }
 
     companion object {
-        private const val REQUEST_IMAGE_CAPTURE = 101
-        private const val PICK_IMAGE_CODE = 102
+        const val REQUEST_IMAGE_CAPTURE = 101
+        const val PICK_IMAGE_CODE = 102
     }
 }

@@ -122,6 +122,13 @@ fun ShapeableImageView.loadNewsImage(image: String?) {
     else this.load(R.drawable.no_profile_image)
 }
 
+@BindingAdapter("load_chatImage")
+fun ShapeableImageView.loadChatImage(image: String?) {
+    if (image != null && image.isNotBlank()) this.load(image) {
+        RoundedCornersTransformation(0f)
+    }
+}
+
 @BindingAdapter("set_animation")
 fun ShimmerFrameLayout.setShimmerAnimation(visible: Boolean) {
     if (visible) startShimmerAnimation() else stopShimmerAnimation()

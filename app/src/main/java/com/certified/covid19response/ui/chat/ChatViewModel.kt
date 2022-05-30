@@ -1,5 +1,6 @@
 package com.certified.covid19response.ui.chat
 
+import android.net.Uri
 import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
@@ -8,19 +9,22 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.certified.covid19response.data.model.Conversation
 import com.certified.covid19response.data.model.Message
+import com.certified.covid19response.data.model.Record
 import com.certified.covid19response.data.model.User
-import com.certified.covid19response.util.Extensions.showToast
+import com.certified.covid19response.data.repository.FirebaseRepository
 import com.certified.covid19response.util.UIState
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 @HiltViewModel
-class ChatViewModel @Inject constructor() : ViewModel() {
+class ChatViewModel @Inject constructor(private val repository: FirebaseRepository) : ViewModel() {
 
     val uiState = ObservableField(UIState.EMPTY)
     val chatListUiState = ObservableField(UIState.EMPTY)
@@ -66,11 +70,11 @@ class ChatViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    fun sendMessage(id: String, text: String, sender: User?, receiver: User?) {
+    fun sendMessage(id: String, text: String, sender: User?, receiver: User?, message: Message) {
 
         val db = Firebase.firestore
 
-        val message = Message(
+        val messageToSend = message.copy(
             id = id,
             message = text,
             senderId = Firebase.auth.currentUser!!.uid,
@@ -83,14 +87,14 @@ class ChatViewModel @Inject constructor() : ViewModel() {
         val receiverLastMessageRef =
             db.collection("messages").document("last_messages").collection(receiver.id).document(id)
         db.runBatch {
-            it.set(messagesRef, message)
+            it.set(messagesRef, messageToSend)
             it.set(
                 senderLastMessageRef,
                 Conversation(
                     id = senderLastMessageRef.id,
                     sender = sender,
                     receiver = receiver,
-                    message = message
+                    message = messageToSend
                 )
             )
             it.set(
@@ -99,11 +103,35 @@ class ChatViewModel @Inject constructor() : ViewModel() {
                     id = receiverLastMessageRef.id,
                     sender = sender,
                     receiver = receiver,
-                    message = message
+                    message = messageToSend
                 )
             )
         }.addOnFailureListener {
             _toastMessage.value = "An error occurred: ${it.localizedMessage}"
+        }
+    }
+
+    fun uploadImage(
+        uri: Uri?,
+        path: String,
+        storage: FirebaseStorage,
+        id: String,
+        text: String,
+        sender: User?,
+        receiver: User?,
+        message: Message
+    ) {
+        viewModelScope.launch {
+            try {
+                val imageRef = storage.reference.child(path)
+                imageRef.putFile(uri!!).await()
+                val downloadUrl = imageRef.downloadUrl.await()
+                sendMessage(id, "", sender, receiver, Message(image = downloadUrl.toString()))
+                uiState.set(UIState.SUCCESS)
+            } catch (e: Exception) {
+                uiState.set(UIState.FAILURE)
+                Log.d("TAG", "uploadImage: Error: ${e.localizedMessage}")
+            }
         }
     }
 }

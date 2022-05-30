@@ -21,6 +21,8 @@
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_50sdp"
             android:layout_marginTop="@dimen/_8sdp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:load_image="@{conversation.receiver.profile_image}"

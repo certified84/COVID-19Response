@@ -68,16 +68,16 @@
             app:layout_constraintGuide_end="@dimen/_16sdp" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_chat"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:id="@+id/recycler_view_chat"
-            app:listMessages="@{viewModel.messages}"
             android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginBottom="@dimen/_10sdp"
             app:layout_constraintBottom_toTopOf="@+id/materialCardView5"
             app:layout_constraintEnd_toStartOf="@+id/guideline6"
             app:layout_constraintStart_toStartOf="@+id/guideline5"
             app:layout_constraintTop_toBottomOf="@+id/btn_back"
+            app:listMessages="@{viewModel.messages}"
             tools:itemCount="4"
             tools:listitem="@layout/item_chat_receiver" />
 
@@ -139,11 +139,11 @@
                     style="@style/Widget.Material3.Button.OutlinedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:alpha=".7"
                     android:minWidth="0dp"
                     android:minHeight="0dp"
                     android:padding="@dimen/_4sdp"
-                    android:alpha=".7"
-                    android:layout_marginEnd="@dimen/_4sdp"
                     app:icon="@drawable/ic_attachment"
                     app:iconTint="@color/black"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -153,6 +153,43 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
+
+        <View
+            android:id="@+id/view_recording"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_50sdp"
+            android:background="@color/ash"
+            android:elevation="@dimen/_4sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/fab_action"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_delete_recording"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:contentDescription="@string/back_button"
+            android:elevation="@dimen/_5sdp"
+            android:padding="@dimen/_4sdp"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:src="@drawable/ic_delete"
+            app:layout_constraintBottom_toBottomOf="@+id/fab_action"
+            app:layout_constraintStart_toStartOf="@+id/view_recording"
+            app:layout_constraintTop_toTopOf="@+id/fab_action" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/_5sdp"
+            android:fontFamily="@font/space_grotesk_medium"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/fab_action"
+            app:layout_constraintEnd_toStartOf="@+id/fab_action"
+            app:layout_constraintStart_toEndOf="@+id/btn_delete_recording"
+            app:layout_constraintTop_toTopOf="@+id/fab_action"
+            android:text="00:00" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_action"
@@ -165,6 +202,14 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline6"
             app:tint="@android:color/white" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_recording"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:constraint_referenced_ids="tv_timer,btn_delete_recording,view_recording" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

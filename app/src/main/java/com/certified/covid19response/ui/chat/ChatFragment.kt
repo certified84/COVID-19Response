@@ -208,7 +208,6 @@ class ChatFragment : Fragment() {
             dialog.dismiss()
         }
         builder.show()
-        showToast("You'll be able to send attachments soon...")
     }
 
     private fun launchCamera() {

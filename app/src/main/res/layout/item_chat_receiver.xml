@@ -24,7 +24,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:foregroundGravity="right"
             app:cardBackgroundColor="#9999FF"
-            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardCornerRadius="@dimen/_15sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -34,16 +34,17 @@
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/shapeableImageView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_150sdp"
+                    app:layout_constraintDimensionRatio="1:1"
                     android:layout_height="wrap_content"
-                    app:load_chatImage="@{message.image}"
-                    android:maxWidth="@dimen/_220sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:load_chatImage="@{message.image}"
                     app:visible="@{message.message.length() &lt;= 0}"
                     tools:src="@tools:sample/avatars"
-                    tools:visibility="gone" />
+                    tools:visibility="visible" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/btn_play_recording"
@@ -88,7 +89,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/shapeableImageView"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:text="jaojfiajdoiafodoajoidfasdnafafafajiojoiajfoiajfiojijaofijiofajoiejfoaijfoiajfoiajoifjaoiejfioaaijfoajfioajoijfaoijfaoijaijiofjaoijfiaojfoiajoifjoaiejfioajoiefjajfawojfiaoaoijfoiajoifofadfioaneoifenaiodfenja" />
 
                 <androidx.constraintlayout.widget.Group
@@ -97,7 +98,7 @@
                     android:layout_height="wrap_content"
                     app:constraint_referenced_ids="btn_play_recording,tv_timer"
                     app:visible="@{message.record != null}"
-                    tools:visibility="visible" />
+                    tools:visibility="gone" />
                 
             </androidx.constraintlayout.widget.ConstraintLayout>
             

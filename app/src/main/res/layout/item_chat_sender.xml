@@ -35,12 +35,13 @@
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/shapeableImageView"
                     android:layout_width="@dimen/_150sdp"
-                    android:layout_height="@dimen/_150sdp"
-                    android:maxWidth="@dimen/_220sdp"
-                    app:load_chatImage="@{message.image}"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:load_chatImage="@{message.image}"
                     app:visible="@{message.message.length() &lt;= 0}"
                     tools:src="@tools:sample/avatars"
                     tools:visibility="visible" />
@@ -87,7 +88,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/shapeableImageView"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:text="jaojfiajdoiafodoajoikjkhgfdsdfghjl;kljhgfdsfdgfhjjk;kljkhjghfddfasdnafafafajiojoiajfoiajfiojijaofijiofajoiejfoaijfoiajfoiajoifjaoiejfioaaijfoajfioajoijfaoijfaoijaijiofjaoijfiaojfoiajoifjoaiejfioajoiefjajfawojfiaoaoijfoiajoifofadfioaneoifenaiodfenja"
                     tools:visibility="gone" />
 

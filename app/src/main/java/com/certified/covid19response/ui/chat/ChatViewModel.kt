@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.certified.covid19response.data.model.Conversation
 import com.certified.covid19response.data.model.Message
+import com.certified.covid19response.data.model.Record
 import com.certified.covid19response.data.model.User
 import com.certified.covid19response.data.repository.FirebaseRepository
 import com.certified.covid19response.util.UIState
@@ -122,10 +123,8 @@ class ChatViewModel @Inject constructor(private val repository: FirebaseReposito
         path: String,
         storage: FirebaseStorage,
         id: String,
-        text: String,
         sender: User?,
-        receiver: User?,
-        message: Message
+        receiver: User?
     ) {
         viewModelScope.launch {
             try {
@@ -133,6 +132,35 @@ class ChatViewModel @Inject constructor(private val repository: FirebaseReposito
                 imageRef.putFile(uri!!).await()
                 val downloadUrl = imageRef.downloadUrl.await()
                 sendMessage(id, "", sender, receiver, Message(image = downloadUrl.toString()))
+                uiState.set(UIState.SUCCESS)
+            } catch (e: Exception) {
+                uiState.set(UIState.FAILURE)
+                Log.d("TAG", "uploadImage: Error: ${e.localizedMessage}")
+            }
+        }
+    }
+
+    fun uploadVoiceRecord(
+        uri: Uri?,
+        path: String,
+        storage: FirebaseStorage,
+        id: String,
+        sender: User?,
+        receiver: User?,
+        length: Long
+    ) {
+        viewModelScope.launch {
+            try {
+                val recordRef = storage.reference.child(path)
+                recordRef.putFile(uri!!).await()
+                val downloadUrl = recordRef.downloadUrl.await()
+                sendMessage(
+                    id,
+                    "",
+                    sender,
+                    receiver,
+                    Message(record = Record(downloadUrl.toString(), length))
+                )
                 uiState.set(UIState.SUCCESS)
             } catch (e: Exception) {
                 uiState.set(UIState.FAILURE)

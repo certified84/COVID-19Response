@@ -19,4 +19,4 @@ data class Message(
 ) : Parcelable
 
 @Parcelize
-data class Record(val record: String, val length: Int): Parcelable
+data class Record(val record: String = "", val length: Long = 0L): Parcelable

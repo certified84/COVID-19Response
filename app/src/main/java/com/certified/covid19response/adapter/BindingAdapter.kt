@@ -3,7 +3,6 @@ package com.certified.covid19response.adapter
 import android.os.Build
 import android.text.Html
 import android.view.View
-import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView

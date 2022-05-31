@@ -44,9 +44,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:load_chatImage="@{message.image}"
-                    app:visible="@{message.message.length() &lt;= 0}"
+                    app:visible="@{message.message.length() &lt;= 0 &amp;&amp; message.record == null}"
                     tools:src="@tools:sample/avatars"
-                    tools:visibility="visible" />
+                    tools:visibility="gone" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/btn_play_recording"
@@ -100,7 +100,7 @@
                     android:layout_height="wrap_content"
                     app:constraint_referenced_ids="btn_play_recording,tv_timer"
                     app:visible="@{message.record != null}"
-                    tools:visibility="gone" />
+                    tools:visibility="visible" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

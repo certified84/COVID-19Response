@@ -139,3 +139,11 @@ fun ShimmerFrameLayout.setShimmerAnimation(visible: Boolean) {
 fun MaterialTextView.doctorName(value: String) {
     text = "Doctor ${value.substringAfter("D_")}"
 }
+
+@BindingAdapter("timeText")
+fun MaterialTextView.timeText(value: Long) {
+    text = if (value >= 3600)
+        String.format("%02d:%02d:%02d", value / 3600, (value % 3600) / 60, value % 60)
+    else
+        String.format("%02d:%02d", (value % 3600) / 60, value % 60)
+}

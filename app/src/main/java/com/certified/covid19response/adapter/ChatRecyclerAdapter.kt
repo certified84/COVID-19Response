@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.certified.covid19response.data.model.Message
-import com.certified.covid19response.data.model.News
 import com.certified.covid19response.databinding.ItemChatDateBinding
 import com.certified.covid19response.databinding.ItemChatReceiverBinding
 import com.certified.covid19response.databinding.ItemChatSenderBinding
@@ -14,10 +13,22 @@ import com.certified.covid19response.databinding.ItemChatSenderBinding
 class ChatRecyclerAdapter(private val id: String) :
     ListAdapter<Message, RecyclerView.ViewHolder>(diffCallback) {
 
+    private lateinit var listener: OnItemClickedListener
+
     inner class ReceiverViewHolder(val binding: ItemChatReceiverBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(message: Message) {
             binding.message = message
+        }
+
+        init {
+            binding.btnPlayRecording.setOnClickListener {
+                val position = absoluteAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val message = getItem(position)
+                    listener.onItemClick(message)
+                }
+            }
         }
     }
 
@@ -26,6 +37,15 @@ class ChatRecyclerAdapter(private val id: String) :
         fun bind(message: Message) {
             binding.message = message
         }
+
+        init {
+            binding.btnPlayRecording.setOnClickListener {
+                val position = absoluteAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    listener.onItemClick(getItem(position))
+                }
+            }
+        }
     }
 
     inner class ChatDateViewHolder(val binding: ItemChatDateBinding) :
@@ -33,6 +53,14 @@ class ChatRecyclerAdapter(private val id: String) :
         fun bind(message: Message) {
             binding.message = message
         }
+    }
+
+    interface OnItemClickedListener {
+        fun onItemClick(message: Message)
+    }
+
+    fun setOnItemClickedListener(listener: OnItemClickedListener) {
+        this.listener = listener
     }
 
     companion object {

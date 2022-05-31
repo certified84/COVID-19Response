@@ -6,6 +6,7 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.net.Uri
 import android.os.Bundle
@@ -41,6 +42,7 @@ import com.google.firebase.storage.ktx.storage
 import dagger.hilt.android.AndroidEntryPoint
 import timerx.Stopwatch
 import timerx.StopwatchBuilder
+import timerx.Timer
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.IOException
@@ -52,17 +54,23 @@ class ChatFragment : Fragment() {
 
     private var _binding: FragmentChatBinding? = null
     private val binding get() = _binding!!
-    private lateinit var auth: FirebaseAuth
     private val args: ChatFragmentArgs by navArgs()
     private val viewModel: ChatViewModel by activityViewModels()
+
+    private lateinit var auth: FirebaseAuth
     private val preferences by lazy { PreferenceManager.getDefaultSharedPreferences(requireContext()) }
-    private var stopWatch: Stopwatch? = null
+    private val filePath by lazy { filePath(requireActivity()) }
+
     private var mediaRecorder: MediaRecorder? = null
+    private var mediaPlayer: MediaPlayer? = null
+    private var stopWatch: Stopwatch? = null
+    private var timer: Timer? = null
+
     private var isRecording = false
+    private var isPlayingRecord = false
     private lateinit var file: String
     private lateinit var storage: FirebaseStorage
     private var audioLength by Delegates.notNull<Long>()
-    private val filePath by lazy { filePath(requireActivity()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -194,6 +202,13 @@ class ChatFragment : Fragment() {
             val adapter = ChatRecyclerAdapter(auth.currentUser!!.uid)
             recyclerViewChat.adapter = adapter
             recyclerViewChat.layoutManager = LinearLayoutManager(requireContext())
+            adapter.setOnItemClickedListener(object : ChatRecyclerAdapter.OnItemClickedListener {
+                override fun onItemClick(message: Message) {
+                    if (message.record != null && !isPlayingRecord) {
+                        startPlayingRecording(message)
+                    } else stopPlayingRecording()
+                }
+            })
 
             viewModel?.messages?.observe(viewLifecycleOwner) {
                 adapter.notifyDataSetChanged()
@@ -468,6 +483,62 @@ class ChatFragment : Fragment() {
             }
             groupRecording.visibility = View.GONE
         }
+    }
+
+    private fun startPlayingRecording(message: Message) {
+//        timer = TimerBuilder()
+//            .startTime(_note.audioLength, TimeUnit.SECONDS)
+//            .startFormat("HH:MM:SS")
+//            .onTick { time -> binding.tvTimer.text = time }
+//            .actionWhen(0, TimeUnit.SECONDS) {
+//                binding.btnRecord.setImageDrawable(
+//                    ResourcesCompat.getDrawable(
+//                        resources,
+//                        R.drawable.ic_audio_not_playing,
+//                        null
+//                    )
+//                ).run {
+//                    isPlayingRecord = false
+//                    stopPlayingRecording()
+//                }
+//            }
+//            .build()
+        mediaPlayer = MediaPlayer()
+        try {
+            mediaPlayer?.apply {
+                setDataSource(message.record?.record)
+                prepare()
+                start()
+                isPlayingRecord = true
+            }
+//            timer!!.start()
+        } catch (e: IOException) {
+            Log.d("TAG", "startPlayingRecording: ${e.localizedMessage}")
+            showToast("An error occurred: ${e.localizedMessage}")
+        }
+    }
+
+    private fun pausePlayingRecording() {
+        mediaPlayer?.pause()
+        timer?.stop()
+    }
+
+    private fun continuePlayingRecording() {
+        mediaPlayer?.start()
+        timer?.start()
+    }
+
+    private fun stopPlayingRecording() {
+        mediaPlayer?.apply {
+            stop()
+            release()
+        }
+        timer?.apply {
+            reset()
+            stop()
+        }
+        timer = null
+        isPlayingRecord = false
     }
 
     override fun onDestroyView() {

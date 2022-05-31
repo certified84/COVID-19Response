@@ -248,6 +248,7 @@ class ChatFragment : Fragment() {
                     bitmap?.compress(Bitmap.CompressFormat.PNG, 100, it)
                 }
                 val file = File(requireContext().filesDir, "profile_image")
+                viewModel.uiState.set(UIState.LOADING)
                 uploadImage(Uri.fromFile(file))
             } catch (e: IOException) {
                 e.printStackTrace()
@@ -255,6 +256,7 @@ class ChatFragment : Fragment() {
         } else if (requestCode == ProfileFragment.PICK_IMAGE_CODE && resultCode == Activity.RESULT_OK) {
             assert(data != null)
             try {
+                viewModel.uiState.set(UIState.LOADING)
                 uploadImage(data?.data)
             } catch (e: FileNotFoundException) {
                 e.printStackTrace()
@@ -317,25 +319,26 @@ class ChatFragment : Fragment() {
     private fun recordAudio() {
         showToast("Audio recording is on its way...")
         binding.apply {
-            if (hasPermission(requireContext(), Manifest.permission.RECORD_AUDIO))
-                fabAction.setImageDrawable(
-                    ResourcesCompat.getDrawable(
-                        resources,
-                        R.drawable.ic_send_black_24dp,
-                        null
+            if (!isRecording)
+                if (hasPermission(requireContext(), Manifest.permission.RECORD_AUDIO))
+                    fabAction.setImageDrawable(
+                        ResourcesCompat.getDrawable(
+                            resources,
+                            R.drawable.ic_send_black_24dp,
+                            null
+                        )
+                    ).run {
+                        isRecording = true
+                        groupRecording.visibility = View.VISIBLE
+                        startRecording()
+                    }
+                else
+                    requestPermission(
+                        requireActivity(),
+                        requireContext().getString(R.string.permission_required),
+                        MainActivity.RECORD_AUDIO_PERMISSION_CODE,
+                        Manifest.permission.RECORD_AUDIO
                     )
-                ).run {
-                    isRecording = true
-                    groupRecording.visibility = View.VISIBLE
-                    startRecording()
-                }
-            else
-                requestPermission(
-                    requireActivity(),
-                    requireContext().getString(R.string.permission_required),
-                    MainActivity.RECORD_AUDIO_PERMISSION_CODE,
-                    Manifest.permission.RECORD_AUDIO
-                )
         }
     }
 
@@ -382,6 +385,7 @@ class ChatFragment : Fragment() {
     }
 
     private fun stopRecording() {
+        isRecording = false
         binding.apply {
             fabAction.setImageDrawable(
                 ResourcesCompat.getDrawable(

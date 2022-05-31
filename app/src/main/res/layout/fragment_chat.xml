@@ -211,5 +211,17 @@
             tools:visibility="visible"
             app:constraint_referenced_ids="tv_timer,btn_delete_recording,view_recording" />
 
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:indicatorColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visible="@{uiState == UIState.LOADING}" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

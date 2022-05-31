@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.certified.covid19response.data.model.Conversation
 import com.certified.covid19response.data.model.Message
-import com.certified.covid19response.data.model.Record
 import com.certified.covid19response.data.model.User
 import com.certified.covid19response.data.repository.FirebaseRepository
 import com.certified.covid19response.util.UIState
@@ -71,43 +70,50 @@ class ChatViewModel @Inject constructor(private val repository: FirebaseReposito
     }
 
     fun sendMessage(id: String, text: String, sender: User?, receiver: User?, message: Message) {
+        viewModelScope.launch {
+            try {
 
-        val db = Firebase.firestore
+                val db = Firebase.firestore
 
-        val messageToSend = message.copy(
-            id = id,
-            message = text,
-            senderId = Firebase.auth.currentUser!!.uid,
-            receiverId = receiver!!.id
-        )
-
-        val messagesRef = db.collection("messages").document(id).collection("messages").document()
-        val senderLastMessageRef =
-            db.collection("messages").document("last_messages").collection(sender!!.id).document(id)
-        val receiverLastMessageRef =
-            db.collection("messages").document("last_messages").collection(receiver.id).document(id)
-        db.runBatch {
-            it.set(messagesRef, messageToSend)
-            it.set(
-                senderLastMessageRef,
-                Conversation(
-                    id = senderLastMessageRef.id,
-                    sender = sender,
-                    receiver = receiver,
-                    message = messageToSend
+                val messageToSend = message.copy(
+                    id = id,
+                    message = text,
+                    senderId = Firebase.auth.currentUser!!.uid,
+                    receiverId = receiver!!.id
                 )
-            )
-            it.set(
-                receiverLastMessageRef,
-                Conversation(
-                    id = receiverLastMessageRef.id,
-                    sender = sender,
-                    receiver = receiver,
-                    message = messageToSend
-                )
-            )
-        }.addOnFailureListener {
-            _toastMessage.value = "An error occurred: ${it.localizedMessage}"
+
+                val messagesRef =
+                    db.collection("messages").document(id).collection("messages").document()
+                val senderLastMessageRef =
+                    db.collection("messages").document("last_messages").collection(sender!!.id)
+                        .document(id)
+                val receiverLastMessageRef =
+                    db.collection("messages").document("last_messages").collection(receiver.id)
+                        .document(id)
+                db.runBatch {
+                    it.set(messagesRef, messageToSend)
+                    it.set(
+                        senderLastMessageRef,
+                        Conversation(
+                            id = senderLastMessageRef.id,
+                            sender = sender,
+                            receiver = receiver,
+                            message = messageToSend
+                        )
+                    )
+                    it.set(
+                        receiverLastMessageRef,
+                        Conversation(
+                            id = receiverLastMessageRef.id,
+                            sender = sender,
+                            receiver = receiver,
+                            message = messageToSend
+                        )
+                    )
+                }.await()
+            } catch (e: Exception) {
+                _toastMessage.value = "An error occurred: ${e.localizedMessage}"
+            }
         }
     }
 

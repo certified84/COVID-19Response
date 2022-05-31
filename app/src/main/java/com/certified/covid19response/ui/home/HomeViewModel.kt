@@ -11,7 +11,6 @@ import com.certified.covid19response.data.model.NewsApiOrgArticle
 import com.certified.covid19response.data.repository.FirebaseRepository
 import com.certified.covid19response.data.repository.Repository
 import com.certified.covid19response.util.ApiErrorUtil
-import com.certified.covid19response.util.Config
 import com.certified.covid19response.util.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -26,6 +25,7 @@ class HomeViewModel @Inject constructor(
     ViewModel() {
 
     val uiState = ObservableField(UIState.LOADING)
+    val newsUiState = ObservableField(UIState.LOADING)
 
     private val _newsApiOrgNews = MutableLiveData<List<NewsApiOrgArticle>>()
     val newsApiOrgNews: LiveData<List<NewsApiOrgArticle>> get() = _newsApiOrgNews
@@ -37,7 +37,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         getNewsApiOrgNews()
-        getNewsApiOrgHeadlines()
+//        getNewsApiOrgHeadlines()
     }
 
     private fun getNewsApiOrgNews() {
@@ -47,6 +47,8 @@ class HomeViewModel @Inject constructor(
                 if (response.isSuccessful) {
                     uiState.set(UIState.SUCCESS)
                     _newsApiOrgArticle.value =
+                        response.body()?.articles?.sortedByDescending { it.publishedAt }
+                    _newsApiOrgNews.value =
                         response.body()?.articles?.sortedByDescending { it.publishedAt }
                 } else {
                     uiState.set(UIState.FAILURE)
@@ -69,6 +71,8 @@ class HomeViewModel @Inject constructor(
                     uiState.set(UIState.SUCCESS)
                     _newsApiOrgNews.value =
                         response.body()?.articles?.sortedByDescending { it.publishedAt }
+                    if (response.body()?.articles?.isEmpty() == true)
+                        newsUiState.set(UIState.EMPTY)
                 } else {
                     uiState.set(UIState.FAILURE)
                     Log.d("TAG", "getNewsApiOrgHeadlines: error: ${response.body()?.message}")

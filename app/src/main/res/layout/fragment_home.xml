@@ -14,6 +14,10 @@
             type="ObservableField&lt;UIState>" />
 
         <variable
+            name="newsUiState"
+            type="ObservableField&lt;UIState>" />
+
+        <variable
             name="viewModel"
             type="com.certified.covid19response.ui.home.HomeViewModel" />
     </data>
@@ -97,6 +101,7 @@
                     android:id="@+id/recycler_view_news"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:minHeight="@dimen/_100sdp"
                     app:layout_constraintEnd_toEndOf="@+id/btn_show_all_news"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/materialTextView13"
@@ -104,6 +109,23 @@
                     app:listNews="@{viewModel.newsApiOrgNews}"
                     tools:itemCount="1"
                     tools:listitem="@layout/item_news" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/materialTextView40"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:alpha=".7"
+                    app:layout_constraintEnd_toEndOf="@+id/btn_show_all_news"
+                    android:fontFamily="@font/space_grotesk_regular"
+                    android:text="@string/no_news_text"
+                    android:textAlignment="center"
+                    tools:visibility="gone"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp"
+                    app:layout_constraintBottom_toBottomOf="@+id/recycler_view_news"
+                    app:layout_constraintStart_toStartOf="@+id/materialTextView13"
+                    app:layout_constraintTop_toTopOf="@+id/recycler_view_news"
+                    app:visible="@{newsUiState == UIState.EMPTY}" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/materialTextView16"

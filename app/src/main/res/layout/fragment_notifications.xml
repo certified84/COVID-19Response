@@ -62,7 +62,7 @@
             app:layout_constraintStart_toStartOf="@+id/guideline5"
             app:layout_constraintTop_toBottomOf="@+id/materialTextView12"
             app:layout_constraintVertical_chainStyle="packed"
-            app:visible="@{uiState == uiState.EMPTY}" />
+            app:visible="@{uiState == UIState.EMPTY}" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/materialTextView40"
@@ -79,7 +79,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline5"
             app:layout_constraintTop_toBottomOf="@+id/materialTextView38"
-            app:visible="@{uiState == uiState.EMPTY}" />
+            app:visible="@{uiState == UIState.EMPTY}" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline5"

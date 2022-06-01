@@ -9,6 +9,10 @@ import com.certified.covid19response.data.model.Message
 import com.certified.covid19response.databinding.ItemChatDateBinding
 import com.certified.covid19response.databinding.ItemChatReceiverBinding
 import com.certified.covid19response.databinding.ItemChatSenderBinding
+import com.certified.covid19response.ui.chat.ChatFragment
+import timerx.Timer
+import timerx.TimerBuilder
+import java.util.concurrent.TimeUnit
 
 class ChatRecyclerAdapter(private val id: String) :
     ListAdapter<Message, RecyclerView.ViewHolder>(diffCallback) {
@@ -17,6 +21,7 @@ class ChatRecyclerAdapter(private val id: String) :
 
     inner class ReceiverViewHolder(val binding: ItemChatReceiverBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        private var timer: Timer? = null
         fun bind(message: Message) {
             binding.message = message
         }
@@ -26,7 +31,17 @@ class ChatRecyclerAdapter(private val id: String) :
                 val position = absoluteAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val message = getItem(position)
-                    listener.onItemClick(message)
+                    if (message.record != null)
+                        timer = TimerBuilder()
+                            .startTime(message.record.length, TimeUnit.SECONDS)
+                            .startFormat("MM:SS")
+                            .onTick { time -> binding.tvTimer.text = time }
+                            .actionWhen(0, TimeUnit.SECONDS) {
+                                timer?.reset()
+                                timer?.release()
+                            }
+                            .build()
+                    listener.onItemClick(message, timer)
                 }
             }
         }
@@ -34,6 +49,7 @@ class ChatRecyclerAdapter(private val id: String) :
 
     inner class SenderViewHolder(val binding: ItemChatSenderBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        private var timer: Timer? = null
         fun bind(message: Message) {
             binding.message = message
         }
@@ -42,7 +58,17 @@ class ChatRecyclerAdapter(private val id: String) :
             binding.btnPlayRecording.setOnClickListener {
                 val position = absoluteAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    listener.onItemClick(getItem(position))
+                    val message = getItem(position)
+                    if (message.record != null)
+                        timer = TimerBuilder()
+                            .startTime(message.record.length, TimeUnit.SECONDS)
+                            .startFormat("MM:SS")
+                            .onTick { time -> binding.tvTimer.text = time }
+                            .actionWhen(0, TimeUnit.SECONDS) {
+
+                            }
+                            .build()
+                    listener.onItemClick(message, timer)
                 }
             }
         }
@@ -56,7 +82,7 @@ class ChatRecyclerAdapter(private val id: String) :
     }
 
     interface OnItemClickedListener {
-        fun onItemClick(message: Message)
+        fun onItemClick(message: Message, timer: Timer?)
     }
 
     fun setOnItemClickedListener(listener: OnItemClickedListener) {

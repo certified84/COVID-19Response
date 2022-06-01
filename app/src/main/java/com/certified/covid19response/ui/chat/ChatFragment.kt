@@ -64,10 +64,11 @@ class ChatFragment : Fragment() {
     private var mediaRecorder: MediaRecorder? = null
     private var mediaPlayer: MediaPlayer? = null
     private var stopWatch: Stopwatch? = null
-    private var timer: Timer? = null
+//    private var timer: Timer? = null
 
     private var isRecording = false
     private var isPlayingRecord = false
+    private var isPause = false
     private lateinit var file: String
     private lateinit var storage: FirebaseStorage
     private var audioLength by Delegates.notNull<Long>()
@@ -203,10 +204,23 @@ class ChatFragment : Fragment() {
             recyclerViewChat.adapter = adapter
             recyclerViewChat.layoutManager = LinearLayoutManager(requireContext())
             adapter.setOnItemClickedListener(object : ChatRecyclerAdapter.OnItemClickedListener {
-                override fun onItemClick(message: Message) {
-                    if (message.record != null && !isPlayingRecord) {
-                        startPlayingRecording(message)
-                    } else stopPlayingRecording()
+                override fun onItemClick(message: Message, timer: Timer?) {
+                    if (message.record != null) {
+                        isPlayingRecord = if (!isPlayingRecord) {
+                            if (!isPause)
+                                startPlayingRecording(message, timer)
+                            else
+                                continuePlayingRecording(timer)
+                            true
+                        } else {
+                            if (!isPause)
+                                pausePlayingRecording(timer)
+                            else
+                                stopPlayingRecording(timer)
+                            false
+                        }
+                    }
+//                    else if (message.record != null && isPlayingRecord) stopPlayingRecording(timer)
                 }
             })
 
@@ -480,55 +494,45 @@ class ChatFragment : Fragment() {
                         position = preferences.getString(PreferenceKeys.USER_POSITION_KEY, "")!!
                     ) else args.conversation?.receiver, audioLength
                 )
+                deleteRecording()
             }
             groupRecording.visibility = View.GONE
         }
     }
 
-    private fun startPlayingRecording(message: Message) {
-//        timer = TimerBuilder()
-//            .startTime(_note.audioLength, TimeUnit.SECONDS)
-//            .startFormat("HH:MM:SS")
-//            .onTick { time -> binding.tvTimer.text = time }
-//            .actionWhen(0, TimeUnit.SECONDS) {
-//                binding.btnRecord.setImageDrawable(
-//                    ResourcesCompat.getDrawable(
-//                        resources,
-//                        R.drawable.ic_audio_not_playing,
-//                        null
-//                    )
-//                ).run {
-//                    isPlayingRecord = false
-//                    stopPlayingRecording()
-//                }
-//            }
-//            .build()
+    private fun startPlayingRecording(message: Message, timer: Timer?) {
+//        stopPlayingRecording(timer)
         mediaPlayer = MediaPlayer()
         try {
             mediaPlayer?.apply {
                 setDataSource(message.record?.record)
                 prepare()
                 start()
+                timer!!.start()
                 isPlayingRecord = true
             }
-//            timer!!.start()
         } catch (e: IOException) {
             Log.d("TAG", "startPlayingRecording: ${e.localizedMessage}")
             showToast("An error occurred: ${e.localizedMessage}")
         }
+        when (timer?.getRemainingTimeIn(TimeUnit.SECONDS)) {
+            0L -> stopPlayingRecording(timer)
+        }
     }
 
-    private fun pausePlayingRecording() {
+    private fun pausePlayingRecording(timer: Timer?) {
+        isPause = true
         mediaPlayer?.pause()
         timer?.stop()
     }
 
-    private fun continuePlayingRecording() {
+    private fun continuePlayingRecording(timer: Timer?) {
+        isPause = false
         mediaPlayer?.start()
         timer?.start()
     }
 
-    private fun stopPlayingRecording() {
+    fun stopPlayingRecording(timer: Timer?) {
         mediaPlayer?.apply {
             stop()
             release()
@@ -537,12 +541,22 @@ class ChatFragment : Fragment() {
             reset()
             stop()
         }
-        timer = null
-        isPlayingRecord = false
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        if (isPlayingRecord)
+            mediaPlayer?.apply {
+                stop()
+                release()
+            }
+        mediaRecorder = null
+        mediaPlayer = null
+        stopWatch?.apply {
+            stop()
+            reset()
+        }
+        stopWatch = null
         _binding = null
     }
 }

@@ -111,4 +111,7 @@ dependencies {
 
 //    Easy Permissions
     implementation 'com.vmadalin:easypermissions-ktx:1.0.0'
+
+//    Custom progress indicator
+    implementation 'com.github.certified84:CustomProgressIndicator:1.0.1'
 }

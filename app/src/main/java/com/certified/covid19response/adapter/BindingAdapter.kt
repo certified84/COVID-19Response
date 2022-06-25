@@ -15,6 +15,7 @@ import com.certified.covid19response.data.model.Message
 import com.certified.covid19response.data.model.NewsApiOrgArticle
 import com.certified.covid19response.data.model.User
 import com.certified.covid19response.util.roundOffDecimal
+import com.certified.customprogressindicatorlibrary.CustomProgressIndicator
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
@@ -25,6 +26,11 @@ import java.time.format.DateTimeFormatter
 @BindingAdapter("visible")
 fun View.setVisible(visible: Boolean) {
     visibility = if (visible) View.VISIBLE else View.GONE
+}
+
+@BindingAdapter("animate")
+fun CustomProgressIndicator.animate(visible: Boolean) {
+    if (visible) startAnimation() else stopAnimation()
 }
 
 @BindingAdapter("listNews")

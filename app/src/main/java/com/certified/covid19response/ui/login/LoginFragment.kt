@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.edit
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -111,7 +112,19 @@ class LoginFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        binding.indicator.apply {
+            setTextColor(ResourcesCompat.getColorStateList(resources, R.color.white, null)!!)
+            setTypeface(R.font.space_grotesk_regular)
+            setProgressIndicatorColor("#0404B2")
+            setImageResource(R.drawable.app_icon)
+            setTrackColor("#FFFFFF")
+        }
         requireActivity().findViewById<SmoothBottomBar>(R.id.bottomBar).visibility = View.GONE
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.indicator.stopAnimation()
     }
 
     override fun onDestroyView() {

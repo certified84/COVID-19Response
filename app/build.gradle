@@ -21,7 +21,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "RAPID_API_KEY", RAPID_API_KEY)
+//        buildConfigField("String", "RAPID_API_KEY", RAPID_API_KEY)
         buildConfigField("String", "NEWS_API_ORG_API_KEY", NEWS_API_ORG_API_KEY)
     }
 

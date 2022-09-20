@@ -37,9 +37,9 @@ class PasswordRecoveryFragment : Fragment() {
             binding.uiState = viewModel.uiState
 
             with(viewModel){message.observe(viewLifecycleOwner) {
-                if (it != null) {
+                if (it != null && it.isNotBlank()) {
                     showToast(it)
-                    _message.postValue(null)
+                    _message.postValue("")
                 }
             }
             success.observe(viewLifecycleOwner) {

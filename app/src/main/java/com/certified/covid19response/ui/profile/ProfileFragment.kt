@@ -185,7 +185,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         val path = "profileImages/${auth.currentUser!!.uid}/profileImage.jpg"
         viewModel.apply {
             uiState.set(UIState.LOADING)
-            uploadImage(uri, path, storage, auth.currentUser!!.uid)
+            uploadImage(uri, path, storage)
             binding.ivProfileImage.load(uri) {
                 transformations(CircleCropTransformation())
             }

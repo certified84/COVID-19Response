@@ -33,7 +33,7 @@ class ProfileViewModel @Inject constructor(private val repository: FirebaseRepos
     val _success = MutableLiveData<Boolean>()
     val success: LiveData<Boolean> get() = _success
 
-    fun uploadImage(uri: Uri?, path: String, storage: FirebaseStorage, userID: String) {
+    fun uploadImage(uri: Uri?, path: String, storage: FirebaseStorage) {
         viewModelScope.launch {
             try {
                 val profileImageRef = storage.reference.child(path)

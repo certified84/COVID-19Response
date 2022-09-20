@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.certified.covid19response.R
 import com.certified.covid19response.adapter.ArticlesRecyclerAdapter
 import com.certified.covid19response.adapter.NewsRecyclerAdapter
-import com.certified.covid19response.data.model.News
 import com.certified.covid19response.data.model.NewsApiOrgArticle
 import com.certified.covid19response.databinding.FragmentHomeBinding
 import com.certified.covid19response.util.Extensions.openBrowser
@@ -52,11 +51,11 @@ class HomeFragment : Fragment() {
 
             articlesAdapter.setOnItemClickedListener(object :
                 ArticlesRecyclerAdapter.OnItemClickedListener {
-                override fun onItemClick(news: NewsApiOrgArticle) {
+                override fun onItemClick(article: NewsApiOrgArticle) {
                     requireContext().openBrowser(
-                        news.url,
+                        article.url,
                         findNavController(),
-                        HomeFragmentDirections.actionHomeFragmentToWebFragment(news.url)
+                        HomeFragmentDirections.actionHomeFragmentToWebFragment(article.url)
                     )
                 }
             })

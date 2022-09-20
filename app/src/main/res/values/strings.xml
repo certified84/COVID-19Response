@@ -42,7 +42,7 @@
     <string name="or">OR</string>
     <string name="hint_nin">e.g 00012130101010</string>
     <string name="explore_feed">Explore Feed</string>
-    <string name="latest_news">Latest news</string>
+    <string name="latest_news">Latest News</string>
     <string name="all"><u>All</u></string>
     <string name="trending">Trending</string>
     <string name="new_release">New release</string>
@@ -116,12 +116,14 @@
     <string name="protect_yourself">Protect yourself:</string>
     <string name="reset_password">Reset Password</string>
     <string name="password_recovery">Password Recovery</string>
-    <string name="password_recovery_summary">Hi there, Kindly enter to email to reset your password</string>
+    <string name="password_recovery_summary">Hi there, Kindly enter your email to reset your password</string>
     <string name="hint_sex">e.g Male</string>
     <string name="choose_sex">Choose Sex</string>
-    <string name="hint_position">e.g Gynacologist</string>
+    <string name="hint_position">e.g Gynaecologist</string>
     <string name="enter_position">Enter Position</string>
     <string name="notification_subtitle">When there are new updates; news and articles, we\'ll post it here</string>
     <string name="notification_title">There\'s nothing new here.</string>
     <string name="feature_not_available">This feature is currently not available to doctors. Kindly check back later.</string>
+    <string name="permission_required">This permission is required to enable audio recording</string>
+    <string name="no_news_text">There are currently no new releases. We\'ll post them here when there are.</string>
 </resources>

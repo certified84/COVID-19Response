@@ -28,16 +28,83 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textview.MaterialTextView
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/space_grotesk_regular"
-                android:maxWidth="@dimen/_220sdp"
-                android:text="@{message.message}"
-                android:padding="@dimen/_8sdp"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_12ssp"
-                tools:text="jaojfiajdoiafodoajoidfasdnafafafajiojoiajfoiajfiojijaofijiofajoiejfoaijfoiajfoiajoifjaoiejfioaaijfoajfioajoijfaoijfaoijaijiofjaoijfiaojfoiajoifjoaiejfioajoiefjajfawojfiaoaoijfoiajoifofadfioaneoifenaiodfenja" />
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/shapeableImageView"
+                    android:layout_width="@dimen/_170sdp"
+                    android:layout_height="@dimen/_200sdp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:load_chatImage="@{message.image}"
+                    app:visible="@{message.message.length() &lt;= 0 &amp;&amp; message.record == null}"
+                    tools:src="@tools:sample/avatars"
+                    tools:visibility="gone" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btn_play_recording"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:contentDescription="@string/back_button"
+                    android:elevation="@dimen/_5sdp"
+                    android:padding="@dimen/_4sdp"
+                    android:src="@drawable/ic_play"
+                    android:tint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_timer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:elevation="@dimen/_5sdp"
+                    android:fontFamily="@font/space_grotesk_medium"
+                    app:timeText="@{message.record.length}"
+                    tools:text="00:00"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12ssp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btn_play_recording"
+                    app:layout_constraintTop_toTopOf="@+id/btn_play_recording" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/space_grotesk_regular"
+                    android:maxWidth="@dimen/_200sdp"
+                    android:padding="@dimen/_8sdp"
+                    android:text="@{message.message}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12ssp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="jaojfiajdoiafodoajoidfasdnafafafajiojoiajfoiajfiojijaofijiofajoiejfoaijfoiajfoiajoifjaoiejfioaaijfoajfioajoijfaoijfaoijaijiofjaoijfiaojfoiajoifjoaiejfioajoiefjajfawojfiaoaoijfoiajoifofadfioaneoifenaiodfenja"
+                    tools:visibility="gone" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/group_recording"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:constraint_referenced_ids="btn_play_recording,tv_timer"
+                    app:visible="@{message.record != null}"
+                    tools:visibility="visible" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.textview.MaterialTextView
@@ -46,8 +113,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
             android:fontFamily="@font/space_grotesk_regular"
-            android:textSize="@dimen/_10ssp"
             android:text="@{UtilKt.formatTime(message.time)}"
+            android:textSize="@dimen/_10ssp"
             app:layout_constraintStart_toStartOf="@+id/materialCardView3"
             app:layout_constraintTop_toBottomOf="@+id/materialCardView3"
             tools:text="9:23 PM" />

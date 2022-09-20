@@ -17,4 +17,8 @@
     <style name="ShapeAppearanceOverlay.Covid19Response" parent="">
         <item name="cornerSize">50%</item>
     </style>
+
+    <style name="ShapeAppearanceOverlayCorner.Covid19Response" parent="">
+        <item name="cornerSize">15%</item>
+    </style>
 </resources>

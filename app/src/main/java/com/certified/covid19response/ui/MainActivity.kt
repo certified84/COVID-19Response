@@ -68,4 +68,8 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
+
+    companion object {
+        const val RECORD_AUDIO_PERMISSION_CODE = 100
+    }
 }

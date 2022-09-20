@@ -3,6 +3,7 @@ package com.certified.covid19response.adapter
 import android.os.Build
 import android.text.Html
 import android.view.View
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -14,6 +15,7 @@ import com.certified.covid19response.data.model.Message
 import com.certified.covid19response.data.model.NewsApiOrgArticle
 import com.certified.covid19response.data.model.User
 import com.certified.covid19response.util.roundOffDecimal
+import com.certified.customprogressindicatorlibrary.CustomProgressIndicator
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
@@ -24,6 +26,11 @@ import java.time.format.DateTimeFormatter
 @BindingAdapter("visible")
 fun View.setVisible(visible: Boolean) {
     visibility = if (visible) View.VISIBLE else View.GONE
+}
+
+@BindingAdapter("animate")
+fun CustomProgressIndicator.animate(visible: Boolean) {
+    if (visible) startAnimation() else stopAnimation()
 }
 
 @BindingAdapter("listNews")
@@ -122,6 +129,13 @@ fun ShapeableImageView.loadNewsImage(image: String?) {
     else this.load(R.drawable.no_profile_image)
 }
 
+@BindingAdapter("load_chatImage")
+fun AppCompatImageView.loadChatImage(image: String?) {
+    if (image != null && image.isNotBlank()) this.load(image) {
+        RoundedCornersTransformation(0f)
+    }
+}
+
 @BindingAdapter("set_animation")
 fun ShimmerFrameLayout.setShimmerAnimation(visible: Boolean) {
     if (visible) startShimmerAnimation() else stopShimmerAnimation()
@@ -130,4 +144,12 @@ fun ShimmerFrameLayout.setShimmerAnimation(visible: Boolean) {
 @BindingAdapter("doctor_name")
 fun MaterialTextView.doctorName(value: String) {
     text = "Doctor ${value.substringAfter("D_")}"
+}
+
+@BindingAdapter("timeText")
+fun MaterialTextView.timeText(value: Long) {
+    text = if (value >= 3600)
+        String.format("%02d:%02d:%02d", value / 3600, (value % 3600) / 60, value % 60)
+    else
+        String.format("%02d:%02d", (value % 3600) / 60, value % 60)
 }

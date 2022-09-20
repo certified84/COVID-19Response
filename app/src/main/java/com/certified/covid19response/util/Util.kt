@@ -1,6 +1,9 @@
 package com.certified.covid19response.util
 
+import android.app.Activity
+import android.content.Context
 import com.google.android.material.textfield.TextInputEditText
+import com.vmadalin.easypermissions.EasyPermissions
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
@@ -80,4 +83,13 @@ fun formatChatDate(date: Date): String {
         else -> SimpleDateFormat("MMM, DD", Locale.getDefault()).format(date)
     }
 //    SimpleDateFormat("h:mm a", Locale.getDefault()).format(date)
+}
+
+fun filePath(activity: Activity) = activity.getExternalFilesDir("/")?.absolutePath
+
+fun hasPermission(context: Context, permission: String) =
+    EasyPermissions.hasPermissions(context, permission)
+
+fun requestPermission(activity: Activity, message: String, requestCode: Int, permission: String) {
+    EasyPermissions.requestPermissions(activity, message, requestCode, permission)
 }

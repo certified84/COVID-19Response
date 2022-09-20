@@ -21,6 +21,8 @@
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_50sdp"
             android:layout_marginTop="@dimen/_8sdp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:load_image="@{conversation.receiver.profile_image}"
@@ -72,6 +74,79 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_name"
             tools:text="9:23 PM" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_play_recording"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha=".7"
+            android:background="@null"
+            android:contentDescription="@string/back_button"
+            android:elevation="@dimen/_5sdp"
+            android:padding="@dimen/_4sdp"
+            android:src="@drawable/ic_mic"
+            android:tint="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_profile_image"
+            app:layout_constraintStart_toEndOf="@+id/iv_profile_image"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:elevation="@dimen/_5sdp"
+            android:fontFamily="@font/space_grotesk_medium"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_play_recording"
+            app:layout_constraintStart_toEndOf="@+id/btn_play_recording"
+            app:layout_constraintTop_toTopOf="@+id/btn_play_recording"
+            app:timeText="@{conversation.message.record.length}"
+            tools:text="00:00" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_recording"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="btn_play_recording,tv_timer"
+            app:visible="@{conversation.message.record != null}"
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha=".7"
+            android:background="@null"
+            android:contentDescription="@string/back_button"
+            android:elevation="@dimen/_5sdp"
+            android:padding="@dimen/_4sdp"
+            android:src="@drawable/ic_image"
+            android:tint="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_profile_image"
+            app:layout_constraintStart_toEndOf="@+id/iv_profile_image"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:elevation="@dimen/_5sdp"
+            android:fontFamily="@font/space_grotesk_medium"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_image"
+            app:layout_constraintStart_toEndOf="@+id/btn_image"
+            app:layout_constraintTop_toTopOf="@+id/btn_image"
+            android:text="Photo" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="btn_image,tv_image"
+            app:visible="@{conversation.message.message.length() &lt;= 0 &amp;&amp; conversation.message.record == null}"
+            tools:visibility="visible" />
 
         <View
             android:id="@+id/view"

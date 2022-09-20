@@ -15,6 +15,20 @@ A simple covid-19 response application to give users an idea of the severity of 
 
 <br />
 
+***You can test the application here👇***
+
+[<img src="https://appetize.io/images/logo1_colored_tight.png" alt="drawing" width="100"/>](https://appetize.io/app/z3ofxfsgp5dqeu4or23ycds5fa?device=pixel4&osVersion=11.0&scale=75)
+
+***Or download it [here](https://github.com/certified84/COVID-19Response/blob/master/app/release/app-release.apk?raw=true)***
+
+### Test login details:
+ - Email: achiagasamson5@gmail.com Password: samson for regular account
+ - Email: sirhumble84@gmail.com Password: samson for doctor account
+ 
+***You can also signup if you want 😉***
+
+<br />
+
 ## Screenshots 🌞
 Splash | Onboarding | Login | Signup | 
 --- | --- | --- | --- | 
@@ -96,13 +110,24 @@ This app uses [***MVVM (Model View View-Model)***](https://developer.android.com
 ![](https://github.com/TheCodeMonks/Notes-App/blob/master/screenshots/ANDROID%20ROOM%20DB%20DIAGRAM.jpg)
 
 ## Build-tool 🧰
-You need to have [Android Studio](https://developer.android.com/studio) to build this project.
+- You need to have [Android Studio](https://developer.android.com/studio) to build this project.
+- You will also need to get an api key from [News Api Org](https://newsapi.org/)
+- Add the api key to your gradle.properties file 
+  ```
+    NEWS_API_ORG_API_KEY = "xxxxxxxxxxxxxxxxxxxxxx"
+  ```
+- You also need to create a new project on [firebase](https://cloud.google.com/firestore/docs/client/get-firebase), [download the config file](https://support.google.com/firebase/answer/7015592?hl=en#zippy=%2Cin-this-article) and add it to your app module directory 
 
 <br />
 
 ## Contribute 🤝
 If you want to contribute to this app, you're always welcome!
 See [Contributing Guidelines](https://github.com/certified84/COVID-19Response/blob/master/CONTRIBUTION.md). 
+
+<br>
+
+## Found an Issue? 
+Please open a PR
 
 <br>
 
